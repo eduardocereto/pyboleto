@@ -247,7 +247,7 @@ class BoletoPDF:
 
         self.pdfCanvas.drawString( 
             0, 
-            (((linhaInicial - 1)*self.heightLine)) + self.deltaTitle, 
+            (((linhaInicial - 1)*self.heightLine-3*cm)) + self.deltaTitle, 
             'Demonstrativo' 
         )
 
@@ -306,7 +306,7 @@ class BoletoPDF:
         for i in range(len(demonstrativo)):
             self.pdfCanvas.drawString( 
                 2*self.space, 
-                (((linhaInicial - 1)*self.heightLine)) - (i * heighFont), 
+                (-3*cm+((linhaInicial - 1)*self.heightLine)) - (i * heighFont), 
                 demonstrativo[i] 
             )
 
@@ -699,11 +699,11 @@ class BoletoPDF:
         y = 0
         #y += 2*mm
         #self.drawHorizontalCorteLine(x, y, self.width)
-        y += 6*mm
+        y += 1*mm
         d = self.drawReciboCaixa(boletoDados, x, y)
         y += d[1] + (25*mm)
         self.drawHorizontalCorteLine(x, y, self.width)
-        y += 25*mm
+        y += 20*mm
         d = self.drawReciboSacado(boletoDados, x, y)
         y += d[1]
         return (self.width,y)
