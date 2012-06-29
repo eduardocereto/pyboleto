@@ -27,7 +27,11 @@ class BoletoReal( BoletoData ):
         return dv
 
     def calculate_dv_barcode(self, line):
-        dv = self.modulo11(line)
+        dv = self.modulo11(line,r=1)
+        if dv == 0 or dv == 1:
+            dv = 1
+        else:
+            dv = 11 - dv
         return dv
 
     @property
@@ -44,7 +48,5 @@ class BoletoReal( BoletoData ):
             self.nosso_numero,
         )
         dv = self.calculate_dv_barcode(num.replace('X', '', 1))
-
         num = num.replace('X', str(dv), 1)
         return num
-
