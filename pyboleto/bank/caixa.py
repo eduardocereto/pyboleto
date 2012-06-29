@@ -13,6 +13,7 @@ class BoletoCaixa( BoletoData ):
         super(BoletoCaixa , self).__init__(*args, **kwargs)
 
         self.codigo_banco = "104"
+        self.local_pagamento = "Preferencialmente nas Casas Lotéricas e Agências da Caixa"
         self.logo_image_path = os.path.dirname(__file__) + \
             "/../media/logo_bancocaixa.jpg"
 
@@ -22,7 +23,7 @@ class BoletoCaixa( BoletoData ):
         '''
         self.inicio_nosso_numero = '80'
 
-    # Nosso numero (sem dv) sao 10 digitos
+    # Nosso numero (sem dv) sao 17 digitos
     def _nosso_numero_get(self):
         return self._nosso_numero
     '''
@@ -31,7 +32,7 @@ class BoletoCaixa( BoletoData ):
     def _nosso_numero_set(self, val):
         try:
             self._nosso_numero = self.inicio_nosso_numero + \
-                self.formata_numero(val, 8)
+                str(self.formata_numero(val, 15))
         except AttributeError:
             pass
 
@@ -71,4 +72,8 @@ class BoletoCaixa( BoletoData ):
 
         num = num.replace('X', str(dv), 1)
         return num
+
+    def format_nosso_numero(self):
+        return self._nosso_numero + '-' + str(self.dv_nosso_numero)
+      
 
