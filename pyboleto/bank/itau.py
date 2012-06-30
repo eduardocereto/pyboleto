@@ -1,0 +1,70 @@
+# -*- coding: utf-8
+from pyboleto.data import BoletoData, custom_property
+import os.path
+from datetime import datetime, date
+
+### CAUTION - NÃO TESTADO ###
+
+class BoletoItau( BoletoData ):   
+    '''
+        Gera Dados necessários para criação de boleto para o banco Itau
+        com registro
+    '''
+    def __init__(self, *args, **kwargs):
+
+        super(BoletoItau, self).__init__(*args, **kwargs)
+
+        self.codigo_banco = "341"
+        self.logo_image_path = os.path.dirname(__file__) + \
+            "/../media/logo_itau.jpg"
+        self.especie_documento = 'DM'
+
+    # Nosso numero (sem dv) com 8 digitos
+    nosso_numero = custom_property('nosso_numero', 8)
+    # Conta (sem dv) com 5 digitos
+    conta_cedente = custom_property('conta_cedente', 5)
+    #  Agência (sem dv) com 4 digitos
+    agencia_cedente = custom_property('agencia_cedente', 4)
+
+    @property
+    def dv_nosso_numero(self):
+        composto = "%4s%5s%3s%8s" %(self.agencia_cedente, self.conta_cedente,
+                                            self.carteira, self.nosso_numero)
+        return self.modulo10(composto)
+
+    @property
+    def dv_agencia_conta_cedente(self):
+        agencia_conta = "%s%s" % (self.agencia_cedente, self.conta_cedente)
+        return self.modulo10(agencia_conta)
+
+    @property
+    def agencia_conta_cedente(self):
+        return "%s/%s-%s" % (self.agencia_cedente, self.conta_cedente, 
+                                                self.dv_agencia_conta_cedente)    
+
+    def format_nosso_numero(self):
+        return "%3s/%8s-%1s" %(self.carteira, self.nosso_numero, 
+                                                    self.dv_nosso_numero)
+
+    # Numero para o codigo de barras com 44 digitos
+    @property
+    def barcode(self):
+        num = "%3s%1s%1s%4s%10s%3s%8s%1s%4s%5s%1s%3s" % (
+            self.codigo_banco,
+            self.moeda,
+            'X',
+            self.fator_vencimento,
+            self.formata_valor(self.valor_documento,10),
+            self.carteira,
+            self.nosso_numero,
+            self.dv_nosso_numero,
+            self.agencia_cedente,
+            self.conta_cedente,
+            self.dv_agencia_conta_cedente,
+            '000'
+        )
+        
+        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
+
+        num = num.replace('X', str(dv), 1)
+        return num
