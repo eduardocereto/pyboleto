@@ -43,6 +43,12 @@ class BoletoData(object):
         self.agencia_cedente = ""
         self.carteira = ""
         self.cedente = ""
+        self.cedente_cidade = ""
+        self.cedente_uf = ""
+        self.cedente_logradouro = ""
+        self.cedente_bairro = ""
+        self.cedente_cep = ""
+        self.cedente_documento = ""
         self.codigo_banco = ""
         self.conta_cedente = ""
         self.data_documento = ""
@@ -58,6 +64,7 @@ class BoletoData(object):
         self.numero_documento = ""
         self.quantidade = ""
         self.sacado_nome = ""
+        self.sacado_documento = ""
         self.sacado_cidade = ""
         self.sacado_uf = ""
         self.sacado_endereco = ""
@@ -112,6 +119,23 @@ class BoletoData(object):
     agencia_cedente = custom_property('agencia_cedente', 4)
 
     conta_cedente = custom_property('conta_cedente', 7)
+
+    def _cedente_endereco_get(self):
+        if not hasattr(self, '_cedente_endereco'):
+            self._cedente_endereco = '%s - %s - %s - %s - %s' % ( 
+                self.cedente_logradouro,
+                self.cedente_bairro, 
+                self.cedente_cidade, 
+                self.cedente_uf,
+                self.cedente_cep 
+            )
+        return self._cedente_endereco
+    def _cedente_endereco_set(self, endereco):
+        if len(endereco) > 80:
+            raise BoletoException(
+                u'Linha de endereço possui mais que 80 caracteres')
+        self._cedente_endereco = endereco
+    cedente_endereco = property(_cedente_endereco_get, _cedente_endereco_set)
 
     def _get_valor(self):
         try:
@@ -175,7 +199,7 @@ class BoletoData(object):
     def _sacado_get(self):
         if not hasattr(self, '_sacado'):
             self.sacado = [
-                self.sacado_nome,
+                '%s - CPF/CNPJ: %s' % (self.sacado_nome, self.sacado_documento),
                 self.sacado_endereco,
                 '%s - %s - %s - %s' % (
                     self.sacado_bairro, 
