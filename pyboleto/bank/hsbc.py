@@ -38,7 +38,7 @@ class BoletoHsbc( BoletoData ):
     def data_vencimento_juliano(self):
         data_vencimento = str(self.data_vencimento.timetuple().tm_yday)
         data_vencimento += str(self.data_vencimento.year)[-1:]
-        return data_vencimento
+        return data_vencimento.zfill(4)
 
     # Numero para o codigo de barras com 44 digitos
     @property
@@ -59,14 +59,14 @@ class BoletoHsbc( BoletoData ):
         num = num.replace('X', str(dv), 1)
         return num
 
-class BoletoHsbcRegistro( BoletoData ):   
+class BoletoHsbcComRegistro( BoletoData ):   
     '''
         Gera Dados necessários para criação de boleto para o banco HSBC
         com registro
     '''
     def __init__(self, *args, **kwargs):
 
-        super(BoletoHsbcRegistro , self).__init__(*args, **kwargs)
+        super(BoletoHsbcComRegistro , self).__init__(*args, **kwargs)
 
         self.codigo_banco = "399"
         self.logo_image_path = os.path.dirname(__file__) + \
