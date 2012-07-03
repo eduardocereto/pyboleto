@@ -2,12 +2,20 @@
 from pyboleto.data import BoletoData, custom_property
 import os.path
 
-### CAUTION - NÃO TESTADO ###
 class BoletoCaixa( BoletoData ):
     '''
         Gera Dados necessários para criação de boleto para o banco Caixa
         Economica Federal
     '''
+
+    conta_cedente = custom_property('conta_cedente', 11)
+
+    '''
+        Este numero tem o inicio fixo
+        Carteira SR: 80, 81 ou 82
+        Carteira CR: 90 (Confirmar com gerente qual usar)
+    '''
+    nosso_numero = custom_property('nosso_numero', 10)
 
     def __init__(self, *args, **kwargs):
         super(BoletoCaixa , self).__init__(*args, **kwargs)
@@ -16,27 +24,6 @@ class BoletoCaixa( BoletoData ):
         self.local_pagamento = "Preferencialmente nas Casas Lotéricas e Agências da Caixa"
         self.logo_image_path = os.path.dirname(__file__) + \
             "/../media/logo_bancocaixa.jpg"
-
-        ''' 
-            Carteira SR: 80, 81 ou 82  -  
-            Carteira CR: 90 (Confirmar com gerente qual usar)
-        '''
-        self.inicio_nosso_numero = '80'
-
-    # Nosso numero (sem dv) sao 17 digitos
-    def _nosso_numero_get(self):
-        return self._nosso_numero
-    '''
-        Nosso Número sem DV, máximo 8 chars
-    '''
-    def _nosso_numero_set(self, val):
-        try:
-            self._nosso_numero = self.inicio_nosso_numero + \
-                str(self.formata_numero(val, 15))
-        except AttributeError:
-            pass
-
-    nosso_numero = property(_nosso_numero_get, _nosso_numero_set)
 
     @property
     def dv_nosso_numero(self):
@@ -47,13 +34,6 @@ class BoletoCaixa( BoletoData ):
         else:
             dv = digito
         return dv
-
-    '''
-        agencia do cedente sem DV
-    '''
-    agencia_cedente = custom_property('agencia_cedente', 4)
-
-    conta_cedente = custom_property('conta_cedente', 11)
 
     # Numero para o codigo de barras com 44 digitos
     @property
