@@ -6,7 +6,7 @@ setup(
     version = __import__('pyboleto').__version__,
     author = 'Eduardo Cereto Carvalho',
     author_email = 'eduardocereto@gmail.com',
-    url = 'https://bitbucket.org/eduardo.cereto/pyboleto/',
+    url = 'https://github.com/eduardocereto/pyboleto',
     packages = find_packages(),
     include_package_data = True,
     zip_safe = False,
@@ -17,7 +17,7 @@ setup(
         'pyboleto'
     ],
     license = 'BSD',
-    description = 'Python Library to create boletos',
+    description = 'Python Library to create "boletos de cobrança bancária" for several Brazilian banks',
     long_description = open('README.rst', 'r').read(),
     download_url = 'http://pypi.python.org/pypi/pyboleto',
     entry_points = {
