@@ -2,7 +2,6 @@
 from pyboleto.data import BoletoData, custom_property
 import os.path
 
-### CAUTION - NÃO TESTADO ###
 class BoletoBradesco( BoletoData ):
     '''
         Gera Dados necessários para criação de boleto para o banco Bradesco

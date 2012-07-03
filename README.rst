@@ -28,13 +28,18 @@ For now here's where we are.
  | **Bank**             | **Carteira /** | **Implemented** | **Tested** |
  |                      | **Convenio**   |                 |            |   
  +======================+================+=================+============+
- | Bradesco             | 06             | Yes             | No         |
+ | **Banco do Brasil**  | 18             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+
- | Caixa Economica      | SR             | Yes             | No         |
+ | **Bradesco**         | 06, 03         | Yes             | Yes        |
  +----------------------+----------------+-----------------+------------+
- | Real                 | 57             | Yes             | No         |
+ | **Caixa Economica**  | SR             | Yes             | No         |
+ +----------------------+----------------+-----------------+------------+
+ | **HSBC**             | CNR, CSB       | Yes             | No         |
  +----------------------+----------------+-----------------+------------+ 
- | Banco do Brasil      | 18             | Yes             | No         |
+ | **Itau**             | 175, 174, 178, | Yes             | No         |
+ |                      | 104, 109, 157  |                 |            |
+ +----------------------+----------------+-----------------+------------+ 
+ | **Real**             | 57             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+ 
 
 .. _pyboleto-docs:
@@ -42,9 +47,13 @@ For now here's where we are.
 Documentation
 =============
 
-Current documents are avilable here:
-
 http://packages.python.org/pyboleto/
+
+The best way to learn how to create Boletos using pyboleto is to look at the
+examples at `print_sample_data.py`
+
+
+.. _print_sample_data.py: https://github.com/eduardocereto/pyboleto/blob/master/pyboleto/scripts/print_sample_data.py 
 
 .. _pyboleto-installation:
 
@@ -78,7 +87,7 @@ You can install it by doing the following,::
     $ python setup.py build
     # python setup.py install # as root
 
-.. _pyboleto-installing-from-git:
+.. _pyboleto-installing-from-hg:
 
 Using the development version
 -----------------------------
@@ -86,6 +95,16 @@ Using the development version
 You can clone the repository by doing the following::
 
     $ git clone https://github.com/eduardocereto/pyboleto.git
+
+.. _pyboleto-unittests:
+
+Executing unittests
+===================
+
+::
+
+    $ cd pyboleto
+    $ python -m unittest discover
 
 .. _pyboleto-license:
 

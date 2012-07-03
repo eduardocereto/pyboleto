@@ -6,7 +6,7 @@ from reportlab.graphics.barcode.common import I2of5
 import reportlab.lib.pagesizes
 import datetime
 
-class BoletoPDF:
+class BoletoPDF(object):
 
     def __init__(self, file_descr, landscape = False ):
         self.width = 190*mm
@@ -188,7 +188,7 @@ class BoletoPDF:
             (linhaInicial + 3) * self.heightLine + 3, 
             boletoDados.codigo_dv_banco 
         )
-        self.pdfCanvas.setFont( 'Helvetica-Bold', 10 )
+        self.pdfCanvas.setFont( 'Helvetica-Bold', 11.5 )
         self.pdfCanvas.drawRightString( 
             self.width, 
             (linhaInicial + 3) * self.heightLine + 3, 
@@ -683,7 +683,7 @@ class BoletoPDF:
             y + 2*self.space, 
             boletoDados.codigo_dv_banco 
         )
-        self.pdfCanvas.setFont('Helvetica-Bold', 10 )
+        self.pdfCanvas.setFont('Helvetica-Bold', 11.5 )
         self.pdfCanvas.drawRightString(
             self.width, 
             y + 2*self.space, 

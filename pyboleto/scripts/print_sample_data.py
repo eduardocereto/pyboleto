@@ -16,7 +16,9 @@ def print_bb():
         d.especie_documento = 'DM'
 
         d.carteira = '18'
-        d.cedente = 'Empresa Empresa Empresa Empresa Empresa LTDA'
+        d.cedente = 'Empresa ACME LTDA'
+        d.cedente_documento = "102.323.777-01"
+        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
         d.agencia_cedente = '9999'
         d.conta_cedente = '99999'
 
@@ -42,22 +44,21 @@ def print_bb():
             ]
         listaDados.append( d )
 
-    print "Normal"
     boleto = BoletoPDF( 'boleto-bb-formato-normal-teste.pdf' )
     for i in range(len(listaDados)):
-        print i
         boleto.drawBoleto(listaDados[i])
         boleto.nextPage()
     boleto.save()
 
 
-
-def print_test():
+def print_real():
     listaDadosReal = []
     for i in range(2):
         d = BoletoReal()
         d.carteira = '57'  # Contrato firmado com o Banco Real
-        d.cedente = 'Empresa Empresa Empresa Empresa Empresa LTDA'
+        d.cedente = 'Empresa ACME LTDA'
+        d.cedente_documento = "102.323.777-01"
+        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
         d.agencia_cedente = '0531'
         d.conta_cedente = '5705853'
 
@@ -85,11 +86,21 @@ def print_test():
             ]
         listaDadosReal.append( d )
 
+    # Real Formato normal - uma pagina por folha A4
+    boleto = BoletoPDF( 'boleto-real-formato-normal-teste.pdf' )
+    for i in range(len(listaDadosReal)):
+        boleto.drawBoleto(listaDadosReal[i])
+        boleto.nextPage()
+    boleto.save()
+
+def print_bradesco():
     listaDadosBradesco = []
     for i in range(2):
         d = BoletoBradesco()
         d.carteira = '06'  # Contrato firmado com o Banco Bradesco
-        d.cedente = 'Empresa Empresa Empresa Empresa Empresa LTDA'
+        d.cedente = 'Empresa ACME LTDA'
+        d.cedente_documento = "102.323.777-01"
+        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
         d.agencia_cedente = '0278-0'
         d.conta_cedente = '43905-3'
 
@@ -117,11 +128,31 @@ def print_test():
             ]
         listaDadosBradesco.append( d )
 
+    # Bradesco Formato carne - duas paginas por folha A4
+    boleto = BoletoPDF( 'boleto-bradesco-formato-carne-teste.pdf', True )
+    for i in range(0,len(listaDadosBradesco),2):
+        boleto.drawBoletoCarneDuplo(
+            listaDadosBradesco[i], 
+            listaDadosBradesco[i+1]
+        )
+        boleto.nextPage()
+    boleto.save()
+
+    # Bradesco Formato normal - uma pagina por folha A4
+    boleto = BoletoPDF( 'boleto-bradesco-formato-normal-teste.pdf' )
+    for i in range(len(listaDadosBradesco)):
+        boleto.drawBoleto(listaDadosBradesco[i])
+        boleto.nextPage()
+    boleto.save()
+
+def print_caixa():
     listaDadosCaixa = []
     for i in range(2):
         d = BoletoCaixa()
         d.carteira = 'SR'  # Contrato firmado com o Banco Bradesco
-        d.cedente = 'Empresa Empresa Empresa Empresa Empresa LTDA'
+        d.cedente = 'Empresa ACME LTDA'
+        d.cedente_documento = "102.323.777-01"
+        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
         d.agencia_cedente = '1565'
         d.conta_cedente = '414-3'
 
@@ -140,8 +171,8 @@ def print_test():
             ]
         d.valor_documento = 255.00
 
-        d.nosso_numero = "%d" % (i+2)
-        d.numero_documento = "%d" % (i+2)
+        d.nosso_numero = "8019525086"
+        d.numero_documento = "8019525086"
         d.sacado = [
             "Cliente Teste %d" % (i+1),
             "Rua Desconhecida, 00/0000 - Não Sei - Cidade - Cep. 00000-000",
@@ -150,41 +181,11 @@ def print_test():
         listaDadosCaixa.append( d )
 
 
-    # Bradesco Formato carne - duas paginas por folha A4
-    print "Carne"
-    boleto = BoletoPDF( 'boleto-bradesco-formato-carne-teste.pdf', True )
-    for i in range(0,len(listaDadosBradesco),2):
-        print i, i+1
-        boleto.drawBoletoCarneDuplo(
-            listaDadosBradesco[i], 
-            listaDadosBradesco[i+1]
-        )
-        boleto.nextPage()
-    boleto.save()
 
-    # Bradesco Formato normal - uma pagina por folha A4
-    print "Normal"
-    boleto = BoletoPDF( 'boleto-bradesco-formato-normal-teste.pdf' )
-    for i in range(len(listaDadosBradesco)):
-        print i
-        boleto.drawBoleto(listaDadosBradesco[i])
-        boleto.nextPage()
-    boleto.save()
-
-    # Real Formato normal - uma pagina por folha A4
-    print "Normal"
-    boleto = BoletoPDF( 'boleto-real-formato-normal-teste.pdf' )
-    for i in range(len(listaDadosReal)):
-        print i
-        boleto.drawBoleto(listaDadosReal[i])
-        boleto.nextPage()
-    boleto.save()
 
     # Caixa Formato normal - uma pagina por folha A4
-    print "Carne"
     boleto = BoletoPDF( 'boleto-caixa-formato-carne-teste.pdf', True )
     for i in range(0,len(listaDadosCaixa),2):
-        print i, i+1
         boleto.drawBoletoCarneDuplo(
             listaDadosCaixa[i],
             listaDadosCaixa[i+1]
@@ -193,16 +194,38 @@ def print_test():
     boleto.save()
 
     # Caixa Formato normal - uma pagina por folha A4
-    print "Normal"
     boleto = BoletoPDF( 'boleto-caixa-formato-normal-teste.pdf' )
     for i in range(len(listaDadosCaixa)):
-        print i
         boleto.drawBoleto(listaDadosCaixa[i])
         boleto.nextPage()
     boleto.save()
 
+def print_itau():
+    pass
+
+def print_all():
+    print "----------------------------------"
+    print "     Printing Example Boletos     "
+    print "----------------------------------"
+
+    print "Banco do Brasil" 
+    print_bb()
+
+    print "Bradesco"
+    print_bradesco()
+
+    print "Itau"
+    print_itau()
+
+    print "Caixa"
+    print_caixa()
+
+    print "Real"
+    print_real()
+
+    print "----------------------------------"
     print "Ok"
 
+
 if __name__ == "__main__":
-    print_test()
-    print_bb()
+    print_all()
