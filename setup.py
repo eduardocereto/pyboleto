@@ -22,7 +22,7 @@ setup(
     download_url = 'http://pypi.python.org/pypi/pyboleto',
     entry_points = {
         'console_scripts':[
-            'print_boleto_data = pyboleto.scripts.print_sample_data:print_test',
+            'pyboleto_sample = pyboleto.scripts.print_sample_data:print_all',
         ],
     },
     classifiers = [

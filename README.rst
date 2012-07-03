@@ -28,20 +28,19 @@ For now here's where we are.
  | **Bank**             | **Carteira /** | **Implemented** | **Tested** |
  |                      | **Convenio**   |                 |            |   
  +======================+================+=================+============+
- | `Bradesco`_          | 06             | Yes             | Yes        |
+ | **Banco do Brasil**  | 18             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+
- | `Caixa Economica`_   | SR             | Yes             | No         |
+ | **Bradesco**         | 06, 03         | Yes             | Yes        |
  +----------------------+----------------+-----------------+------------+
- | `Real`_              | 57             | Yes             | No         |
+ | **Caixa Economica**  | SR             | Yes             | No         |
+ +----------------------+----------------+-----------------+------------+
+ | **HSBC**             | CNR, CSB       | Yes             | No         |
  +----------------------+----------------+-----------------+------------+ 
- | `Banco do Brasil`_   | 18             | Yes             | No         |
+ | **Itau**             | 175, 174, 178, | Yes             | No         |
+ |                      | 104, 109, 157  |                 |            |
  +----------------------+----------------+-----------------+------------+ 
-
-.. _Bradesco: https://bitbucket.org/eduardo.cereto/pyboleto/wiki/BoletoBradesco
-.. _Caixa Economica: https://bitbucket.org/eduardo.cereto/pyboleto/wiki/BoletoCaixa 
-.. _Real: https://bitbucket.org/eduardo.cereto/pyboleto/wiki/BoletoReal
-.. _Banco do Brasil: https://bitbucket.org/eduardo.cereto/pyboleto/wiki/BoletoBB
-
+ | **Real**             | 57             | Yes             | No         |
+ +----------------------+----------------+-----------------+------------+ 
 
 .. _pyboleto-docs:
 
