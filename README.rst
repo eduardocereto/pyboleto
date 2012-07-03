@@ -103,6 +103,7 @@ Executing unittests
 ===================
 
 ::
+
     $ cd pyboleto
     $ python -m unittest discover
 
