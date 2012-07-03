@@ -212,10 +212,6 @@ class BoletoData(object):
     def _sacado_set(self, list_sacado):
         if len(list_sacado) > 3:
             raise BoletoException(u'Número de linhas do sacado maior que 3')
-        for line in list_sacado:
-            if len(line) > 80:
-                raise BoletoException(
-                    u'Linha de sacado possui mais que 80 caracteres')
         self._sacado = list_sacado
     sacado = property(_sacado_get, _sacado_set)
     

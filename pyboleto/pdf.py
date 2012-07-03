@@ -3,6 +3,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm, cm
 from reportlab.lib.colors import black, white
 from reportlab.graphics.barcode.common import I2of5
+from reportlab.pdfbase.pdfmetrics import stringWidth
 import reportlab.lib.pagesizes
 import datetime
 
@@ -289,10 +290,18 @@ class BoletoPDF(object):
             boletoDados.data_vencimento.strftime('%d/%m/%Y') 
         )
 
+        # Take care of long field
+        sacado0 = unicode(boletoDados.sacado[0])
+        while(stringWidth( sacado0, 
+            self.pdfCanvas._fontname, 
+            self.pdfCanvas._fontsize) > 8.4*cm):
+            #sacado0 = sacado0[:-2] + u'\u2026'
+            sacado0 = sacado0[:-4] + u'...'
+
         self.pdfCanvas.drawString( 
             0 + self.space, 
             (((linhaInicial + 1)*self.heightLine)) + self.space, 
-            boletoDados.sacado[0] 
+            sacado0
         )
         self.pdfCanvas.drawString( 
             self.width - (30*mm) - (35*mm) - (40*mm) + self.space, 
