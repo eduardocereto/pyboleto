@@ -8,7 +8,8 @@ from datetime import datetime, date
 class BoletoItau( BoletoData ):   
     '''
         Gera Dados necessários para criação de boleto para o banco Itau
-        com registro
+        Todas as carteiras com excessão das que utilizam 15 dígitos: (106,107,
+        195,196,198)
     '''
     def __init__(self, *args, **kwargs):
 
@@ -49,6 +50,7 @@ class BoletoItau( BoletoData ):
     # Numero para o codigo de barras com 44 digitos
     @property
     def barcode(self):
+        if
         num = "%3s%1s%1s%4s%10s%3s%8s%1s%4s%5s%1s%3s" % (
             self.codigo_banco,
             self.moeda,
