@@ -6,7 +6,7 @@ from reportlab.graphics.barcode.common import I2of5
 import reportlab.lib.pagesizes
 import datetime
 
-class BoletoPDF:
+class BoletoPDF(object):
 
     def __init__(self, file_descr, landscape = False ):
         self.width = 190*mm
