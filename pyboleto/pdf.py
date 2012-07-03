@@ -188,7 +188,7 @@ class BoletoPDF:
             (linhaInicial + 3) * self.heightLine + 3, 
             boletoDados.codigo_dv_banco 
         )
-        self.pdfCanvas.setFont( 'Helvetica-Bold', 10 )
+        self.pdfCanvas.setFont( 'Helvetica-Bold', 11.5 )
         self.pdfCanvas.drawRightString( 
             self.width, 
             (linhaInicial + 3) * self.heightLine + 3, 
@@ -683,7 +683,7 @@ class BoletoPDF:
             y + 2*self.space, 
             boletoDados.codigo_dv_banco 
         )
-        self.pdfCanvas.setFont('Helvetica-Bold', 10 )
+        self.pdfCanvas.setFont('Helvetica-Bold', 11.5 )
         self.pdfCanvas.drawRightString(
             self.width, 
             y + 2*self.space, 

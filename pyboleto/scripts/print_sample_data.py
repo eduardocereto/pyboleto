@@ -171,8 +171,8 @@ def print_caixa():
             ]
         d.valor_documento = 255.00
 
-        d.nosso_numero = "%d" % (i+2)
-        d.numero_documento = "%d" % (i+2)
+        d.nosso_numero = "8019525086"
+        d.numero_documento = "8019525086"
         d.sacado = [
             "Cliente Teste %d" % (i+1),
             "Rua Desconhecida, 00/0000 - Não Sei - Cidade - Cep. 00000-000",

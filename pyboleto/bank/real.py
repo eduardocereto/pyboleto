@@ -13,7 +13,7 @@ class BoletoReal( BoletoData ):
     @property
     def agencia_conta_cedente(self):
         dv = self.digitao_cobranca
-        s = "%s/%s-%s" % (self.agencia_cedente, self.conta_cedente, dv)
+        s = "%s/%s/%s" % (self.agencia_cedente, self.conta_cedente, dv)
         return s
 
     @property
