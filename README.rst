@@ -48,9 +48,13 @@ For now here's where we are.
 Documentation
 =============
 
-Current documents are avilable here:
-
 http://packages.python.org/pyboleto/
+
+The best way to learn how to create Boletos using pyboleto is to look at the
+examples at `print_sample_data.py`
+
+
+.. _print_sample_data.py: https://github.com/eduardocereto/pyboleto/blob/master/pyboleto/scripts/print_sample_data.py 
 
 .. _pyboleto-installation:
 
@@ -92,6 +96,15 @@ Using the development version
 You can clone the repository by doing the following::
 
     $ git clone https://github.com/eduardocereto/pyboleto.git
+
+.. _pyboleto-unittests:
+
+Executing unittests
+===================
+
+::
+    $ cd pyboleto
+    $ python -m unittest discover
 
 .. _pyboleto-license:
 
