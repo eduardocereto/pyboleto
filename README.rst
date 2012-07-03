@@ -28,14 +28,20 @@ For now here's where we are.
  | **Bank**             | **Carteira /** | **Implemented** | **Tested** |
  |                      | **Convenio**   |                 |            |   
  +======================+================+=================+============+
- | Bradesco             | 06             | Yes             | No         |
+ | `Bradesco`_          | 06             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+
- | Caixa Economica      | SR             | Yes             | No         |
+ | `Caixa Economica`_   | SR             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+
- | Real                 | 57             | Yes             | No         |
+ | `Real`_              | 57             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+ 
- | Banco do Brasil      | 18             | Yes             | No         |
+ | `Banco do Brasil`_   | 18             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+ 
+
+.. _Bradesco: https://bitbucket.org/eduardo.cereto/pyboleto/wiki/BoletoBradesco
+.. _Caixa Economica: https://bitbucket.org/eduardo.cereto/pyboleto/wiki/BoletoCaixa 
+.. _Real: https://bitbucket.org/eduardo.cereto/pyboleto/wiki/BoletoReal
+.. _Banco do Brasil: https://bitbucket.org/eduardo.cereto/pyboleto/wiki/BoletoBB
+
 
 .. _pyboleto-docs:
 
@@ -78,7 +84,7 @@ You can install it by doing the following,::
     $ python setup.py build
     # python setup.py install # as root
 
-.. _pyboleto-installing-from-git:
+.. _pyboleto-installing-from-hg:
 
 Using the development version
 -----------------------------
