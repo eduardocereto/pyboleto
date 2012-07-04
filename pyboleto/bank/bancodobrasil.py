@@ -3,8 +3,6 @@ import os.path
 
 from pyboleto.data import BoletoData, custom_property
 
-### CAUTION - NÃO TESTADO ###
-
 
 class BoletoBB(BoletoData):
     '''
