@@ -44,7 +44,7 @@ class BoletoCaixa( BoletoData ):
             'X',
             self.fator_vencimento,
             self.formata_valor(self.valor_documento,10),
-            self.nosso_numero, 
+            self.nosso_numero,
             self.agencia_cedente,
             self.conta_cedente.split('-')[0],
         )
@@ -55,5 +55,5 @@ class BoletoCaixa( BoletoData ):
 
     def format_nosso_numero(self):
         return self._nosso_numero + '-' + str(self.dv_nosso_numero)
-      
+
 

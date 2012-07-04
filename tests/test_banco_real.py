@@ -19,12 +19,12 @@ class TestBancoBradesco(unittest.TestCase):
         self.dados = d
 
     def test_linha_digitavel(self):
-        self.assertEqual(self.dados.linha_digitavel, 
+        self.assertEqual(self.dados.linha_digitavel,
             '35690.53154 70585.390001 00000.001230 8 48690000035500'
         )
-    
+
     def test_codigo_de_barras(self):
-        self.assertEqual(self.dados.barcode, 
+        self.assertEqual(self.dados.barcode,
             '35698486900000355000531570585390000000000123'
         )
 

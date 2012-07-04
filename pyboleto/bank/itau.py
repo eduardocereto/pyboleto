@@ -5,7 +5,7 @@ from datetime import datetime, date
 
 ### CAUTION - NÃO TESTADO ###
 
-class BoletoItau( BoletoData ):   
+class BoletoItau( BoletoData ):
     '''
         Gera Dados necessários para criação de boleto para o banco Itau
         Todas as carteiras com excessão das que utilizam 15 dígitos: (106,107,
@@ -40,11 +40,11 @@ class BoletoItau( BoletoData ):
 
     @property
     def agencia_conta_cedente(self):
-        return "%s/%s-%s" % (self.agencia_cedente, self.conta_cedente, 
-                                                self.dv_agencia_conta_cedente)    
+        return "%s/%s-%s" % (self.agencia_cedente, self.conta_cedente,
+                                                self.dv_agencia_conta_cedente)
 
     def format_nosso_numero(self):
-        return "%3s/%8s-%1s" %(self.carteira, self.nosso_numero, 
+        return "%3s/%8s-%1s" %(self.carteira, self.nosso_numero,
                                                     self.dv_nosso_numero)
 
     # Numero para o codigo de barras com 44 digitos
@@ -64,7 +64,7 @@ class BoletoItau( BoletoData ):
             self.dv_agencia_conta_cedente,
             '000'
         )
-        
+
         dv = self.calculate_dv_barcode(num.replace('X', '', 1))
 
         num = num.replace('X', str(dv), 1)

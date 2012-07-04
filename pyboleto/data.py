@@ -10,9 +10,9 @@ class BoletoException(Exception):
 def custom_property(name, num_length):
     """Função para criar propriedades nos boletos
 
-    Aceita um numero com ou sem DV e remove o DV caso exista. Entao preenxe 
-    com zfill até o tamanho adequado. Note que sempre que possível não use DVs 
-    ao entrar valores no pyboleto. De preferência o pyboleto vai calcular 
+    Aceita um numero com ou sem DV e remove o DV caso exista. Entao preenxe
+    com zfill até o tamanho adequado. Note que sempre que possível não use DVs
+    ao entrar valores no pyboleto. De preferência o pyboleto vai calcular
     todos os DVs quando necessário.
 
     """
@@ -20,7 +20,7 @@ def custom_property(name, num_length):
 
     def _set_attr(self,val):
         val = val.split('-')
-        
+
         if len(val) is 1:
             val[0] = str(val[0]).zfill(num_length)
             setattr(self, internal_attr, ''.join(val))
@@ -28,7 +28,7 @@ def custom_property(name, num_length):
         elif len(val) is 2:
             val[0] = str(val[0]).zfill(num_length)
             setattr(self, internal_attr, '-'.join(val))
-        
+
         else:
             raise BoletoException('Wrong value format')
 
@@ -43,12 +43,12 @@ class BoletoData(object):
     """Interface para implementações específicas de bancos
 
     As classes dentro do pacote bank extendem essa classe para implementar
-    as especificações de cada banco. 
-    Portanto as especificações dentro desta classe são genéricas seguindo as 
-    normas da FEBRABAN. 
+    as especificações de cada banco.
+    Portanto as especificações dentro desta classe são genéricas seguindo as
+    normas da FEBRABAN.
 
     """
-    
+
     def __init__(self, *args, **kwargs):
         self.aceite = "N"
         self.agencia_cedente = ""
@@ -81,7 +81,7 @@ class BoletoData(object):
         self.sacado_endereco = ""
         self.sacado_bairro = ""
         self.sacado_cep = ""
-    
+
     @property
     def barcode(self):
         """Returns string used to generate barcodes
@@ -148,12 +148,12 @@ class BoletoData(object):
 
     def _cedente_endereco_get(self):
         if not hasattr(self, '_cedente_endereco'):
-            self._cedente_endereco = '%s - %s - %s - %s - %s' % ( 
+            self._cedente_endereco = '%s - %s - %s - %s - %s' % (
                 self.cedente_logradouro,
-                self.cedente_bairro, 
-                self.cedente_cidade, 
+                self.cedente_bairro,
+                self.cedente_cidade,
                 self.cedente_uf,
-                self.cedente_cep 
+                self.cedente_cep
             )
         return self._cedente_endereco
     def _cedente_endereco_set(self, endereco):
@@ -181,7 +181,7 @@ class BoletoData(object):
     outro tipo será feito um cast para :class:`Decimal`.
 
     Geralmente valor e valor_documento são o mesmo número.
-    
+
     """
 
     def _get_valor_documento(self):
@@ -199,7 +199,7 @@ class BoletoData(object):
 
     De preferência para passar um valor em :class:`Decimal`, se não for passado
     outro tipo será feito um cast para :class:`Decimal`.
-    
+
     """
 
     def _instrucoes_get(self):
@@ -220,7 +220,7 @@ class BoletoData(object):
     """Instruções para o caixa do banco que recebe o bilhete
 
     Máximo de 7 linhas com 90 caracteres cada.
-    Geralmente contém instruções para aplicar multa ou não aceitar caso tenha 
+    Geralmente contém instruções para aplicar multa ou não aceitar caso tenha
     passado a data de validade.
 
     """
@@ -250,7 +250,7 @@ class BoletoData(object):
         """Tenta usar o sacado que foi setado ou constroi um
 
         Se você não especificar um sacado o boleto tentará construir um sacado
-        a partir de outras proriedades setadas. 
+        a partir de outras proriedades setadas.
 
         Para facilitar você deve sempre setar essa propriedade.
 
@@ -260,9 +260,9 @@ class BoletoData(object):
                 '%s - CPF/CNPJ: %s' % (self.sacado_nome, self.sacado_documento),
                 self.sacado_endereco,
                 '%s - %s - %s - %s' % (
-                    self.sacado_bairro, 
-                    self.sacado_cidade, 
-                    self.sacado_uf, 
+                    self.sacado_bairro,
+                    self.sacado_cidade,
+                    self.sacado_uf,
                     self.sacado_cep
                 )
             ]
@@ -272,13 +272,13 @@ class BoletoData(object):
             raise BoletoException(u'Número de linhas do sacado maior que 3')
         self._sacado = list_sacado
     sacado = property(_sacado_get, _sacado_set)
-    """Campo sacado composto por até 3 linhas. 
+    """Campo sacado composto por até 3 linhas.
 
     A primeira linha precisa ser o nome do sacado.
     As outras duas linhas devem ser usadas para o endereço do sacado.
 
     """
-    
+
     @property
     def fator_vencimento(self):
         date_ref = datetime.date(2000,7,3) # Fator = 1000
@@ -298,8 +298,8 @@ class BoletoData(object):
     @property
     def linha_digitavel(self):
         """Monta a linha digitável a partir do barcode
-        
-        Esta é a linha que o cliente pode utilizar para digitar se o código 
+
+        Esta é a linha que o cliente pode utilizar para digitar se o código
         de barras não estiver legível.
 
         Posição    Conteúdo
@@ -315,7 +315,7 @@ class BoletoData(object):
             BoletoException("Boleto doesn't have a barcode")
 
         p1 = linha[0:4]
-        p2 = linha[19:24]        
+        p2 = linha[19:24]
         p3 = self.modulo10("%s%s"%(p1,p2))
         p4 = "%s%s%s" %(p1,p2,p3)
         p5 = p4[0:5]
@@ -335,7 +335,7 @@ class BoletoData(object):
         p4 = p3[0:5]
         p5 = p3[5:]
         campo3 = "%s.%s" %(p4,p5)
-        campo4 = linha[4]        
+        campo4 = linha[4]
         campo5 = linha[5:19]
 
         return "%s %s %s %s %s" %(campo1,campo2,campo3,campo4,campo5)
@@ -350,14 +350,14 @@ class BoletoData(object):
             raise BoletoException(
                 u'Tamanho em caracteres do número está maior que o permitido' )
         return numero.zfill(tamanho)
-    
+
     @staticmethod
     def formata_texto(texto, tamanho):
         if len(texto) > tamanho:
-            raise BoletoException( 
+            raise BoletoException(
                 u'Tamanho em caracteres do texto está maior que o permitido' )
         return texto.ljust(tamanho)
-    
+
     def formata_valor(self,nfloat, tamanho):
         try:
             txt = nfloat.replace( '.', '' )
@@ -365,7 +365,7 @@ class BoletoData(object):
             return txt
         except AttributeError:
             pass
-    
+
     @staticmethod
     def modulo10(num):
         soma = 0
@@ -380,13 +380,13 @@ class BoletoData(object):
                 peso = 1
             else:
                 peso = 2
-        
+
         resto10 = soma % 10
         if resto10 == 0:
             modulo10 = 0
         else:
             modulo10 = 10 - resto10
-            
+
         return modulo10
 
     @staticmethod
@@ -404,7 +404,7 @@ class BoletoData(object):
             digito = soma % 11
             if digito == 10:
                 digito = 0
-            return digito     
+            return digito
         if r == 1:
             resto = soma % 11
             return resto

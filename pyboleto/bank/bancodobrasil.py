@@ -25,7 +25,7 @@ class BoletoBB( BoletoData ):
 
         # Size of convenio 6, 7 or 8
         self.format_convenio = format_convenio
-        
+
         #  Nosso Numero format. 1 or 2
         #  1: Nosso Numero with 5 positions
         #  2: Nosso Numero with 17 positions
@@ -33,13 +33,13 @@ class BoletoBB( BoletoData ):
 
     def format_nosso_numero(self):
         return "%s-%s" % (
-            self.nosso_numero, 
+            self.nosso_numero,
             self.dv_nosso_numero
         )
 
     # Nosso numero (sem dv) sao 11 digitos
     def _get_nosso_numero(self):
-        return self.convenio + self._nosso_numero   
+        return self.convenio + self._nosso_numero
 
     def _set_nosso_numero(self,val):
         val = str(val)
@@ -62,7 +62,7 @@ class BoletoBB( BoletoData ):
     def _set_convenio(self, val):
         self._convenio = str(val).ljust(self.format_convenio, '0')
     convenio = property(_get_convenio, _set_convenio)
-    
+
     @property
     def agencia_conta_cedente(self):
         return "%s-%s / %s-%s" % (
@@ -91,7 +91,7 @@ class BoletoBB( BoletoData ):
                 self.fator_vencimento,
                 self.formata_valor(self.valor_documento,10),
                 '000000',
-                self.nosso_numero, 
+                self.nosso_numero,
                 self.carteira
             )
         elif self.format_convenio is 6:
@@ -102,7 +102,7 @@ class BoletoBB( BoletoData ):
                     'X',
                     self.fator_vencimento,
                     self.formata_valor(self.valor_documento,10),
-                    self.nosso_numero, 
+                    self.nosso_numero,
                     self.agencia_cedente,
                     self.conta_cedente,
                     self.carteira
@@ -114,11 +114,11 @@ class BoletoBB( BoletoData ):
                     'X',
                     self.fator_vencimento,
                     self.formata_valor(self.valor_documento,10),
-                    self.nosso_numero, 
+                    self.nosso_numero,
                     '21' # numero do serviço
                 )
-            
-        
+
+
         dv = self.modulo11(num.replace('X', '', 1))
 
         num = num.replace('X', str(dv), 1)

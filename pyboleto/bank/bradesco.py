@@ -16,8 +16,8 @@ class BoletoBradesco( BoletoData ):
 
     def format_nosso_numero(self):
         return "%s/%s-%s" % (
-            self.carteira, 
-            self.nosso_numero, 
+            self.carteira,
+            self.nosso_numero,
             self.dv_nosso_numero
         )
 
@@ -50,12 +50,12 @@ class BoletoBradesco( BoletoData ):
             self.fator_vencimento,
             self.formata_valor(self.valor_documento,10),
             self.agencia_cedente.split('-')[0],
-            self.carteira, 
-            self.nosso_numero, 
+            self.carteira,
+            self.nosso_numero,
             self.conta_cedente.split('-')[0],
             '0'
         )
-        
+
         dv = self.calculate_dv_barcode(num.replace('X', '', 1))
 
         num = num.replace('X', str(dv), 1)

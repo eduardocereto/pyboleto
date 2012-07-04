@@ -7,7 +7,7 @@ pyboleto
 pyboleto provides a python class to generate "boletos de cobranca" as these
 are the Brazilian equivalent for invoices.
 
-It's easy to implement classes for new banks. 
+It's easy to implement classes for new banks.
 
 This class is still in development and currently has no documented API.
 
@@ -26,7 +26,7 @@ For now here's where we are.
 
  +----------------------+----------------+-----------------+------------+
  | **Bank**             | **Carteira /** | **Implemented** | **Tested** |
- |                      | **Convenio**   |                 |            |   
+ |                      | **Convenio**   |                 |            |
  +======================+================+=================+============+
  | **Banco do Brasil**  | 18             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+
@@ -35,12 +35,12 @@ For now here's where we are.
  | **Caixa Economica**  | SR             | Yes             | No         |
  +----------------------+----------------+-----------------+------------+
  | **HSBC**             | CNR, CSB       | Yes             | No         |
- +----------------------+----------------+-----------------+------------+ 
+ +----------------------+----------------+-----------------+------------+
  | **Itau**             | 175, 174, 178, | Yes             | No         |
  |                      | 104, 109, 157  |                 |            |
- +----------------------+----------------+-----------------+------------+ 
+ +----------------------+----------------+-----------------+------------+
  | **Real**             | 57             | Yes             | No         |
- +----------------------+----------------+-----------------+------------+ 
+ +----------------------+----------------+-----------------+------------+
 
 .. _pyboleto-docs:
 
@@ -53,7 +53,7 @@ The best way to learn how to create Boletos using pyboleto is to look at the
 examples at `print_sample_data.py`
 
 
-.. _print_sample_data.py: https://github.com/eduardocereto/pyboleto/blob/master/pyboleto/scripts/print_sample_data.py 
+.. _print_sample_data.py: https://github.com/eduardocereto/pyboleto/blob/master/pyboleto/scripts/print_sample_data.py
 
 .. _pyboleto-installation:
 

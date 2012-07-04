@@ -50,8 +50,8 @@ class BoletoHsbc( BoletoData ):
             self.fator_vencimento,
             self.formata_valor(self.valor_documento,10),
             self.conta_cedente,
-            self.numero_documento, 
-            self.data_vencimento_juliano, 
+            self.numero_documento,
+            self.data_vencimento_juliano,
             '2'
         )
         dv = self.calculate_dv_barcode(num.replace('X', '', 1))
@@ -59,7 +59,7 @@ class BoletoHsbc( BoletoData ):
         num = num.replace('X', str(dv), 1)
         return num
 
-class BoletoHsbcComRegistro( BoletoData ):   
+class BoletoHsbcComRegistro( BoletoData ):
     '''
         Gera Dados necessários para criação de boleto para o banco HSBC
         com registro
@@ -101,7 +101,7 @@ class BoletoHsbcComRegistro( BoletoData ):
             '00',
             '1'
         )
-        
+
         dv = self.calculate_dv_barcode(num.replace('X', '', 1))
 
         num = num.replace('X', str(dv), 1)

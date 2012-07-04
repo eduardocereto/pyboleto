@@ -19,8 +19,8 @@ class BoletoReal( BoletoData ):
     @property
     def digitao_cobranca(self):
         num = "%s%s%s" % (
-            self.nosso_numero, 
-            self.agencia_cedente, 
+            self.nosso_numero,
+            self.agencia_cedente,
             self.conta_cedente
         )
         dv = self.modulo10(num)

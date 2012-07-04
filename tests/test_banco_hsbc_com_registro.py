@@ -18,12 +18,12 @@ class TestBancoHsbcComRegistro(unittest.TestCase):
         self.dados = d
 
     def test_linha_digitavel(self):
-        self.assertEqual(self.dados.linha_digitavel, 
+        self.assertEqual(self.dados.linha_digitavel,
             '39991.71600 57195.001417 50002.520018 1 47780000033585'
         )
-    
+
     def test_codigo_de_barras(self):
-        self.assertEqual(self.dados.barcode, 
+        self.assertEqual(self.dados.barcode,
             '39991477800000335851716057195001415000252001'
         )
 
