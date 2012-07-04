@@ -37,5 +37,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     test_suite='tests.alltests.suite',
+    test_requires=['pyflakes>=0.5.0'],
 )
 

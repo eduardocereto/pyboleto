@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import re
 from decimal import Decimal
 
 class BoletoException(Exception):

@@ -22,6 +22,7 @@ def suite():
         'tests.test_banco_caixa',
         'tests.test_banco_itau',
         'tests.test_banco_real',
+        'tests.test_pyflakes',
     ]
     alltests = unittest.TestSuite()
     for module in map(my_import, modules_to_test):

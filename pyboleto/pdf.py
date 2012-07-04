@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm, cm
-from reportlab.lib.colors import black, white
+from reportlab.lib.colors import black
 from reportlab.graphics.barcode.common import I2of5
 from reportlab.pdfbase.pdfmetrics import stringWidth
 import reportlab.lib.pagesizes
-import datetime
 
 class BoletoPDF(object):
     """Geração do Boleto em PDF

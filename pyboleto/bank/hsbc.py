@@ -1,7 +1,6 @@
 # -*- coding: utf-8
 from pyboleto.data import BoletoData, custom_property
 import os.path
-from datetime import datetime, date
 
 ### CAUTION - NÃO TESTADO ###
 class BoletoHsbc( BoletoData ):
