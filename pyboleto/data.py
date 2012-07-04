@@ -8,11 +8,14 @@ class BoletoException(Exception):
         Exception.__init__(self, message)
 
 def custom_property(name, num_length):
-    '''
-        Function to create properties on boleto
+    """Função para criar propriedades nos boletos
 
-        It accepts a number with or without a DV and zerofills it
-    '''
+    Aceita um numero com ou sem DV e remove o DV caso exista. Entao preenxe 
+    com zfill até o tamanho adequado. Note que sempre que possível não use DVs 
+    ao entrar valores no pyboleto. De preferência o pyboleto vai calcular 
+    todos os DVs quando necessário.
+
+    """
     internal_attr = '_%s'%name
 
     def _set_attr(self,val):
@@ -37,6 +40,14 @@ def custom_property(name, num_length):
     )
 
 class BoletoData(object):
+    """Interface para implementações específicas de bancos
+
+    As classes dentro do pacote bank extendem essa classe para implementar
+    as especificações de cada banco. 
+    Portanto as especificações dentro desta classe são genéricas seguindo as 
+    normas da FEBRABAN. 
+
+    """
     
     def __init__(self, *args, **kwargs):
         self.aceite = "N"
@@ -73,32 +84,32 @@ class BoletoData(object):
     
     @property
     def barcode(self):
-        '''
-            Returns string used to generate barcodes
+        """Returns string used to generate barcodes
 
-            It should be implemented by derived class
-        '''
+        Precisa ser implementado pela classe derivada
+
+        """
         raise NotImplementedError(
             'This method has not been implemented by this class'
         )
 
     @property
     def dv_nosso_numero(self):
-        '''
-            Returns nosso número DV
+        """Retorna DV do nosso número
 
-            It should be implemented by derived class
-        '''
+        Precisa ser implementado pela classe derivada
+
+        """
         raise NotImplementedError(
             'This method has not been implemented by this class'
         )
 
     def calculate_dv_barcode(self, line):
-        '''
-            Calculates de DV for barcode
+        """Calcula DV para código de barras
 
-            It should be implemented by derived class
-        '''
+        Geralmente é implementado pela classe derivada
+
+        """
         resto2 = self.modulo11(line,9,1)
         if resto2 in [0, 1, 10]:
             dv = 1
@@ -107,18 +118,33 @@ class BoletoData(object):
         return dv
 
     def format_nosso_numero(self):
-        '''
-            Return Formatted Nosso Número
+        """
+            Formata Nosso Número
 
-            It should be implemented by derived class
-        '''
+            Geralmente é implementado pela classe derivada
+        """
         return self.nosso_numero
 
     nosso_numero = custom_property('nosso_numero', 13)
+    """Nosso Número geralmente tem 13 posições
+
+    Algumas subclasses podem alterar isso dependendo das normas do banco
+
+    """
 
     agencia_cedente = custom_property('agencia_cedente', 4)
+    """Agência do Cedente geralmente tem 4 posições
+
+    Algumas subclasses podem alterar isso dependendo das normas do banco
+
+    """
 
     conta_cedente = custom_property('conta_cedente', 7)
+    """Conta do Cedente geralmente tem 7 posições
+
+    Algumas subclasses podem alterar isso dependendo das normas do banco
+
+    """
 
     def _cedente_endereco_get(self):
         if not hasattr(self, '_cedente_endereco'):
@@ -136,6 +162,7 @@ class BoletoData(object):
                 u'Linha de endereço possui mais que 80 caracteres')
         self._cedente_endereco = endereco
     cedente_endereco = property(_cedente_endereco_get, _cedente_endereco_set)
+    """Endereço do cedento com no máximo 80 caracteres"""
 
     def _get_valor(self):
         try:
@@ -148,6 +175,14 @@ class BoletoData(object):
         else:
             self._valor = Decimal(str(val), 2)
     valor = property(_get_valor, _set_valor)
+    """Valor convertido para :class:`Decimal`.
+
+    De preferência para passar um valor em :class:`Decimal`, se não for passado
+    outro tipo será feito um cast para :class:`Decimal`.
+
+    Geralmente valor e valor_documento são o mesmo número.
+    
+    """
 
     def _get_valor_documento(self):
         try:
@@ -159,10 +194,13 @@ class BoletoData(object):
             self._valor_documento = val
         else:
             self._valor_documento = Decimal(str(val), 2)
-    valor_documento = property(
-        _get_valor_documento,
-        _set_valor_documento
-    )
+    valor_documento = property(_get_valor_documento, _set_valor_documento)
+    """Valor do Documento convertido para :class:`Decimal`.
+
+    De preferência para passar um valor em :class:`Decimal`, se não for passado
+    outro tipo será feito um cast para :class:`Decimal`.
+    
+    """
 
     def _instrucoes_get(self):
         try:
@@ -179,6 +217,13 @@ class BoletoData(object):
                     u'Linha de instruções possui mais que 90 caracteres')
         self._instrucoes = list_inst
     instrucoes = property(_instrucoes_get, _instrucoes_set)
+    """Instruções para o caixa do banco que recebe o bilhete
+
+    Máximo de 7 linhas com 90 caracteres cada.
+    Geralmente contém instruções para aplicar multa ou não aceitar caso tenha 
+    passado a data de validade.
+
+    """
 
     def _demonstrativo_get(self):
         try:
@@ -195,8 +240,21 @@ class BoletoData(object):
                     u'Linha de demonstrativo possui mais que 90 caracteres')
         self._demonstrativo = list_dem
     demonstrativo = property(_demonstrativo_get, _demonstrativo_set)
+    """Texto que vai impresso no corpo do Recibo do Sacado
+
+    Máximo de 12 linhas com 90 caracteres cada.
+
+    """
 
     def _sacado_get(self):
+        """Tenta usar o sacado que foi setado ou constroi um
+
+        Se você não especificar um sacado o boleto tentará construir um sacado
+        a partir de outras proriedades setadas. 
+
+        Para facilitar você deve sempre setar essa propriedade.
+
+        """
         if not hasattr(self, '_sacado'):
             self.sacado = [
                 '%s - CPF/CNPJ: %s' % (self.sacado_nome, self.sacado_documento),
@@ -214,6 +272,12 @@ class BoletoData(object):
             raise BoletoException(u'Número de linhas do sacado maior que 3')
         self._sacado = list_sacado
     sacado = property(_sacado_get, _sacado_set)
+    """Campo sacado composto por até 3 linhas. 
+
+    A primeira linha precisa ser o nome do sacado.
+    As outras duas linhas devem ser usadas para o endereço do sacado.
+
+    """
     
     @property
     def fator_vencimento(self):
@@ -233,16 +297,19 @@ class BoletoData(object):
 
     @property
     def linha_digitavel(self):
-        '''
-            Monta a linha que o cliente pode utilizar para digitar se o código 
-            de barras não puder ser lido
-            Posição    Conteúdo
-            1 a 3    Número do banco
-            4        Código da Moeda - 9 para Real
-            5        Digito verificador do Código de Barras
-            6 a 19   Valor (12 inteiros e 2 decimais)
-            20 a 44  Campo Livre definido por cada banco
-        '''
+        """Monta a linha digitável a partir do barcode
+        
+        Esta é a linha que o cliente pode utilizar para digitar se o código 
+        de barras não estiver legível.
+
+        Posição    Conteúdo
+        1 a 3    Número do banco
+        4        Código da Moeda - 9 para Real
+        5        Digito verificador do Código de Barras
+        6 a 19   Valor (12 inteiros e 2 decimais)
+        20 a 44  Campo Livre definido por cada banco
+
+        """
         linha = self.barcode
         if not linha:
             BoletoException("Boleto doesn't have a barcode")
@@ -275,6 +342,10 @@ class BoletoData(object):
 
     @staticmethod
     def formata_numero(numero, tamanho):
+        """Formatacao comum para numeros
+
+        Preenche com zero fill a esquerda
+        """
         if len(numero) > tamanho:
             raise BoletoException(
                 u'Tamanho em caracteres do número está maior que o permitido' )
