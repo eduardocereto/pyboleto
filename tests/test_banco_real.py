@@ -28,6 +28,8 @@ class TestBancoBradesco(unittest.TestCase):
             '35698486900000355000531570585390000000000123'
         )
 
+suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoBradesco)
+
 if __name__ == '__main__':
     unittest.main()
 

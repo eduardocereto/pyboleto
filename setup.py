@@ -36,5 +36,6 @@ setup(
         'Topic :: Office/Business :: Financial',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
+    test_suite='tests.alltests.suite',
 )
 

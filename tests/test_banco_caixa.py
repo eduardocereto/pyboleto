@@ -31,6 +31,8 @@ class TestBancoCaixa(unittest.TestCase):
             '10491538800002952958019525086156587000000414'
         )
 
+suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoCaixa)
+
 if __name__ == '__main__':
     unittest.main()
 

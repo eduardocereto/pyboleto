@@ -36,6 +36,8 @@ class TestBancoHsbc(unittest.TestCase):
     def test_nosso_numero(self):
         self.assertEqual(self.dados.nosso_numero, '0100010103120947')
 
+suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoHsbc)
+
 if __name__ == '__main__':
     unittest.main()
 
