@@ -1,15 +1,19 @@
 # -*- coding: utf-8
-from pyboleto.data import BoletoData, custom_property
 import os.path
 
+from pyboleto.data import BoletoData, custom_property
+
+
 ### CAUTION - NÃO TESTADO ###
-class BoletoHsbc( BoletoData ):
+
+
+class BoletoHsbc(BoletoData):
     '''
         Gera Dados necessários para criação de boleto para o banco HSBC
     '''
 
     def __init__(self, *args, **kwargs):
-        super(BoletoHsbc , self).__init__(*args, **kwargs)
+        super(BoletoHsbc, self).__init__(*args, **kwargs)
 
         self.codigo_banco = "399"
         self.logo_image_path = os.path.dirname(__file__) + \
@@ -25,7 +29,7 @@ class BoletoHsbc( BoletoData ):
         # Cobrança com vencimento = 4
         nosso_numero += "4"
         # Segundo DV
-        sum_params = int(nosso_numero)+int(self.conta_cedente)
+        sum_params = int(nosso_numero) + int(self.conta_cedente)
         sum_params += int(self.data_vencimento.strftime('%d%m%y'))
         sum_params = str(sum_params)
         nosso_numero += str(self.modulo11(sum_params))
@@ -47,7 +51,7 @@ class BoletoHsbc( BoletoData ):
             self.moeda,
             'X',
             self.fator_vencimento,
-            self.formata_valor(self.valor_documento,10),
+            self.formata_valor(self.valor_documento, 10),
             self.conta_cedente,
             self.numero_documento,
             self.data_vencimento_juliano,
@@ -58,14 +62,15 @@ class BoletoHsbc( BoletoData ):
         num = num.replace('X', str(dv), 1)
         return num
 
-class BoletoHsbcComRegistro( BoletoData ):
+
+class BoletoHsbcComRegistro(BoletoData):
     '''
         Gera Dados necessários para criação de boleto para o banco HSBC
         com registro
     '''
     def __init__(self, *args, **kwargs):
 
-        super(BoletoHsbcComRegistro , self).__init__(*args, **kwargs)
+        super(BoletoHsbcComRegistro, self).__init__(*args, **kwargs)
 
         self.codigo_banco = "399"
         self.logo_image_path = os.path.dirname(__file__) + \
@@ -78,11 +83,11 @@ class BoletoHsbcComRegistro( BoletoData ):
 
     @property
     def dv_nosso_numero(self):
-        resto = self.modulo11(self.nosso_numero,7,1)
+        resto = self.modulo11(self.nosso_numero, 7, 1)
         if resto == 0 or resto == 1:
             return 0
         else:
-            return 11-resto
+            return 11 - resto
 
     # Numero para o codigo de barras com 44 digitos
     @property
@@ -92,7 +97,7 @@ class BoletoHsbcComRegistro( BoletoData ):
             self.moeda,
             'X',
             self.fator_vencimento,
-            self.formata_valor(self.valor_documento,10),
+            self.formata_valor(self.valor_documento, 10),
             self.nosso_numero,
             self.dv_nosso_numero,
             self.agencia_cedente.split('-')[0],

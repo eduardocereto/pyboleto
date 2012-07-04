@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import unittest
 
+
 def suite():
     def my_import(name):
         # See http://docs.python.org/lib/built-in-funcs.html#l2h-6
@@ -22,12 +23,14 @@ def suite():
         'tests.test_banco_caixa',
         'tests.test_banco_itau',
         'tests.test_banco_real',
+        'tests.test_pep8',
         'tests.test_pyflakes',
     ]
     alltests = unittest.TestSuite()
     for module in map(my_import, modules_to_test):
         alltests.addTest(module.suite)
     return alltests
+
 
 if __name__ == '__main__':
     unittest.TextTestRunner(verbosity=2).run(suite())

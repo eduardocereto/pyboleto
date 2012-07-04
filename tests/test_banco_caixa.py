@@ -4,6 +4,7 @@ import datetime
 
 from pyboleto.bank.caixa import BoletoCaixa
 
+
 class TestBancoCaixa(unittest.TestCase):
     def setUp(self):
         d = BoletoCaixa()
@@ -33,6 +34,6 @@ class TestBancoCaixa(unittest.TestCase):
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoCaixa)
 
+
 if __name__ == '__main__':
     unittest.main()
-

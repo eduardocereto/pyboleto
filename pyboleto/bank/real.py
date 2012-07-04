@@ -1,10 +1,12 @@
-from pyboleto.data import BoletoData
 import os.path
 
-class BoletoReal( BoletoData ):
+from pyboleto.data import BoletoData
+
+
+class BoletoReal(BoletoData):
 
     def __init__(self, *args, **kwargs):
-        super(BoletoReal , self).__init__(*args, **kwargs)
+        super(BoletoReal, self).__init__(*args, **kwargs)
 
         self.codigo_banco = "356"
         self.logo_image_path = os.path.dirname(__file__) + \
@@ -27,7 +29,7 @@ class BoletoReal( BoletoData ):
         return dv
 
     def calculate_dv_barcode(self, line):
-        dv = self.modulo11(line,r=1)
+        dv = self.modulo11(line, r=1)
         if dv == 0 or dv == 1:
             dv = 1
         else:
@@ -36,12 +38,12 @@ class BoletoReal( BoletoData ):
 
     @property
     def barcode(self):
-        num = "%3s%1s%1s%4s%10s%4s%7s%1s%13s" % ( \
-            self.codigo_banco, \
+        num = "%3s%1s%1s%4s%10s%4s%7s%1s%13s" % (
+            self.codigo_banco,
             self.moeda,
             'X',
             self.fator_vencimento,
-            self.formata_valor(self.valor_documento,10),
+            self.formata_valor(self.valor_documento, 10),
             self.agencia_cedente,
             self.conta_cedente,
             self.digitao_cobranca,

@@ -4,6 +4,7 @@ import datetime
 
 from pyboleto.bank.hsbc import BoletoHsbcComRegistro
 
+
 class TestBancoHsbcComRegistro(unittest.TestCase):
     def setUp(self):
         d = BoletoHsbcComRegistro()
@@ -38,6 +39,6 @@ class TestBancoHsbcComRegistro(unittest.TestCase):
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoHsbcComRegistro)
 
+
 if __name__ == '__main__':
     unittest.main()
-

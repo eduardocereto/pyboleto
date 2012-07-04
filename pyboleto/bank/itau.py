@@ -1,10 +1,12 @@
 # -*- coding: utf-8
-from pyboleto.data import BoletoData, custom_property
 import os.path
+
+from pyboleto.data import BoletoData, custom_property
 
 ### CAUTION - NÃO TESTADO ###
 
-class BoletoItau( BoletoData ):
+
+class BoletoItau(BoletoData):
     '''
         Gera Dados necessários para criação de boleto para o banco Itau
         Todas as carteiras com excessão das que utilizam 15 dígitos: (106,107,
@@ -28,8 +30,8 @@ class BoletoItau( BoletoData ):
 
     @property
     def dv_nosso_numero(self):
-        composto = "%4s%5s%3s%8s" %(self.agencia_cedente, self.conta_cedente,
-                                            self.carteira, self.nosso_numero)
+        composto = "%4s%5s%3s%8s" % (self.agencia_cedente, self.conta_cedente,
+                                     self.carteira, self.nosso_numero)
         return self.modulo10(composto)
 
     @property
@@ -40,11 +42,11 @@ class BoletoItau( BoletoData ):
     @property
     def agencia_conta_cedente(self):
         return "%s/%s-%s" % (self.agencia_cedente, self.conta_cedente,
-                                                self.dv_agencia_conta_cedente)
+                             self.dv_agencia_conta_cedente)
 
     def format_nosso_numero(self):
-        return "%3s/%8s-%1s" %(self.carteira, self.nosso_numero,
-                                                    self.dv_nosso_numero)
+        return "%3s/%8s-%1s" % (self.carteira, self.nosso_numero,
+                                self.dv_nosso_numero)
 
     # Numero para o codigo de barras com 44 digitos
     @property
@@ -54,7 +56,7 @@ class BoletoItau( BoletoData ):
             self.moeda,
             'X',
             self.fator_vencimento,
-            self.formata_valor(self.valor_documento,10),
+            self.formata_valor(self.valor_documento, 10),
             self.carteira,
             self.nosso_numero,
             self.dv_nosso_numero,

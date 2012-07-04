@@ -1,9 +1,12 @@
 # -*- coding: utf-8
-from pyboleto.data import BoletoData, custom_property
 import os.path
 
+from pyboleto.data import BoletoData, custom_property
+
 ### CAUTION - NÃO TESTADO ###
-class BoletoBB( BoletoData ):
+
+
+class BoletoBB(BoletoData):
     '''
         Gera Dados necessários para criação de boleto para o Banco do Brasil
     '''
@@ -16,7 +19,7 @@ class BoletoBB( BoletoData ):
                 format_convenio Formato do convenio 6, 7 ou 8
                 format_nnumero Formato nosso numero 1 ou 2
         '''
-        super(BoletoBB , self).__init__(*args, **kwargs)
+        super(BoletoBB, self).__init__(*args, **kwargs)
 
         self.codigo_banco = "001"
         self.carteira = 18
@@ -41,7 +44,7 @@ class BoletoBB( BoletoData ):
     def _get_nosso_numero(self):
         return self.convenio + self._nosso_numero
 
-    def _set_nosso_numero(self,val):
+    def _set_nosso_numero(self, val):
         val = str(val)
         if self.format_convenio is 6:
             if self.format_nnumero is 1:
@@ -89,7 +92,7 @@ class BoletoBB( BoletoData ):
                 self.moeda,
                 'X',
                 self.fator_vencimento,
-                self.formata_valor(self.valor_documento,10),
+                self.formata_valor(self.valor_documento, 10),
                 '000000',
                 self.nosso_numero,
                 self.carteira
@@ -101,7 +104,7 @@ class BoletoBB( BoletoData ):
                     self.moeda,
                     'X',
                     self.fator_vencimento,
-                    self.formata_valor(self.valor_documento,10),
+                    self.formata_valor(self.valor_documento, 10),
                     self.nosso_numero,
                     self.agencia_cedente,
                     self.conta_cedente,
@@ -113,14 +116,12 @@ class BoletoBB( BoletoData ):
                     self.moeda,
                     'X',
                     self.fator_vencimento,
-                    self.formata_valor(self.valor_documento,10),
+                    self.formata_valor(self.valor_documento, 10),
                     self.nosso_numero,
                     '21' # numero do serviço
                 )
-
 
         dv = self.modulo11(num.replace('X', '', 1))
 
         num = num.replace('X', str(dv), 1)
         return num
-

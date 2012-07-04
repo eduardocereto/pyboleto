@@ -4,6 +4,7 @@ import datetime
 
 from pyboleto.bank.itau import BoletoItau
 
+
 class TestBancoItau(unittest.TestCase):
     def setUp(self):
         d = BoletoItau()
@@ -44,4 +45,3 @@ suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoItau)
 
 if __name__ == '__main__':
     unittest.main()
-

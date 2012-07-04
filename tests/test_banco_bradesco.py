@@ -4,6 +4,7 @@ import datetime
 
 from pyboleto.bank.bradesco import BoletoBradesco
 
+
 class TestBancoBradesco(unittest.TestCase):
     def setUp(self):
         d = BoletoBradesco()
@@ -36,6 +37,6 @@ class TestBancoBradesco(unittest.TestCase):
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoBradesco)
 
+
 if __name__ == '__main__':
     unittest.main()
-

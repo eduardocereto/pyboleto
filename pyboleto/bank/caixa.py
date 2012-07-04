@@ -1,8 +1,10 @@
 #-*- coding: utf-8 -*-
-from pyboleto.data import BoletoData, custom_property
 import os.path
 
-class BoletoCaixa( BoletoData ):
+from pyboleto.data import BoletoData, custom_property
+
+
+class BoletoCaixa(BoletoData):
     '''
         Gera Dados necessários para criação de boleto para o banco Caixa
         Economica Federal
@@ -18,7 +20,7 @@ class BoletoCaixa( BoletoData ):
     nosso_numero = custom_property('nosso_numero', 10)
 
     def __init__(self, *args, **kwargs):
-        super(BoletoCaixa , self).__init__(*args, **kwargs)
+        super(BoletoCaixa, self).__init__(*args, **kwargs)
 
         self.codigo_banco = "104"
         self.local_pagamento = "Preferencialmente nas Casas Lotéricas e Agências da Caixa"
@@ -27,7 +29,7 @@ class BoletoCaixa( BoletoData ):
 
     @property
     def dv_nosso_numero(self):
-        resto2 = self.modulo11(self.nosso_numero.split('-')[0],9,1)
+        resto2 = self.modulo11(self.nosso_numero.split('-')[0], 9, 1)
         digito = 11 - resto2
         if digito == 10 or digito == 11:
             dv = 0
@@ -43,7 +45,7 @@ class BoletoCaixa( BoletoData ):
             self.moeda,
             'X',
             self.fator_vencimento,
-            self.formata_valor(self.valor_documento,10),
+            self.formata_valor(self.valor_documento, 10),
             self.nosso_numero,
             self.agencia_cedente,
             self.conta_cedente.split('-')[0],
@@ -55,5 +57,3 @@ class BoletoCaixa( BoletoData ):
 
     def format_nosso_numero(self):
         return self._nosso_numero + '-' + str(self.dv_nosso_numero)
-
-

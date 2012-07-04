@@ -2,9 +2,11 @@
 import datetime
 from decimal import Decimal
 
+
 class BoletoException(Exception):
-    def __init__(self, message ):
+    def __init__(self, message):
         Exception.__init__(self, message)
+
 
 def custom_property(name, num_length):
     """Função para criar propriedades nos boletos
@@ -15,9 +17,9 @@ def custom_property(name, num_length):
     todos os DVs quando necessário.
 
     """
-    internal_attr = '_%s'%name
+    internal_attr = '_%s' % name
 
-    def _set_attr(self,val):
+    def _set_attr(self, val):
         val = val.split('-')
 
         if len(val) is 1:
@@ -37,6 +39,7 @@ def custom_property(name, num_length):
         lambda self: delattr(self, internal_attr),
         name
     )
+
 
 class BoletoData(object):
     """Interface para implementações específicas de bancos
@@ -109,7 +112,7 @@ class BoletoData(object):
         Geralmente é implementado pela classe derivada
 
         """
-        resto2 = self.modulo11(line,9,1)
+        resto2 = self.modulo11(line, 9, 1)
         if resto2 in [0, 1, 10]:
             dv = 1
         else:
@@ -155,6 +158,7 @@ class BoletoData(object):
                 self.cedente_cep
             )
         return self._cedente_endereco
+
     def _cedente_endereco_set(self, endereco):
         if len(endereco) > 80:
             raise BoletoException(
@@ -168,6 +172,7 @@ class BoletoData(object):
             return "%.2f" % self._valor
         except AttributeError:
             pass
+
     def _set_valor(self, val):
         if type(val) is Decimal:
             self._valor = val
@@ -188,6 +193,7 @@ class BoletoData(object):
             return "%.2f" % self._valor_documento
         except AttributeError:
             pass
+
     def _set_valor_documento(self, val):
         if type(val) is Decimal:
             self._valor_documento = val
@@ -206,6 +212,7 @@ class BoletoData(object):
             return self._instrucoes
         except AttributeError:
             pass
+
     def _instrucoes_set(self, list_inst):
         if len(list_inst) > 7:
             raise BoletoException(
@@ -229,7 +236,8 @@ class BoletoData(object):
             return self._demonstrativo
         except AttributeError:
             pass
-    def _demonstrativo_set(self,list_dem):
+
+    def _demonstrativo_set(self, list_dem):
         if len(list_dem) > 12:
             raise BoletoException(
                 u'Número de linhas de demonstrativo maior que 12')
@@ -266,6 +274,7 @@ class BoletoData(object):
                 )
             ]
         return self._sacado
+
     def _sacado_set(self, list_sacado):
         if len(list_sacado) > 3:
             raise BoletoException(u'Número de linhas do sacado maior que 3')
@@ -280,7 +289,7 @@ class BoletoData(object):
 
     @property
     def fator_vencimento(self):
-        date_ref = datetime.date(2000,7,3) # Fator = 1000
+        date_ref = datetime.date(2000, 7, 3) # Fator = 1000
         delta = self.data_vencimento - date_ref
         fator = delta.days + 1000
         return fator
@@ -315,29 +324,29 @@ class BoletoData(object):
 
         p1 = linha[0:4]
         p2 = linha[19:24]
-        p3 = self.modulo10("%s%s"%(p1,p2))
-        p4 = "%s%s%s" %(p1,p2,p3)
+        p3 = self.modulo10("%s%s" % (p1, p2))
+        p4 = "%s%s%s" % (p1, p2, p3)
         p5 = p4[0:5]
         p6 = p4[5:]
-        campo1 = "%s.%s" %(p5,p6)
+        campo1 = "%s.%s" % (p5, p6)
 
         p1 = linha[24:34]
         p2 = self.modulo10(p1)
-        p3 = "%s%s" %(p1,p2)
+        p3 = "%s%s" % (p1, p2)
         p4 = p3[0:5]
         p5 = p3[5:]
-        campo2 = "%s.%s" %(p4,p5)
+        campo2 = "%s.%s" % (p4, p5)
 
         p1 = linha[34:44]
         p2 = self.modulo10(p1)
-        p3 = "%s%s" %(p1,p2)
+        p3 = "%s%s" % (p1, p2)
         p4 = p3[0:5]
         p5 = p3[5:]
-        campo3 = "%s.%s" %(p4,p5)
+        campo3 = "%s.%s" % (p4, p5)
         campo4 = linha[4]
         campo5 = linha[5:19]
 
-        return "%s %s %s %s %s" %(campo1,campo2,campo3,campo4,campo5)
+        return "%s %s %s %s %s" % (campo1, campo2, campo3, campo4, campo5)
 
     @staticmethod
     def formata_numero(numero, tamanho):
@@ -347,19 +356,19 @@ class BoletoData(object):
         """
         if len(numero) > tamanho:
             raise BoletoException(
-                u'Tamanho em caracteres do número está maior que o permitido' )
+                u'Tamanho em caracteres do número está maior que o permitido')
         return numero.zfill(tamanho)
 
     @staticmethod
     def formata_texto(texto, tamanho):
         if len(texto) > tamanho:
             raise BoletoException(
-                u'Tamanho em caracteres do texto está maior que o permitido' )
+                u'Tamanho em caracteres do texto está maior que o permitido')
         return texto.ljust(tamanho)
 
-    def formata_valor(self,nfloat, tamanho):
+    def formata_valor(self, nfloat, tamanho):
         try:
-            txt = nfloat.replace( '.', '' )
+            txt = nfloat.replace('.', '')
             txt = self.formata_numero(txt, tamanho)
             return txt
         except AttributeError:
@@ -369,11 +378,11 @@ class BoletoData(object):
     def modulo10(num):
         soma = 0
         peso = 2
-        for i in range(len(num)-1,-1,-1):
+        for i in range(len(num) - 1, -1, -1):
             parcial = int(num[i]) * peso
             if parcial > 9:
                 s = "%d" % parcial
-                parcial = int(s[0])+int(s[1])
+                parcial = int(s[0]) + int(s[1])
             soma += parcial
             if peso == 2:
                 peso = 1
@@ -389,9 +398,9 @@ class BoletoData(object):
         return modulo10
 
     @staticmethod
-    def modulo11(num,base=9,r=0):
-        soma=0
-        fator=2
+    def modulo11(num, base=9, r=0):
+        soma = 0
+        fator = 2
         for i in range(len(str(num))).__reversed__():
             parcial10 = int(num[i]) * fator
             soma += parcial10
@@ -407,4 +416,3 @@ class BoletoData(object):
         if r == 1:
             resto = soma % 11
             return resto
-
