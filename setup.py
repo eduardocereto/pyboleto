@@ -8,7 +8,10 @@ setup(
     author_email = 'eduardocereto@gmail.com',
     url = 'https://github.com/eduardocereto/pyboleto',
     packages = find_packages(),
-    include_package_data = True,
+    package_data = {
+        '': ['LICENSE'],
+        'pyboleto': ['media/*.jpg'],
+    },
     zip_safe = False,
     install_requires = [
         'reportlab>=2.5',
@@ -20,11 +23,7 @@ setup(
     description = 'Python Library to create "boletos de cobrança bancária" for several Brazilian banks',
     long_description = open('README.rst', 'r').read(),
     download_url = 'http://pypi.python.org/pypi/pyboleto',
-    entry_points = {
-        'console_scripts':[
-            'pyboleto_sample = pyboleto.scripts.print_sample_data:print_all',
-        ],
-    },
+    scripts = ['bin/pyboleto_sample.py'],
     classifiers = [
         'Development Status :: 4 - Beta',
         'Operating System :: OS Independent',
