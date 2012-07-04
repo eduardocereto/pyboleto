@@ -75,3 +75,8 @@ class TestPEP8(SourceTest, unittest.TestCase):
         if result:
             raise AssertionError(
                 "ERROR: %d PEP8 errors in %s" % (result, filename, ))
+
+suite = unittest.TestLoader().loadTestsFromTestCase(TestPEP8)
+
+if __name__ == '__main__':
+    unittest.main()

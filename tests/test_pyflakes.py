@@ -104,3 +104,8 @@ class TestPyflakes(SourceTest, unittest.TestCase):
         if result:
             raise AssertionError(
                 "%d warnings:\n%s\n" % (len(msgs), '\n'.join(msgs), ))
+
+suite = unittest.TestLoader().loadTestsFromTestCase(TestPyflakes)
+
+if __name__ == '__main__':
+    unittest.main()
