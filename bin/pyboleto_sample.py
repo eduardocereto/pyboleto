@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from pyboleto.bank.real import BoletoReal
 from pyboleto.bank.bradesco import BoletoBradesco
