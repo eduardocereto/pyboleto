@@ -37,6 +37,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     test_suite='tests.alltests.suite',
-    test_requires=['pep8>=0.6.1',
+    tests_require=['pep8>=0.6.1',
+                   'pep8<1.3',
                    'pyflakes>=0.5.0'],
 )
