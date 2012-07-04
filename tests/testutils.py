@@ -45,7 +45,7 @@ class SourceTest(object):
 
     @classmethod
     def __class_init__(cls, namespace):
-        root = os.path.dirname(os.path.dirname(pyboleto.__file__)) + '/'
+        root = os.path.dirname(os.path.dirname(pyboleto.__file__))
         cls.root = root
         for filename in get_sources(root):
             testname = filename[len(root):]
