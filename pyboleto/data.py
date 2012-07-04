@@ -22,11 +22,11 @@ def custom_property(name, num_length):
     def _set_attr(self, val):
         val = val.split('-')
 
-        if len(val) is 1:
+        if len(val) == 1:
             val[0] = str(val[0]).zfill(num_length)
             setattr(self, internal_attr, ''.join(val))
 
-        elif len(val) is 2:
+        elif len(val) == 2:
             val[0] = str(val[0]).zfill(num_length)
             setattr(self, internal_attr, '-'.join(val))
 

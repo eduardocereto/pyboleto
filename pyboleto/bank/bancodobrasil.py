@@ -44,14 +44,14 @@ class BoletoBB(BoletoData):
 
     def _set_nosso_numero(self, val):
         val = str(val)
-        if self.format_convenio is 6:
-            if self.format_nnumero is 1:
+        if self.format_convenio == 6:
+            if self.format_nnumero == 1:
                 nn = val.zfill(5)
-            elif self.format_nnumero is 2:
+            elif self.format_nnumero == 2:
                 nn = val.zfill(17)
-        elif self.format_convenio is 7:
+        elif self.format_convenio == 7:
             nn = val.zfill(10)
-        elif self.format_convenio is 8:
+        elif self.format_convenio == 8:
             nn = val.zfill(9)
         self._nosso_numero = nn
 
@@ -95,8 +95,8 @@ class BoletoBB(BoletoData):
                 self.nosso_numero,
                 self.carteira
             )
-        elif self.format_convenio is 6:
-            if self.format_nnumero is 1:
+        elif self.format_convenio == 6:
+            if self.format_nnumero == 1:
                 num = "%3s%1s%1s%4s%10s%s%s%s%s" % (
                     self.codigo_banco,
                     self.moeda,
@@ -108,7 +108,7 @@ class BoletoBB(BoletoData):
                     self.conta_cedente,
                     self.carteira
                 )
-            if self.format_nnumero is 2:
+            if self.format_nnumero == 2:
                 num = "%3s%1s%1s%4s%10s%s%2s" % (
                     self.codigo_banco,
                     self.moeda,
