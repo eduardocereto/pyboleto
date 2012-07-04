@@ -4,8 +4,10 @@ import datetime
 
 from pyboleto.bank.itau import BoletoItau
 
+from testutils import BoletoTestCase
 
-class TestBancoItau(unittest.TestCase):
+
+class TestBancoItau(BoletoTestCase):
     def setUp(self):
         d = BoletoItau()
         d.carteira = '109'
@@ -18,6 +20,9 @@ class TestBancoItau(unittest.TestCase):
         d.nosso_numero = '157'
         d.numero_documento = '456'
         self.dados = d
+
+    def test_render(self):
+        self.check_pdf_rendering('itau', self.dados)
 
     def test_linha_digitavel(self):
         self.assertEqual(self.dados.linha_digitavel,

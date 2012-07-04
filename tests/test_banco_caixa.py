@@ -4,8 +4,10 @@ import datetime
 
 from pyboleto.bank.caixa import BoletoCaixa
 
+from testutils import BoletoTestCase
 
-class TestBancoCaixa(unittest.TestCase):
+
+class TestBancoCaixa(BoletoTestCase):
     def setUp(self):
         d = BoletoCaixa()
         d.carteira = 'SR'
@@ -18,6 +20,9 @@ class TestBancoCaixa(unittest.TestCase):
         d.nosso_numero = '8019525086'
         d.numero_documento = '270319510'
         self.dados = d
+
+    def test_render(self):
+        self.check_pdf_rendering('caixa', self.dados)
 
     def test_linha_digitavel(self):
         self.assertEqual(self.dados.linha_digitavel,

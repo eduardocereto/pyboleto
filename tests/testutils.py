@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 
+import difflib
 import fnmatch
 import os
+import re
+import subprocess
+import tempfile
+import unittest
+from xml.etree.ElementTree import fromstring, tostring
 
 import pyboleto
+from pyboleto.pdf import BoletoPDF
 
 
 def list_recursively(directory, pattern):
@@ -31,6 +38,36 @@ def get_sources(root):
             yield fname
 
         yield os.path.join(root, 'setup.py')
+
+
+def _diff(orig, new, short, verbose):
+    lines = difflib.unified_diff(orig, new)
+    if not lines:
+        return ''
+
+    return ''.join('%s: %s' % (short, line) for line in lines)
+
+
+def diff_files(orig, new, verbose=False):
+    with open(orig) as f_orig:
+        with open(new) as f_new:
+            return _diff(f_orig.readlines(),
+                         f_new.readlines(),
+                         short=os.path.basename(orig),
+                         verbose=verbose)
+
+
+def diff_pdf_htmls(original_filename, filename):
+    # REPLACE all generated dates with %%DATE%%
+    for fname in [original_filename, filename]:
+        with open(fname) as f:
+            data = f.read()
+            data = re.sub(r'name="date" content="(.*)"',
+                          r'name="date" content="%%DATE%%"', data)
+        with open(fname, 'w') as f:
+            f.write(data)
+
+    return diff_files(original_filename, filename)
 
 
 class ClassInittableMetaType(type):
@@ -66,3 +103,64 @@ class SourceTest(object):
             return False
         else:
             return True
+
+
+def indent(elem, level=0):
+    i = "\n" + level * "  "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for elem in elem:
+            indent(elem, level + 1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i
+
+
+def pdftoxml(filename, output):
+    # FIXME: Change this to use popen
+    p = subprocess.Popen(['pdftohtml',
+                          '-stdout',
+                          '-xml',
+                          '-noframes',
+                          '-i',
+                          '-q',
+                          filename],
+                         stdout=subprocess.PIPE)
+    stdout, stderr = p.communicate()
+    if stderr:
+        raise SystemExit("Error while runnig pdftohtml: %s" % (stderr, ))
+
+    root = fromstring(stdout)
+    indent(root)
+    open(output, 'w').write(tostring(root))
+
+
+class BoletoTestCase(unittest.TestCase):
+    def _get_expected(self, bank, generated):
+        fname = os.path.join(os.path.dirname(pyboleto.__file__),
+                             "..", "tests", "xml", bank + '-expected.xml')
+        if not os.path.exists(fname):
+            open(fname, 'w').write(open(generated).read())
+        return fname
+
+    def check_pdf_rendering(self, bank, dados):
+        filename = tempfile.mktemp(prefix="pyboleto-",
+                                   suffix=".pdf")
+        boleto = BoletoPDF(filename, True)
+        boleto.drawBoleto(dados)
+        boleto.nextPage()
+        boleto.save()
+
+        generated = filename + '.xml'
+        pdftoxml(filename, generated)
+        expected = self._get_expected(bank, generated)
+        diff = diff_pdf_htmls(expected, generated)
+        if diff:
+            self.fail("Error while checking xml for bank %r:\n%s" % (
+                bank, diff))
+        os.unlink(generated)

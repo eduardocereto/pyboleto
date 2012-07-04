@@ -1,0 +1,80 @@
+<pdf2xml>
+  <page height="892" left="0" number="1" position="absolute" top="0" width="1262">
+    <fontspec color="#000000" family="Helvetica" id="0" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="1" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="2" size="25" />
+    <fontspec color="#000000" family="Helvetica" id="3" size="15" />
+    <text font="0" height="8" left="627" top="825" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
+    <text font="0" height="8" left="634" top="810" width="65">C&#243;digo de baixa</text>
+    <text font="0" height="8" left="15" top="810" width="73">Sacador / Avalista</text>
+    <text font="0" height="8" left="15" top="768" width="31">Sacado</text>
+    <text font="1" height="12" left="79" top="770" width="86"> - CPF/CNPJ: </text>
+    <text font="1" height="12" left="79" top="800" width="36"> -  -  - </text>
+    <text font="0" height="8" left="634" top="741" width="70">(=) Valor cobrado</text>
+    <text font="0" height="8" left="634" top="713" width="89">(+) Outros acr&#233;scimos</text>
+    <text font="0" height="8" left="634" top="685" width="59">(+) Mora/Multa</text>
+    <text font="0" height="8" left="634" top="658" width="80">(-) Outras dedu&#231;&#245;es</text>
+    <text font="0" height="8" left="634" top="630" width="107">(-) Descontos/Abatimentos</text>
+    <text font="0" height="8" left="15" top="630" width="42">Instru&#231;&#245;es</text>
+    <text font="0" height="8" left="15" top="603" width="56">Uso do banco</text>
+    <text font="0" height="8" left="145" top="603" width="32">Carteira</text>
+    <text font="0" height="8" left="230" top="603" width="32">Esp&#233;cie</text>
+    <text font="0" height="8" left="316" top="603" width="47">Quantidade</text>
+    <text font="0" height="8" left="486" top="603" width="21">Valor</text>
+    <text font="0" height="8" left="634" top="603" width="82">(=) Valor documento</text>
+    <text font="1" height="12" left="145" top="613" width="28">CSB</text>
+    <text font="1" height="12" left="230" top="613" width="17">R$</text>
+    <text font="1" height="12" left="775" top="613" width="41">335,85</text>
+    <text font="0" height="8" left="15" top="575" width="79">Data do documento</text>
+    <text font="0" height="8" left="145" top="575" width="69">N. do documento</text>
+    <text font="0" height="8" left="316" top="575" width="49">Esp&#233;cie doc</text>
+    <text font="0" height="8" left="401" top="575" width="25">Aceite</text>
+    <text font="0" height="8" left="486" top="575" width="83">Data processamento</text>
+    <text font="0" height="8" left="634" top="575" width="59">Nosso n&#250;mero</text>
+    <text font="1" height="12" left="15" top="586" width="68">06/11/2010</text>
+    <text font="1" height="12" left="145" top="586" width="15">02</text>
+    <text font="1" height="12" left="316" top="586" width="19">PD</text>
+    <text font="1" height="12" left="401" top="586" width="10">N</text>
+    <text font="1" height="12" left="486" top="586" width="68">06/11/2010</text>
+    <text font="1" height="12" left="742" top="586" width="75">1716057195</text>
+    <text font="0" height="8" left="15" top="547" width="34">Cedente</text>
+    <text font="0" height="8" left="634" top="547" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
+    <text font="1" height="12" left="718" top="558" width="98">0141-4/5000252</text>
+    <text font="0" height="8" left="15" top="520" width="82">Local de pagamento</text>
+    <text font="0" height="8" left="634" top="520" width="48">Vencimento</text>
+    <text font="1" height="12" left="15" top="530" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
+    <text font="1" height="12" left="749" top="530" width="68">06/11/2010</text>
+    <text font="2" height="25" left="193" top="490" width="69">
+      <b>399-9</b>
+    </text>
+    <text font="3" height="16" left="338" top="497" width="484">
+      <b>39991.71600 57195.001417 50002.520018 1 47780000033585</b>
+    </text>
+    <text font="2" height="25" left="193" top="-224" width="69">
+      <b>399-9</b>
+    </text>
+    <text font="3" height="16" left="673" top="-217" width="150">
+      <b>Recibo do Sacado</b>
+    </text>
+    <text font="0" height="8" left="730" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
+    <text font="0" height="8" left="15" top="-196" width="34">Cedente</text>
+    <text font="0" height="8" left="379" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
+    <text font="0" height="8" left="549" top="-196" width="81">CPF/CNPJ Cedente</text>
+    <text font="0" height="8" left="698" top="-196" width="48">Vencimento</text>
+    <text font="0" height="8" left="15" top="-168" width="31">Sacado</text>
+    <text font="0" height="8" left="379" top="-168" width="60">Nosso N&#250;mero</text>
+    <text font="0" height="8" left="549" top="-168" width="69">N. do documento</text>
+    <text font="0" height="8" left="698" top="-168" width="68">Data Documento</text>
+    <text font="0" height="8" left="15" top="-141" width="75">Endere&#231;o Cedente</text>
+    <text font="0" height="8" left="698" top="-141" width="70">Valor Documento</text>
+    <text font="0" height="8" left="15" top="-13" width="58">Demonstrativo</text>
+    <text font="1" height="12" left="379" top="-185" width="98">0141-4/5000252</text>
+    <text font="1" height="12" left="698" top="-185" width="68">06/11/2010</text>
+    <text font="1" height="12" left="18" top="-157" width="86"> - CPF/CNPJ: </text>
+    <text font="1" height="12" left="379" top="-157" width="75">1716057195</text>
+    <text font="1" height="12" left="549" top="-157" width="15">02</text>
+    <text font="1" height="12" left="698" top="-157" width="68">06/11/2010</text>
+    <text font="1" height="12" left="18" top="-130" width="48"> -  -  -  - </text>
+    <text font="1" height="12" left="698" top="-130" width="41">335,85</text>
+  </page>
+</pdf2xml>
