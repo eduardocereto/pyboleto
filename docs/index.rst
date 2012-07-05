@@ -1,5 +1,5 @@
 .. pyboleto documentation master file, created by
-   sphinx-quickstart on Tue Jan 25 05:25:28 2011.
+   sphinx-quickstart on Thu Jul  5 02:10:50 2012.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -9,15 +9,10 @@ Welcome to pyboleto's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
-   pdf.rst
-   data.rst
+   pyboleto
 
-   bank/bancodobrasil.rst
-   bank/caixa.rst
-   bank/bradesco.rst
-   bank/real.rst
 
 
 Indices and tables

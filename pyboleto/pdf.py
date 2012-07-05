@@ -1,4 +1,14 @@
 # -*- coding: utf-8 -*-
+"""
+    pyboleto.pdf
+    ~~~~~~~~~~~~
+
+    Classe Responsável por fazer o output do boleto em pdf usando Reportlab.
+
+    :copyright: © 2011 - 2012 by Eduardo Cereto Carvalho
+    :license: BSD, see LICENSE for more details.
+
+"""
 from reportlab.graphics.barcode.common import I2of5
 from reportlab.lib.colors import black
 from reportlab.lib.pagesizes import A4, landscape as pagesize_landscape
@@ -17,21 +27,13 @@ class BoletoPDF(object):
     Esta classe pode imprimir boletos em formato de carnê (2 boletos por
     página) ou em formato de folha cheia.
 
+    :param file_descr: Um arquivo ou *file-like* class.
+    :param landscape: Formato da folha. Usar ``True`` para boleto 
+        tipo carnê.
+
     """
 
     def __init__(self, file_descr, landscape=False):
-        """Método construtor
-
-        Recebe um file_descr onde o output do boleto será impresso.
-        O File descriptior aponta para um arquivo em disco ou para um Buffer
-        que depois pode ser usado para enviar para o cliente no caso de um
-        sistema Web.
-
-        O construtor não recebe nenhum dados pois um arquivo pode conter vários
-        boletos. Portanto outros métodos são responsáveis por adicionar
-        páginas.
-
-        """
         self.width = 190 * mm
         self.widthCanhoto = 70 * mm
         self.heightLine = 6.5 * mm
@@ -50,7 +52,13 @@ class BoletoPDF(object):
         self.pdfCanvas.setStrokeColor(black)
 
     def drawReciboSacadoCanhoto(self, boletoDados, x, y):
-        """Imprime o Recibo do Sacado para modelo de carnê"""
+        """Imprime o Recibo do Sacado para modelo de carnê
+        
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :type boletoDados: `BoletoData`
+        
+        """
 
         self.pdfCanvas.saveState()
         self.pdfCanvas.translate(x, y)
@@ -156,7 +164,13 @@ class BoletoPDF(object):
                 ((linhaInicial + 2) * self.heightLine))
 
     def drawReciboSacado(self, boletoDados, x, y):
-        """Imprime o Recibo do Sacado para modelo de página inteira"""
+        """Imprime o Recibo do Sacado para modelo de página inteira
+        
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :type boletoDados: `BoletoData`
+        
+        """
 
         self.pdfCanvas.saveState()
         self.pdfCanvas.translate(x, y)
@@ -401,6 +415,13 @@ class BoletoPDF(object):
         self.pdfCanvas.restoreState()
 
     def drawReciboCaixa(self, boletoDados, x, y):
+        """Imprime o Recibo do Caixa
+        
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :type boletoDados: `BoletoData`
+        
+        """
         self.pdfCanvas.saveState()
 
         self.pdfCanvas.translate(x, y)
@@ -728,12 +749,16 @@ class BoletoPDF(object):
 
         return self.width, (y + self.heightLine)
 
-    def drawBoletoCarneDuplo(self, boletoDados1, boletoDados2):
+    def drawBoletoCarneDuplo(self, boletoDados1, boletoDados2=None):
         """Imprime um boleto tipo carnê com 2 boletos por página.
-
-        Recebe os dois boletos como parâmetros posicionais.
-        boletoDados deve ser subclasse de :class:`BoletoData`
-
+        
+        :param boletoDados1: Objeto com os dados do boleto a ser preenchido. 
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :param boletoDados2: Objeto com os dados do boleto a ser preenchido. 
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :type boletoDados1: `BoletoData`
+        :type boletoDados2: `BoletoData`
+        
         """
         y = 5 * mm
         d = self.drawBoletoCarne(boletoDados1, y)
@@ -749,6 +774,9 @@ class BoletoPDF(object):
         Esta função não deve ser chamada diretamente, ao invés disso use a
         drawBoletoCarneDuplo.
 
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :type boletoDados: `BoletoData`
         """
         x = 15 * mm
         d = self.drawReciboSacadoCanhoto(boletoDados, x, y)
@@ -765,6 +793,9 @@ class BoletoPDF(object):
         Você pode chamar este método diversas vezes para criar um arquivo com
         várias páginas, uma por boleto.
 
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :type boletoDados: `BoletoData`
         """
         x = 3.5 * mm
         y = 0
@@ -810,7 +841,7 @@ class BoletoPDF(object):
         return txt
 
     def _codigoBarraI25(self, num, x, y):
-        """Código de barras otimizado para boletos
+        """Imprime Código de barras otimizado para boletos
 
         O código de barras é tomizado para que o comprimeto seja sempre o
         estipulado pela febraban de 103mm.

@@ -1,9 +1,21 @@
 # -*- coding: utf-8 -*-
+"""
+    pyboleto.data
+    ~~~~~~~~~~~~~
+
+    Base para criação dos módulos dos bancos. Comtém funções genéricas 
+    relacionadas a geração dos dados necessários para o boleto bancário.
+
+    :copyright: © 2011 - 2012 by Eduardo Cereto Carvalho
+    :license: BSD, see LICENSE for more details.
+
+"""
 import datetime
 from decimal import Decimal
 
 
 class BoletoException(Exception):
+    """ Exceções para erros no pyboleto"""
     def __init__(self, message):
         Exception.__init__(self, message)
 
@@ -11,10 +23,19 @@ class BoletoException(Exception):
 def custom_property(name, num_length):
     """Função para criar propriedades nos boletos
 
-    Aceita um numero com ou sem DV e remove o DV caso exista. Entao preenxe
+    Cria propriedades com getter, setter e delattr.
+
+    Propriedades criadas com essa função sempre são strings internamente.
+
+    O Setter sempre tentará remover qualquer digito verificador se existir.
+
+    Aceita um numero com ou sem DV e remove o DV caso exista. Então preenxe
     com zfill até o tamanho adequado. Note que sempre que possível não use DVs
     ao entrar valores no pyboleto. De preferência o pyboleto vai calcular
     todos os DVs quando necessário.
+
+    :param name: O nome da propriedade.
+    :param num_length: Tamanho para preencher com '0' na frente.
 
     """
     internal_attr = '_%s' % name
@@ -44,8 +65,8 @@ def custom_property(name, num_length):
 class BoletoData(object):
     """Interface para implementações específicas de bancos
 
-    As classes dentro do pacote bank extendem essa classe para implementar
-    as especificações de cada banco.
+    As classes dentro do pacote :mod:`pyboleto.bank` extendem essa classe
+    para implementar as especificações de cada banco.
     Portanto as especificações dentro desta classe são genéricas seguindo as
     normas da FEBRABAN.
 
@@ -86,9 +107,10 @@ class BoletoData(object):
 
     @property
     def barcode(self):
-        """Returns string used to generate barcodes
+        """Monta string usada para gerar o barcode
 
-        Precisa ser implementado pela classe derivada
+        :exception NotImplementedError: Precisa ser implementado pela classe
+            derivada
 
         """
         raise NotImplementedError(
@@ -99,7 +121,8 @@ class BoletoData(object):
     def dv_nosso_numero(self):
         """Retorna DV do nosso número
 
-        Precisa ser implementado pela classe derivada
+        :exception NotImplementedError: Precisa ser implementado pela classe
+            derivada
 
         """
         raise NotImplementedError(
@@ -181,10 +204,9 @@ class BoletoData(object):
     valor = property(_get_valor, _set_valor)
     """Valor convertido para :class:`Decimal`.
 
-    De preferência para passar um valor em :class:`Decimal`, se não for passado
-    outro tipo será feito um cast para :class:`Decimal`.
-
     Geralmente valor e valor_documento são o mesmo número.
+
+    :type: Decimal
 
     """
 
@@ -290,6 +312,12 @@ class BoletoData(object):
 
     @property
     def fator_vencimento(self):
+        """Usado na geração do barcode
+
+            :return: numero de dias entre 07/10/1997 e :attr:`data_vencimento`
+            :rtype: int
+
+        """
         date_ref = datetime.date(2000, 7, 3)  # Fator = 1000
         delta = self.data_vencimento - date_ref
         fator = delta.days + 1000
@@ -311,12 +339,19 @@ class BoletoData(object):
         Esta é a linha que o cliente pode utilizar para digitar se o código
         de barras não estiver legível.
 
+        Essa função sempre é a mesma para todos os bancos. Então basta
+        implementar o método :func:`barcode` para o pyboleto calcular a linha
+        digitável.
+
         Posição    Conteúdo
         1 a 3    Número do banco
         4        Código da Moeda - 9 para Real
         5        Digito verificador do Código de Barras
         6 a 19   Valor (12 inteiros e 2 decimais)
         20 a 44  Campo Livre definido por cada banco
+
+        :return: linha digitável
+        :rtype: string
 
         """
         linha = self.barcode
