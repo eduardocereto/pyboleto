@@ -32,6 +32,8 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Natural Language :: Portuguese (Brazilian)',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2.5',
+        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Topic :: Office/Business :: Financial',
         'Topic :: Software Development :: Libraries :: Python Modules',
