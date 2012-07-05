@@ -50,7 +50,7 @@ Documentation
 http://packages.python.org/pyboleto/
 
 The best way to learn how to create Boletos using pyboleto is to look at the
-examples at `print_sample_data.py`
+examples at `print_sample_data.py`_
 
 
 .. _print_sample_data.py: https://github.com/eduardocereto/pyboleto/blob/master/pyboleto/scripts/print_sample_data.py
@@ -63,11 +63,11 @@ Installation
 You can install pyboleto either via the Python Package Index (PyPI)
 or from source.
 
-To install using `pip`,::
+To install using pip,::
 
     $ pip install pyboleto
 
-To install using `easy_install`,::
+To install using easy_install,::
 
     $ easy_install pyboleto
 
@@ -102,9 +102,13 @@ Executing unittests
 ===================
 
 ::
+You need either setuptools or distribute in order to execute the tests. Chances are you already have one or another. You also need `pdftohtml`_. 
 
     $ cd pyboleto
-    $ python -m unittest discover
+    $ python setup.py test
+
+
+.. _pdftohtml: http://poppler.freedesktop.org/
 
 .. _pyboleto-license:
 
