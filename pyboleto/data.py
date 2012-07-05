@@ -264,7 +264,8 @@ class BoletoData(object):
         """
         if not hasattr(self, '_sacado'):
             self.sacado = [
-                '%s - CPF/CNPJ: %s' % (self.sacado_nome, self.sacado_documento),
+                '%s - CPF/CNPJ: %s' % (self.sacado_nome,
+                                       self.sacado_documento),
                 self.sacado_endereco,
                 '%s - %s - %s - %s' % (
                     self.sacado_bairro,
@@ -289,7 +290,7 @@ class BoletoData(object):
 
     @property
     def fator_vencimento(self):
-        date_ref = datetime.date(2000, 7, 3) # Fator = 1000
+        date_ref = datetime.date(2000, 7, 3)  # Fator = 1000
         delta = self.data_vencimento - date_ref
         fator = delta.days + 1000
         return fator

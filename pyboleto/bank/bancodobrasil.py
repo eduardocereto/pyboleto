@@ -116,7 +116,7 @@ class BoletoBB(BoletoData):
                     self.fator_vencimento,
                     self.formata_valor(self.valor_documento, 10),
                     self.nosso_numero,
-                    '21' # numero do serviço
+                    '21'  # numero do serviço
                 )
 
         dv = self.modulo11(num.replace('X', '', 1))

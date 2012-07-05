@@ -4,5 +4,5 @@ __version__ = '.'.join(map(str, VERSION))
 __all__ = [
     'data',
     'pdf',
-    'bank', 
+    'bank',
 ]
