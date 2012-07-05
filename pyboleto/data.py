@@ -3,7 +3,7 @@
     pyboleto.data
     ~~~~~~~~~~~~~
 
-    Base para criação dos módulos dos bancos. Comtém funções genéricas 
+    Base para criação dos módulos dos bancos. Comtém funções genéricas
     relacionadas a geração dos dados necessários para o boleto bancário.
 
     :copyright: © 2011 - 2012 by Eduardo Cereto Carvalho

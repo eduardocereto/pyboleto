@@ -28,7 +28,7 @@ class BoletoPDF(object):
     página) ou em formato de folha cheia.
 
     :param file_descr: Um arquivo ou *file-like* class.
-    :param landscape: Formato da folha. Usar ``True`` para boleto 
+    :param landscape: Formato da folha. Usar ``True`` para boleto
         tipo carnê.
 
     """
@@ -53,11 +53,11 @@ class BoletoPDF(object):
 
     def drawReciboSacadoCanhoto(self, boletoDados, x, y):
         """Imprime o Recibo do Sacado para modelo de carnê
-        
-        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :type boletoDados: `BoletoData`
-        
+
         """
 
         self.pdfCanvas.saveState()
@@ -165,11 +165,11 @@ class BoletoPDF(object):
 
     def drawReciboSacado(self, boletoDados, x, y):
         """Imprime o Recibo do Sacado para modelo de página inteira
-        
-        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :type boletoDados: `BoletoData`
-        
+
         """
 
         self.pdfCanvas.saveState()
@@ -416,11 +416,11 @@ class BoletoPDF(object):
 
     def drawReciboCaixa(self, boletoDados, x, y):
         """Imprime o Recibo do Caixa
-        
-        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :type boletoDados: `BoletoData`
-        
+
         """
         self.pdfCanvas.saveState()
 
@@ -751,14 +751,14 @@ class BoletoPDF(object):
 
     def drawBoletoCarneDuplo(self, boletoDados1, boletoDados2=None):
         """Imprime um boleto tipo carnê com 2 boletos por página.
-        
-        :param boletoDados1: Objeto com os dados do boleto a ser preenchido. 
+
+        :param boletoDados1: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
-        :param boletoDados2: Objeto com os dados do boleto a ser preenchido. 
+        :param boletoDados2: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :type boletoDados1: `BoletoData`
         :type boletoDados2: `BoletoData`
-        
+
         """
         y = 5 * mm
         d = self.drawBoletoCarne(boletoDados1, y)
@@ -774,7 +774,7 @@ class BoletoPDF(object):
         Esta função não deve ser chamada diretamente, ao invés disso use a
         drawBoletoCarneDuplo.
 
-        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :type boletoDados: `BoletoData`
         """
@@ -793,7 +793,7 @@ class BoletoPDF(object):
         Você pode chamar este método diversas vezes para criar um arquivo com
         várias páginas, uma por boleto.
 
-        :param boletoDados: Objeto com os dados do boleto a ser preenchido. 
+        :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :type boletoDados: `BoletoData`
         """
