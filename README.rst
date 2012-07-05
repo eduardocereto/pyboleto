@@ -50,10 +50,10 @@ Documentation
 http://packages.python.org/pyboleto/
 
 The best way to learn how to create Boletos using pyboleto is to look at the
-examples at `print_sample_data.py`_
+examples at `pyboleto_sample.py`_
 
 
-.. _print_sample_data.py: https://github.com/eduardocereto/pyboleto/blob/master/pyboleto/scripts/print_sample_data.py
+.. _pyboleto_sample.py: https://github.com/eduardocereto/pyboleto/blob/master/bin/pyboleto_sample.py
 
 .. _pyboleto-installation:
 
@@ -101,8 +101,7 @@ You can clone the repository by doing the following::
 Executing unittests
 ===================
 
-::
-You need either setuptools or distribute in order to execute the tests. Chances are you already have one or another. You also need `pdftohtml`_. 
+You need either setuptools or distribute in order to execute the tests. Chances are you already have one or another. You also need `pdftohtml`_.::
 
     $ cd pyboleto
     $ python setup.py test
