@@ -18,6 +18,7 @@ def suite():
 
     modules_to_test = [
         'tests.test_banco_bradesco',
+        'tests.test_banco_do_brasil',
         'tests.test_banco_hsbc',
         'tests.test_banco_hsbc_com_registro',
         'tests.test_banco_caixa',

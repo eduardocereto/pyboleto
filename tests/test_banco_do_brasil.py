@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 import unittest
 import datetime
@@ -14,6 +13,7 @@ class TestBancoBrasil(BoletoTestCase):
         d.carteira = '18'
         d.data_documento = datetime.date(2011, 3, 8)
         d.data_vencimento = datetime.date(2011, 3, 8)
+        d.data_processamento = datetime.date(2012, 7, 4)
         d.valor_documento = 2952.95
         d.agencia = '9999'
         d.conta = '99999'
