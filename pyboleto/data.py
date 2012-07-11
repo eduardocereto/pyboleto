@@ -391,24 +391,12 @@ class BoletoData(object):
 
         return "%s %s %s %s %s" % (campo1, campo2, campo3, campo4, campo5)
 
-    @staticmethod
-    def formata_numero(numero, tamanho):
-        """Formatacao comum para numeros
-
-        Preenche com zero fill a esquerda
-        """
-        if len(numero) > tamanho:
+    def formata_valor(self, nfloat, tamanho):
+        txt = nfloat.replace('.', '')
+        if len(txt) > tamanho:
             raise BoletoException(
                 u'Tamanho em caracteres do número está maior que o permitido')
-        return numero.zfill(tamanho)
-
-    def formata_valor(self, nfloat, tamanho):
-        try:
-            txt = nfloat.replace('.', '')
-            txt = self.formata_numero(txt, tamanho)
-            return txt
-        except AttributeError:
-            pass
+        return txt.zfill(tamanho)
 
     @staticmethod
     def modulo10(num):
