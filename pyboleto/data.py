@@ -402,13 +402,6 @@ class BoletoData(object):
                 u'Tamanho em caracteres do número está maior que o permitido')
         return numero.zfill(tamanho)
 
-    @staticmethod
-    def formata_texto(texto, tamanho):
-        if len(texto) > tamanho:
-            raise BoletoException(
-                u'Tamanho em caracteres do texto está maior que o permitido')
-        return texto.ljust(tamanho)
-
     def formata_valor(self, nfloat, tamanho):
         try:
             txt = nfloat.replace('.', '')
