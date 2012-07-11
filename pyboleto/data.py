@@ -363,33 +363,17 @@ class BoletoData(object):
         """
         linha = self.barcode
         if not linha:
-            BoletoException("Boleto doesn't have a barcode")
+            raise BoletoException("Boleto doesn't have a barcode")
 
-        p1 = linha[0:4]
-        p2 = linha[19:24]
-        p3 = self.modulo10("%s%s" % (p1, p2))
-        p4 = "%s%s%s" % (p1, p2, p3)
-        p5 = p4[0:5]
-        p6 = p4[5:]
-        campo1 = "%s.%s" % (p5, p6)
+        def monta_campo(campo):
+            campo_dv = "%s%s" % (campo, self.modulo10(campo))
+            return "%s.%s" % (campo_dv[0:5], campo_dv[5:])
 
-        p1 = linha[24:34]
-        p2 = self.modulo10(p1)
-        p3 = "%s%s" % (p1, p2)
-        p4 = p3[0:5]
-        p5 = p3[5:]
-        campo2 = "%s.%s" % (p4, p5)
-
-        p1 = linha[34:44]
-        p2 = self.modulo10(p1)
-        p3 = "%s%s" % (p1, p2)
-        p4 = p3[0:5]
-        p5 = p3[5:]
-        campo3 = "%s.%s" % (p4, p5)
-        campo4 = linha[4]
-        campo5 = linha[5:19]
-
-        return "%s %s %s %s %s" % (campo1, campo2, campo3, campo4, campo5)
+        return ' '.join([monta_campo(linha[0:4] + linha[19:24]),
+                         monta_campo(linha[24:34]),
+                         monta_campo(linha[34:44]),
+                         linha[4],
+                         linha[5:19]])
 
     def formata_valor(self, nfloat, tamanho):
         txt = nfloat.replace('.', '')
