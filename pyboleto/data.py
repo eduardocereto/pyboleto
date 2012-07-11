@@ -444,9 +444,8 @@ class BoletoData(object):
     def modulo11(num, base=9, r=0):
         soma = 0
         fator = 2
-        for i in range(len(str(num))).__reversed__():
-            parcial10 = int(num[i]) * fator
-            soma += parcial10
+        for c in reversed(str(num)):
+            soma += int(c) * fator
             if fator == base:
                 fator = 1
             fator += 1
