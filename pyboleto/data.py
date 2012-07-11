@@ -107,15 +107,22 @@ class BoletoData(object):
 
     @property
     def barcode(self):
-        """Monta string usada para gerar o barcode
-
-        :exception NotImplementedError: Precisa ser implementado pela classe
-            derivada
-
-        """
-        raise NotImplementedError(
-            'This method has not been implemented by this class'
+        num = "%s%1s%1s%4s%10s%24s" % (
+            self.codigo_banco,
+            self.moeda,
+            'X',
+            self.fator_vencimento,
+            self.formata_valor(self.valor_documento, 10),
+            self.campo_livre
         )
+
+        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
+
+        num = num.replace('X', str(dv), 1)
+        if len(num) != 44:
+            raise BoletoException(
+                'The barcode must have 44 caracteres, found %d' % len(num))
+        return num
 
     @property
     def dv_nosso_numero(self):

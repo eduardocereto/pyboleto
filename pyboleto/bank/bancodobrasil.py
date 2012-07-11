@@ -81,45 +81,19 @@ class BoletoBB(BoletoData):
 
     conta_cedente = custom_property('conta_cedente', 8)
 
-    # Numero para o codigo de barras com 44 digitos
     @property
-    def barcode(self):
+    def campo_livre(self):
         if self.format_convenio in (7, 8):
-            num = "%3s%1s%1s%4s%10s%6s%s%s" % (
-                self.codigo_banco,
-                self.moeda,
-                'X',
-                self.fator_vencimento,
-                self.formata_valor(self.valor_documento, 10),
-                '000000',
-                self.nosso_numero,
-                self.carteira
-            )
+            content = "000000%s%s" % (self.nosso_numero,
+                                      self.carteira)
         elif self.format_convenio == 6:
             if self.format_nnumero == 1:
-                num = "%3s%1s%1s%4s%10s%s%s%s%s" % (
-                    self.codigo_banco,
-                    self.moeda,
-                    'X',
-                    self.fator_vencimento,
-                    self.formata_valor(self.valor_documento, 10),
-                    self.nosso_numero,
-                    self.agencia_cedente,
-                    self.conta_cedente,
-                    self.carteira
-                )
+                content = "%s%s%s%s" % (self.nosso_numero,
+                                        self.agencia_cedente,
+                                        self.conta_cedente,
+                                        self.carteira)
             if self.format_nnumero == 2:
-                num = "%3s%1s%1s%4s%10s%s%2s" % (
-                    self.codigo_banco,
-                    self.moeda,
-                    'X',
-                    self.fator_vencimento,
-                    self.formata_valor(self.valor_documento, 10),
-                    self.nosso_numero,
-                    '21'  # numero do serviço
-                )
-
-        dv = self.modulo11(num.replace('X', '', 1))
-
-        num = num.replace('X', str(dv), 1)
-        return num
+                content = "%s%2s" % (self.nosso_numero,
+                                     '21'  # numero do serviço
+                                     )
+        return content

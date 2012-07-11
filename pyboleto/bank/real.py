@@ -37,18 +37,9 @@ class BoletoReal(BoletoData):
         return dv
 
     @property
-    def barcode(self):
-        num = "%3s%1s%1s%4s%10s%4s%7s%1s%13s" % (
-            self.codigo_banco,
-            self.moeda,
-            'X',
-            self.fator_vencimento,
-            self.formata_valor(self.valor_documento, 10),
-            self.agencia_cedente,
-            self.conta_cedente,
-            self.digitao_cobranca,
-            self.nosso_numero,
-        )
-        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
-        num = num.replace('X', str(dv), 1)
-        return num
+    def campo_livre(self):
+        content = "%4s%7s%1s%13s" % (self.agencia_cedente,
+                                     self.conta_cedente,
+                                     self.digitao_cobranca,
+                                     self.nosso_numero)
+        return content

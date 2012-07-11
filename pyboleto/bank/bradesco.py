@@ -42,23 +42,12 @@ class BoletoBradesco(BoletoData):
 
     conta_cedente = custom_property('conta_cedente', 7)
 
-    # Numero para o codigo de barras com 44 digitos
     @property
-    def barcode(self):
-        num = "%3s%1s%1s%4s%10s%4s%2s%11s%7s%1s" % (
-            self.codigo_banco,
-            self.moeda,
-            'X',
-            self.fator_vencimento,
-            self.formata_valor(self.valor_documento, 10),
-            self.agencia_cedente.split('-')[0],
-            self.carteira,
-            self.nosso_numero,
-            self.conta_cedente.split('-')[0],
-            '0'
-        )
-
-        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
-
-        num = num.replace('X', str(dv), 1)
-        return num
+    def campo_livre(self):
+        content = "%4s%2s%11s%7s%1s" % (self.agencia_cedente.split('-')[0],
+                                        self.carteira,
+                                        self.nosso_numero,
+                                        self.conta_cedente.split('-')[0],
+                                        '0'
+                                        )
+        return content

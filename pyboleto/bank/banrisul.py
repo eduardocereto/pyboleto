@@ -104,22 +104,3 @@ class BoletoBanrisul(BoletoData):
                                         int(self.nosso_numero))
         dv = calculaDuploDigito(content)
         return '%s%s' % (content, dv)
-
-    @property
-    def barcode(self):
-        num = "%s%1s%1s%4s%10s%24s" % (
-            self.codigo_banco,
-            self.moeda,
-            'X',
-            self.fator_vencimento,
-            self.formata_valor(self.valor_documento, 10),
-            self.campo_livre
-        )
-
-        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
-
-        num = num.replace('X', str(dv), 1)
-        if len(num) != 44:
-            raise Exception(
-                'The barcode must have 44 caracteres, found %d' % len(num))
-        return num

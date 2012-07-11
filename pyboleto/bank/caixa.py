@@ -37,23 +37,12 @@ class BoletoCaixa(BoletoData):
             dv = digito
         return dv
 
-    # Numero para o codigo de barras com 44 digitos
     @property
-    def barcode(self):
-        num = "%3s%1s%1s%4s%10s%10s%4s%11s" % (
-            self.codigo_banco,
-            self.moeda,
-            'X',
-            self.fator_vencimento,
-            self.formata_valor(self.valor_documento, 10),
-            self.nosso_numero,
-            self.agencia_cedente,
-            self.conta_cedente.split('-')[0],
-        )
-        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
-
-        num = num.replace('X', str(dv), 1)
-        return num
+    def campo_livre(self):
+        content = "%10s%4s%11s" % (self.nosso_numero,
+                                   self.agencia_cedente,
+                                   self.conta_cedente.split('-')[0])
+        return content
 
     def format_nosso_numero(self):
         return self._nosso_numero + '-' + str(self.dv_nosso_numero)

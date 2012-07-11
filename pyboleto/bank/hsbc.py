@@ -43,24 +43,12 @@ class BoletoHsbc(BoletoData):
         data_vencimento += str(self.data_vencimento.year)[-1:]
         return data_vencimento.zfill(4)
 
-    # Numero para o codigo de barras com 44 digitos
     @property
-    def barcode(self):
-        num = "%3s%1s%1s%4s%10s%7s%13s%4s%1s" % (
-            self.codigo_banco,
-            self.moeda,
-            'X',
-            self.fator_vencimento,
-            self.formata_valor(self.valor_documento, 10),
-            self.conta_cedente,
-            self.numero_documento,
-            self.data_vencimento_juliano,
-            '2'
-        )
-        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
-
-        num = num.replace('X', str(dv), 1)
-        return num
+    def campo_livre(self):
+        content = "%7s%13s%4s2" % (self.conta_cedente,
+                                   self.numero_documento,
+                                   self.data_vencimento_juliano)
+        return content
 
 
 class BoletoHsbcComRegistro(BoletoData):
@@ -89,24 +77,10 @@ class BoletoHsbcComRegistro(BoletoData):
         else:
             return 11 - resto
 
-    # Numero para o codigo de barras com 44 digitos
     @property
-    def barcode(self):
-        num = "%3s%1s%1s%4s%10s%10s%1s%4s%7s%2s%1s" % (
-            self.codigo_banco,
-            self.moeda,
-            'X',
-            self.fator_vencimento,
-            self.formata_valor(self.valor_documento, 10),
-            self.nosso_numero,
-            self.dv_nosso_numero,
-            self.agencia_cedente.split('-')[0],
-            self.conta_cedente.split('-')[0],
-            '00',
-            '1'
-        )
-
-        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
-
-        num = num.replace('X', str(dv), 1)
-        return num
+    def campo_livre(self):
+        content = "%10s%1s%4s%7s001" % (self.nosso_numero,
+                                        self.dv_nosso_numero,
+                                        self.agencia_cedente.split('-')[0],
+                                        self.conta_cedente.split('-')[0])
+        return content

@@ -48,25 +48,14 @@ class BoletoItau(BoletoData):
         return "%3s/%8s-%1s" % (self.carteira, self.nosso_numero,
                                 self.dv_nosso_numero)
 
-    # Numero para o codigo de barras com 44 digitos
     @property
-    def barcode(self):
-        num = "%3s%1s%1s%4s%10s%3s%8s%1s%4s%5s%1s%3s" % (
-            self.codigo_banco,
-            self.moeda,
-            'X',
-            self.fator_vencimento,
-            self.formata_valor(self.valor_documento, 10),
-            self.carteira,
-            self.nosso_numero,
-            self.dv_nosso_numero,
-            self.agencia_cedente,
-            self.conta_cedente,
-            self.dv_agencia_conta_cedente,
-            '000'
-        )
-
-        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
-
-        num = num.replace('X', str(dv), 1)
-        return num
+    def campo_livre(self):
+        content = "%3s%8s%1s%4s%5s%1s%3s" % (self.carteira,
+                                             self.nosso_numero,
+                                             self.dv_nosso_numero,
+                                             self.agencia_cedente,
+                                             self.conta_cedente,
+                                             self.dv_agencia_conta_cedente,
+                                             '000'
+                                             )
+        return content
