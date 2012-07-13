@@ -9,6 +9,14 @@ bank Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`banrisul` Module
+---------------------------
+
+.. automodule:: pyboleto.bank.banrisul
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`bradesco` Module
 ----------------------
 
