@@ -88,10 +88,8 @@ class BoletoData(object):
         self.data_documento = ""
         self.data_processamento = datetime.date.today()
         self.data_vencimento = ""
-        self.demonstrativo = []
         self.especie = "R$"
         self.especie_documento = ""
-        self.instrucoes = []
         self.local_pagamento = "Pagável em qualquer banco até o vencimento"
         self.logo_image_path = ""
         self.moeda = "9"
@@ -104,6 +102,13 @@ class BoletoData(object):
         self.sacado_endereco = ""
         self.sacado_bairro = ""
         self.sacado_cep = ""
+
+        self._cedente_endereco = None
+        self._demonstrativo = []
+        self._instrucoes = []
+        self._sacado = None
+        self._valor = None
+        self._valor_documento = None
 
     @property
     def barcode(self):
@@ -179,7 +184,7 @@ class BoletoData(object):
     """
 
     def _cedente_endereco_get(self):
-        if not hasattr(self, '_cedente_endereco'):
+        if self._cedente_endereco is None:
             self._cedente_endereco = '%s - %s - %s - %s - %s' % (
                 self.cedente_logradouro,
                 self.cedente_bairro,
@@ -198,10 +203,8 @@ class BoletoData(object):
     """Endereço do cedento com no máximo 80 caracteres"""
 
     def _get_valor(self):
-        try:
+        if self._valor is not None:
             return "%.2f" % self._valor
-        except AttributeError:
-            pass
 
     def _set_valor(self, val):
         if type(val) is Decimal:
@@ -218,10 +221,8 @@ class BoletoData(object):
     """
 
     def _get_valor_documento(self):
-        try:
+        if self._valor_documento is not None:
             return "%.2f" % self._valor_documento
-        except AttributeError:
-            pass
 
     def _set_valor_documento(self, val):
         if type(val) is Decimal:
@@ -237,10 +238,7 @@ class BoletoData(object):
     """
 
     def _instrucoes_get(self):
-        try:
-            return self._instrucoes
-        except AttributeError:
-            pass
+        return self._instrucoes
 
     def _instrucoes_set(self, list_inst):
         if len(list_inst) > 7:
@@ -261,10 +259,7 @@ class BoletoData(object):
     """
 
     def _demonstrativo_get(self):
-        try:
-            return self._demonstrativo
-        except AttributeError:
-            pass
+        return self._demonstrativo
 
     def _demonstrativo_set(self, list_dem):
         if len(list_dem) > 12:
@@ -291,7 +286,7 @@ class BoletoData(object):
         Para facilitar você deve sempre setar essa propriedade.
 
         """
-        if not hasattr(self, '_sacado'):
+        if self._sacado is None:
             self.sacado = [
                 '%s - CPF/CNPJ: %s' % (self.sacado_nome,
                                        self.sacado_documento),
