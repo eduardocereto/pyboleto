@@ -1,13 +1,16 @@
 # -*- coding: utf-8
 import os.path
 
-from pyboleto.data import BoletoData, custom_property
+from pyboleto.data import BoletoData, CustomProperty
 
 
 class BoletoBB(BoletoData):
     '''
         Gera Dados necessários para criação de boleto para o Banco do Brasil
     '''
+
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
+    conta_cedente = CustomProperty('conta_cedente', 8)
 
     def __init__(self, format_convenio, format_nnumero, *args, **kwargs):
         '''
@@ -76,10 +79,6 @@ class BoletoBB(BoletoData):
     @property
     def dv_nosso_numero(self):
         return self.modulo11(self.nosso_numero)
-
-    agencia_cedente = custom_property('agencia_cedente', 4)
-
-    conta_cedente = custom_property('conta_cedente', 8)
 
     @property
     def campo_livre(self):
