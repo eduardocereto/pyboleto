@@ -13,8 +13,8 @@ class BoletoBradesco(BoletoData):
     agencia_cedente = CustomProperty('agencia_cedente', 4)
     conta_cedente = CustomProperty('conta_cedente', 7)
 
-    def __init__(self, *args, **kwargs):
-        super(BoletoBradesco, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(BoletoBradesco, self).__init__()
 
         self.codigo_banco = "237"
         self.logo_image_path = os.path.dirname(__file__) + \

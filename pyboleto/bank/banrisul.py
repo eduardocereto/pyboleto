@@ -34,8 +34,8 @@ class BoletoBanrisul(BoletoData):
             segundoDV = 11 - restoMod11
         return str(primeiroDV) + str(segundoDV)
 
-    def __init__(self, **kwargs):
-        BoletoData.__init__(self, **kwargs)
+    def __init__(self):
+        BoletoData.__init__(self)
         self.codigo_banco = "041"
         self.logo_image_path = os.path.dirname(__file__) + \
             "/../media/logo_banrisul.jpg"

@@ -14,8 +14,8 @@ class BoletoHsbc(BoletoData):
 
     numero_documento = CustomProperty('numero_documento', 13)
 
-    def __init__(self, *args, **kwargs):
-        super(BoletoHsbc, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(BoletoHsbc, self).__init__()
 
         self.codigo_banco = "399"
         self.logo_image_path = os.path.dirname(__file__) + \
@@ -59,9 +59,8 @@ class BoletoHsbcComRegistro(BoletoData):
     # Nosso numero (sem dv) sao 10 digitos
     nosso_numero = CustomProperty('nosso_numero', 10)
 
-    def __init__(self, *args, **kwargs):
-
-        super(BoletoHsbcComRegistro, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(BoletoHsbcComRegistro, self).__init__()
 
         self.codigo_banco = "399"
         self.logo_image_path = os.path.dirname(__file__) + \

@@ -5,8 +5,8 @@ from pyboleto.data import BoletoData
 
 class BoletoReal(BoletoData):
 
-    def __init__(self, *args, **kwargs):
-        super(BoletoReal, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(BoletoReal, self).__init__()
 
         self.codigo_banco = "356"
         self.logo_image_path = os.path.dirname(__file__) + \
