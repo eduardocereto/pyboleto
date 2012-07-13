@@ -1,6 +1,4 @@
 # -*- coding: utf-8
-import os.path
-
 from pyboleto.data import BoletoData, CustomProperty
 
 
@@ -37,8 +35,7 @@ class BoletoBanrisul(BoletoData):
     def __init__(self):
         BoletoData.__init__(self)
         self.codigo_banco = "041"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_banrisul.jpg"
+        self.logo_image = "logo_banrisul.jpg"
 
     @property
     def campo_livre(self):

@@ -1,6 +1,4 @@
 # -*- coding: utf-8
-import os.path
-
 from pyboleto.data import BoletoData, CustomProperty
 
 
@@ -24,8 +22,7 @@ class BoletoBB(BoletoData):
 
         self.codigo_banco = "001"
         self.carteira = 18
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bb.jpg"
+        self.logo_image = "logo_bb.jpg"
 
         # Size of convenio 6, 7 or 8
         self.format_convenio = format_convenio

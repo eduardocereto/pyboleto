@@ -1,6 +1,4 @@
 # -*- coding: utf-8
-import os.path
-
 from pyboleto.data import BoletoData, CustomProperty
 
 ### CAUTION - NÃO TESTADO ###
@@ -24,8 +22,7 @@ class BoletoItau(BoletoData):
         super(BoletoItau, self).__init__()
 
         self.codigo_banco = "341"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_itau.jpg"
+        self.logo_image = "logo_itau.jpg"
         self.especie_documento = 'DM'
 
     @property

@@ -1,6 +1,4 @@
 # -*- coding: utf-8
-import os.path
-
 from pyboleto.data import BoletoData, CustomProperty
 
 
@@ -17,8 +15,7 @@ class BoletoBradesco(BoletoData):
         super(BoletoBradesco, self).__init__()
 
         self.codigo_banco = "237"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bancobradesco.jpg"
+        self.logo_image = "logo_bancobradesco.jpg"
 
     def format_nosso_numero(self):
         return "%s/%s-%s" % (

@@ -1,6 +1,4 @@
 #-*- coding: utf-8 -*-
-import os.path
-
 from pyboleto.data import BoletoData, CustomProperty
 
 
@@ -24,8 +22,7 @@ class BoletoCaixa(BoletoData):
 
         self.codigo_banco = "104"
         self.local_pagamento = "Preferencialmente nas Casas Lotéricas e Agências da Caixa"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bancocaixa.jpg"
+        self.logo_image = "logo_bancocaixa.jpg"
 
     @property
     def dv_nosso_numero(self):

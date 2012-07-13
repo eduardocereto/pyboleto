@@ -81,7 +81,7 @@ class BoletoData(object):
         self.especie = "R$"
         self.especie_documento = ""
         self.local_pagamento = "Pagável em qualquer banco até o vencimento"
-        self.logo_image_path = ""
+        self.logo_image = ""
         self.moeda = "9"
         self.numero_documento = ""
         self.quantidade = ""

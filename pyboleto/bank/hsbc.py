@@ -1,6 +1,4 @@
 # -*- coding: utf-8
-import os.path
-
 from pyboleto.data import BoletoData, CustomProperty
 
 
@@ -18,8 +16,7 @@ class BoletoHsbc(BoletoData):
         super(BoletoHsbc, self).__init__()
 
         self.codigo_banco = "399"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bancohsbc.jpg"
+        self.logo_image = "logo_bancohsbc.jpg"
         self.carteira = 'CNR'
 
     # Nosso número deve ser calculado automaticamente
@@ -63,8 +60,7 @@ class BoletoHsbcComRegistro(BoletoData):
         super(BoletoHsbcComRegistro, self).__init__()
 
         self.codigo_banco = "399"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bancohsbc.jpg"
+        self.logo_image = "logo_bancohsbc.jpg"
         self.carteira = 'CSB'
         self.especie_documento = 'PD'
 
