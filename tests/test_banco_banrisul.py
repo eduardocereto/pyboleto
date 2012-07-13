@@ -12,6 +12,7 @@ class TestBancoBanrisul(BoletoTestCase):
         d = BoletoBanrisul()
         d.data_documento = datetime.date(2000, 7, 4)
         d.data_vencimento = datetime.date(2000, 7, 4)
+        d.data_processamento = datetime.date(2012, 7, 11)
         d.valor_documento = 550
         d.agencia = '1102'
         d.conta = '9000150'
