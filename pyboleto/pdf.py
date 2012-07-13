@@ -797,14 +797,17 @@ class BoletoPDF(object):
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :type boletoDados: `BoletoData`
         """
-        x = 3.5 * mm
-        y = 0
-        #y += 2 * mm
-        #self.drawHorizontalCorteLine(x, y, self.width)
-        y += 1 * mm
-        d = self.drawReciboCaixa(boletoDados, x, y)
-        y += d[1] + (25 * mm)
+        x = 9 * mm  # margem esquerda
+        y = 10 * mm  # margem inferior
+
         self.drawHorizontalCorteLine(x, y, self.width)
+        y += 4 * mm  # distancia entre linha de corte e barcode
+
+        d = self.drawReciboCaixa(boletoDados, x, y)
+        y += d[1] + (12 * mm)  # distancia entre Recibo caixa e linha de corte
+
+        self.drawHorizontalCorteLine(x, y, self.width)
+
         y += 20 * mm
         d = self.drawReciboSacado(boletoDados, x, y)
         y += d[1]

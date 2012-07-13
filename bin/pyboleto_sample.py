@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import pyboleto
 from pyboleto.bank.real import BoletoReal
 from pyboleto.bank.bradesco import BoletoBradesco
 from pyboleto.bank.caixa import BoletoCaixa
@@ -205,6 +206,7 @@ def print_itau():
     pass
 
 def print_all():
+    print "Pyboleto version: %s" % pyboleto.__version__
     print "----------------------------------"
     print "     Printing Example Boletos     "
     print "----------------------------------"
@@ -215,8 +217,8 @@ def print_all():
     print "Bradesco"
     print_bradesco()
 
-    print "Itau"
-    print_itau()
+    #print "Itau"
+    #print_itau()
 
     print "Caixa"
     print_caixa()
