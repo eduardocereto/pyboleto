@@ -22,7 +22,8 @@ class BoletoCaixa(BoletoData):
         super(BoletoCaixa, self).__init__()
 
         self.codigo_banco = "104"
-        self.local_pagamento = "Preferencialmente nas Casas Lotéricas e Agências da Caixa"
+        self.local_pagamento = "Preferencialmente nas Casas Lotéricas e \
+Agências da Caixa"
         self.logo_image = "logo_bancocaixa.jpg"
 
     @property
