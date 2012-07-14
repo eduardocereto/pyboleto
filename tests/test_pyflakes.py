@@ -44,7 +44,7 @@ except ImportError as err:
 
 
 @skipIf(sys.version_info >= (3,),
-                 "Pyflakes unavailable on this version")
+        "Pyflakes unavailable on this version")
 class TestPyflakes(SourceTest, unittest.TestCase):
     def setUp(self):
         pass
@@ -64,7 +64,7 @@ class TestPyflakes(SourceTest, unittest.TestCase):
                 # bogus message that claims the encoding the file declared was
                 # unknown.
                 print >> sys.stderr, "%s: problem decoding source" % (
-                        filename,
+                    filename,
                 )
             else:
                 line = text.splitlines()[-1]

@@ -69,7 +69,7 @@ class TestPEP8(SourceTest, unittest.TestCase):
     def check_filename(self, root, filename):
         pep8.process_options([
             '--repeat',
-            #'--select=%s' % (','.join(ERRORS), ),
+            '--select=%s' % (','.join(ERRORS), ),
             filename
         ])
         pep8.input_file(filename)
