@@ -1,7 +1,5 @@
 # -*- coding: utf-8
-import os.path
-
-from pyboleto.data import BoletoData, custom_property
+from pyboleto.data import BoletoData, CustomProperty
 
 
 ### CAUTION - NÃO TESTADO ###
@@ -12,12 +10,13 @@ class BoletoHsbc(BoletoData):
         Gera Dados necessários para criação de boleto para o banco HSBC
     '''
 
-    def __init__(self, *args, **kwargs):
-        super(BoletoHsbc, self).__init__(*args, **kwargs)
+    numero_documento = CustomProperty('numero_documento', 13)
+
+    def __init__(self):
+        super(BoletoHsbc, self).__init__()
 
         self.codigo_banco = "399"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bancohsbc.jpg"
+        self.logo_image = "logo_bancohsbc.jpg"
         self.carteira = 'CNR'
 
     # Nosso número deve ser calculado automaticamente
@@ -34,8 +33,6 @@ class BoletoHsbc(BoletoData):
         sum_params = str(sum_params)
         nosso_numero += str(self.modulo11(sum_params))
         return nosso_numero
-
-    numero_documento = custom_property('numero_documento', 13)
 
     @property
     def data_vencimento_juliano(self):
@@ -56,18 +53,16 @@ class BoletoHsbcComRegistro(BoletoData):
         Gera Dados necessários para criação de boleto para o banco HSBC
         com registro
     '''
-    def __init__(self, *args, **kwargs):
+    # Nosso numero (sem dv) sao 10 digitos
+    nosso_numero = CustomProperty('nosso_numero', 10)
 
-        super(BoletoHsbcComRegistro, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(BoletoHsbcComRegistro, self).__init__()
 
         self.codigo_banco = "399"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bancohsbc.jpg"
+        self.logo_image = "logo_bancohsbc.jpg"
         self.carteira = 'CSB'
         self.especie_documento = 'PD'
-
-    # Nosso numero (sem dv) sao 10 digitos
-    nosso_numero = custom_property('nosso_numero', 10)
 
     @property
     def dv_nosso_numero(self):

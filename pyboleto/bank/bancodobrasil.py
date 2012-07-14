@@ -1,7 +1,5 @@
 # -*- coding: utf-8
-import os.path
-
-from pyboleto.data import BoletoData, custom_property
+from pyboleto.data import BoletoData, CustomProperty
 
 
 class BoletoBB(BoletoData):
@@ -9,7 +7,10 @@ class BoletoBB(BoletoData):
         Gera Dados necessários para criação de boleto para o Banco do Brasil
     '''
 
-    def __init__(self, format_convenio, format_nnumero, *args, **kwargs):
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
+    conta_cedente = CustomProperty('conta_cedente', 8)
+
+    def __init__(self, format_convenio, format_nnumero):
         '''
             Construtor para boleto do Banco deo Brasil
 
@@ -17,12 +18,11 @@ class BoletoBB(BoletoData):
                 format_convenio Formato do convenio 6, 7 ou 8
                 format_nnumero Formato nosso numero 1 ou 2
         '''
-        super(BoletoBB, self).__init__(*args, **kwargs)
+        super(BoletoBB, self).__init__()
 
         self.codigo_banco = "001"
         self.carteira = 18
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bb.jpg"
+        self.logo_image = "logo_bb.jpg"
 
         # Size of convenio 6, 7 or 8
         self.format_convenio = format_convenio
@@ -76,10 +76,6 @@ class BoletoBB(BoletoData):
     @property
     def dv_nosso_numero(self):
         return self.modulo11(self.nosso_numero)
-
-    agencia_cedente = custom_property('agencia_cedente', 4)
-
-    conta_cedente = custom_property('conta_cedente', 8)
 
     @property
     def campo_livre(self):

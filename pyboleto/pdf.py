@@ -9,6 +9,8 @@
     :license: BSD, see LICENSE for more details.
 
 """
+import os
+
 from reportlab.graphics.barcode.common import I2of5
 from reportlab.lib.colors import black
 from reportlab.lib.pagesizes import A4, landscape as pagesize_landscape
@@ -50,6 +52,11 @@ class BoletoPDF(object):
 
         self.pdfCanvas = canvas.Canvas(file_descr, pagesize=pagesize)
         self.pdfCanvas.setStrokeColor(black)
+
+    def _load_image(self, logo_image):
+        pyboleto_dir = os.path.basename(os.path.dirname(__file__))
+        image_path = os.path.join(pyboleto_dir, 'media', logo_image)
+        return image_path
 
     def drawReciboSacadoCanhoto(self, boletoDados, x, y):
         """Imprime o Recibo do Sacado para modelo de carnê
@@ -221,9 +228,10 @@ class BoletoPDF(object):
                             (linhaInicial + 3) * self.heightLine,
                             self.heightLine)
 
-        if boletoDados.logo_image_path:
+        if boletoDados.logo_image:
+            logo_image_path = self._load_image(boletoDados.logo_image)
             self.pdfCanvas.drawImage(
-                boletoDados.logo_image_path,
+                logo_image_path,
                 0, (linhaInicial + 3) * self.heightLine + 3,
                 40 * mm,
                 self.heightLine,
@@ -719,9 +727,10 @@ class BoletoPDF(object):
         self.__verticalLine(40 * mm, y, self.heightLine)  # Logo Tipo
         self.__verticalLine(60 * mm, y, self.heightLine)  # Numero do Banco
 
-        if boletoDados.logo_image_path:
+        if boletoDados.logo_image:
+            logo_image_path = self._load_image(boletoDados.logo_image)
             self.pdfCanvas.drawImage(
-                boletoDados.logo_image_path,
+                logo_image_path,
                 0,
                 y + self.space + 1,
                 40 * mm,

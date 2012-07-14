@@ -1,14 +1,12 @@
 # -*- coding: utf-8
-import os.path
-
-from pyboleto.data import BoletoData, custom_property
+from pyboleto.data import BoletoData, CustomProperty
 
 
 # From http://jrimum.org/bopepo/browser/trunk/src/br/com/nordestefomento/jrimum/bopepo/campolivre/AbstractCLBanrisul.java
 
 class BoletoBanrisul(BoletoData):
-    nosso_numero = custom_property('nosso_numero', 8)
-    conta = custom_property('conta', 6)
+    nosso_numero = CustomProperty('nosso_numero', 8)
+    conta = CustomProperty('conta', 6)
 
     def calculaDuploDigito(self, seisPrimeirosCamposConcatenados):
 
@@ -34,11 +32,10 @@ class BoletoBanrisul(BoletoData):
             segundoDV = 11 - restoMod11
         return str(primeiroDV) + str(segundoDV)
 
-    def __init__(self, **kwargs):
-        BoletoData.__init__(self, **kwargs)
+    def __init__(self):
+        BoletoData.__init__(self)
         self.codigo_banco = "041"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_banrisul.jpg"
+        self.logo_image = "logo_banrisul.jpg"
 
     @property
     def campo_livre(self):

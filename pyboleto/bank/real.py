@@ -1,16 +1,14 @@
-import os.path
-
+# -*- coding: utf-8
 from pyboleto.data import BoletoData
 
 
 class BoletoReal(BoletoData):
 
-    def __init__(self, *args, **kwargs):
-        super(BoletoReal, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(BoletoReal, self).__init__()
 
         self.codigo_banco = "356"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_bancoreal.jpg"
+        self.logo_image = "logo_bancoreal.jpg"
 
     @property
     def agencia_conta_cedente(self):

@@ -20,46 +20,36 @@ class BoletoException(Exception):
         Exception.__init__(self, message)
 
 
-def custom_property(name, num_length):
-    """Função para criar propriedades nos boletos
+class CustomProperty(object):
+    """Properidade que aceita um numero com ou sem DV e remove o DV caso
+    exista. Então preenxe com zfill até o tamanho adequado.
 
-    Cria propriedades com getter, setter e delattr.
-
-    Propriedades criadas com essa função sempre são strings internamente.
-
-    O Setter sempre tentará remover qualquer digito verificador se existir.
-
-    Aceita um numero com ou sem DV e remove o DV caso exista. Então preenxe
-    com zfill até o tamanho adequado. Note que sempre que possível não use DVs
-    ao entrar valores no pyboleto. De preferência o pyboleto vai calcular
-    todos os DVs quando necessário.
+    Note que sempre que possível não use DVs ao entrar valores no pyboleto.
+    De preferência o pyboleto vai calcular todos os DVs quando necessário.
 
     :param name: O nome da propriedade.
     :param num_length: Tamanho para preencher com '0' na frente.
 
     """
-    internal_attr = '_%s' % name
+    def __init__(self, name, length):
+        self.name = name
+        self.length = length
+        self.value = '0' * length
 
-    def _set_attr(self, val):
-        val = val.split('-')
+    def __get__(self, obj, class_):
+        if obj is None:
+            return self
+        return self.value
 
-        if len(val) == 1:
-            val[0] = str(val[0]).zfill(num_length)
-            setattr(self, internal_attr, ''.join(val))
-
-        elif len(val) == 2:
-            val[0] = str(val[0]).zfill(num_length)
-            setattr(self, internal_attr, '-'.join(val))
-
+    def __set__(self, obj, value):
+        # Se tiver um DV, só aplica o length para a parte antes do
+        # digito verificador
+        if '-' in value:
+            values = value.split('-')
+            values[0] = values[0].zfill(self.length)
+            self.value = '-'.join(values)
         else:
-            raise BoletoException('Wrong value format')
-
-    return property(
-        lambda self: getattr(self, internal_attr),
-        _set_attr,
-        lambda self: delattr(self, internal_attr),
-        name
-    )
+            self.value = value.zfill(self.length)
 
 
 class BoletoData(object):
@@ -72,7 +62,7 @@ class BoletoData(object):
 
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         self.aceite = "N"
         self.agencia_cedente = ""
         self.carteira = ""
@@ -88,12 +78,10 @@ class BoletoData(object):
         self.data_documento = ""
         self.data_processamento = datetime.date.today()
         self.data_vencimento = ""
-        self.demonstrativo = []
         self.especie = "R$"
         self.especie_documento = ""
-        self.instrucoes = []
         self.local_pagamento = "Pagável em qualquer banco até o vencimento"
-        self.logo_image_path = ""
+        self.logo_image = ""
         self.moeda = "9"
         self.numero_documento = ""
         self.quantidade = ""
@@ -104,6 +92,13 @@ class BoletoData(object):
         self.sacado_endereco = ""
         self.sacado_bairro = ""
         self.sacado_cep = ""
+
+        self._cedente_endereco = None
+        self._demonstrativo = []
+        self._instrucoes = []
+        self._sacado = None
+        self._valor = None
+        self._valor_documento = None
 
     @property
     def barcode(self):
@@ -157,21 +152,21 @@ class BoletoData(object):
         """
         return self.nosso_numero
 
-    nosso_numero = custom_property('nosso_numero', 13)
+    nosso_numero = CustomProperty('nosso_numero', 13)
     """Nosso Número geralmente tem 13 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    agencia_cedente = custom_property('agencia_cedente', 4)
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
     """Agência do Cedente geralmente tem 4 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    conta_cedente = custom_property('conta_cedente', 7)
+    conta_cedente = CustomProperty('conta_cedente', 7)
     """Conta do Cedente geralmente tem 7 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
@@ -179,7 +174,7 @@ class BoletoData(object):
     """
 
     def _cedente_endereco_get(self):
-        if not hasattr(self, '_cedente_endereco'):
+        if self._cedente_endereco is None:
             self._cedente_endereco = '%s - %s - %s - %s - %s' % (
                 self.cedente_logradouro,
                 self.cedente_bairro,
@@ -198,10 +193,8 @@ class BoletoData(object):
     """Endereço do cedento com no máximo 80 caracteres"""
 
     def _get_valor(self):
-        try:
+        if self._valor is not None:
             return "%.2f" % self._valor
-        except AttributeError:
-            pass
 
     def _set_valor(self, val):
         if type(val) is Decimal:
@@ -218,10 +211,8 @@ class BoletoData(object):
     """
 
     def _get_valor_documento(self):
-        try:
+        if self._valor_documento is not None:
             return "%.2f" % self._valor_documento
-        except AttributeError:
-            pass
 
     def _set_valor_documento(self, val):
         if type(val) is Decimal:
@@ -237,10 +228,7 @@ class BoletoData(object):
     """
 
     def _instrucoes_get(self):
-        try:
-            return self._instrucoes
-        except AttributeError:
-            pass
+        return self._instrucoes
 
     def _instrucoes_set(self, list_inst):
         if len(list_inst) > 7:
@@ -261,10 +249,7 @@ class BoletoData(object):
     """
 
     def _demonstrativo_get(self):
-        try:
-            return self._demonstrativo
-        except AttributeError:
-            pass
+        return self._demonstrativo
 
     def _demonstrativo_set(self, list_dem):
         if len(list_dem) > 12:
@@ -291,7 +276,7 @@ class BoletoData(object):
         Para facilitar você deve sempre setar essa propriedade.
 
         """
-        if not hasattr(self, '_sacado'):
+        if self._sacado is None:
             self.sacado = [
                 '%s - CPF/CNPJ: %s' % (self.sacado_nome,
                                        self.sacado_documento),
@@ -363,59 +348,24 @@ class BoletoData(object):
         """
         linha = self.barcode
         if not linha:
-            BoletoException("Boleto doesn't have a barcode")
+            raise BoletoException("Boleto doesn't have a barcode")
 
-        p1 = linha[0:4]
-        p2 = linha[19:24]
-        p3 = self.modulo10("%s%s" % (p1, p2))
-        p4 = "%s%s%s" % (p1, p2, p3)
-        p5 = p4[0:5]
-        p6 = p4[5:]
-        campo1 = "%s.%s" % (p5, p6)
+        def monta_campo(campo):
+            campo_dv = "%s%s" % (campo, self.modulo10(campo))
+            return "%s.%s" % (campo_dv[0:5], campo_dv[5:])
 
-        p1 = linha[24:34]
-        p2 = self.modulo10(p1)
-        p3 = "%s%s" % (p1, p2)
-        p4 = p3[0:5]
-        p5 = p3[5:]
-        campo2 = "%s.%s" % (p4, p5)
-
-        p1 = linha[34:44]
-        p2 = self.modulo10(p1)
-        p3 = "%s%s" % (p1, p2)
-        p4 = p3[0:5]
-        p5 = p3[5:]
-        campo3 = "%s.%s" % (p4, p5)
-        campo4 = linha[4]
-        campo5 = linha[5:19]
-
-        return "%s %s %s %s %s" % (campo1, campo2, campo3, campo4, campo5)
-
-    @staticmethod
-    def formata_numero(numero, tamanho):
-        """Formatacao comum para numeros
-
-        Preenche com zero fill a esquerda
-        """
-        if len(numero) > tamanho:
-            raise BoletoException(
-                u'Tamanho em caracteres do número está maior que o permitido')
-        return numero.zfill(tamanho)
-
-    @staticmethod
-    def formata_texto(texto, tamanho):
-        if len(texto) > tamanho:
-            raise BoletoException(
-                u'Tamanho em caracteres do texto está maior que o permitido')
-        return texto.ljust(tamanho)
+        return ' '.join([monta_campo(linha[0:4] + linha[19:24]),
+                         monta_campo(linha[24:34]),
+                         monta_campo(linha[34:44]),
+                         linha[4],
+                         linha[5:19]])
 
     def formata_valor(self, nfloat, tamanho):
-        try:
-            txt = nfloat.replace('.', '')
-            txt = self.formata_numero(txt, tamanho)
-            return txt
-        except AttributeError:
-            pass
+        txt = nfloat.replace('.', '')
+        if len(txt) > tamanho:
+            raise BoletoException(
+                u'Tamanho em caracteres do número está maior que o permitido')
+        return txt.zfill(tamanho)
 
     @staticmethod
     def modulo10(num):

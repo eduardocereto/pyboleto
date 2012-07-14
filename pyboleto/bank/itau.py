@@ -1,7 +1,5 @@
 # -*- coding: utf-8
-import os.path
-
-from pyboleto.data import BoletoData, custom_property
+from pyboleto.data import BoletoData, CustomProperty
 
 ### CAUTION - NÃO TESTADO ###
 
@@ -12,21 +10,20 @@ class BoletoItau(BoletoData):
         Todas as carteiras com excessão das que utilizam 15 dígitos: (106,107,
         195,196,198)
     '''
-    def __init__(self, *args, **kwargs):
-
-        super(BoletoItau, self).__init__(*args, **kwargs)
-
-        self.codigo_banco = "341"
-        self.logo_image_path = os.path.dirname(__file__) + \
-            "/../media/logo_itau.jpg"
-        self.especie_documento = 'DM'
 
     # Nosso numero (sem dv) com 8 digitos
-    nosso_numero = custom_property('nosso_numero', 8)
+    nosso_numero = CustomProperty('nosso_numero', 8)
     # Conta (sem dv) com 5 digitos
-    conta_cedente = custom_property('conta_cedente', 5)
+    conta_cedente = CustomProperty('conta_cedente', 5)
     #  Agência (sem dv) com 4 digitos
-    agencia_cedente = custom_property('agencia_cedente', 4)
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
+
+    def __init__(self):
+        super(BoletoItau, self).__init__()
+
+        self.codigo_banco = "341"
+        self.logo_image = "logo_itau.jpg"
+        self.especie_documento = 'DM'
 
     @property
     def dv_nosso_numero(self):
