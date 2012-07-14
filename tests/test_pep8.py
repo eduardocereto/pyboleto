@@ -30,7 +30,7 @@ import unittest
 
 import pep8
 
-from testutils import SourceTest
+from .testutils import SourceTest
 
 
 ERRORS = [

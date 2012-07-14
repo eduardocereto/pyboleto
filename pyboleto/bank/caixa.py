@@ -1,19 +1,20 @@
 #-*- coding: utf-8 -*-
-from pyboleto.data import BoletoData, CustomProperty
+from ..data import BoletoData, CustomProperty
 
 
 class BoletoCaixa(BoletoData):
     '''
         Gera Dados necessários para criação de boleto para o banco Caixa
         Economica Federal
+
     '''
 
     conta_cedente = CustomProperty('conta_cedente', 11)
-
     '''
         Este numero tem o inicio fixo
         Carteira SR: 80, 81 ou 82
         Carteira CR: 90 (Confirmar com gerente qual usar)
+
     '''
     nosso_numero = CustomProperty('nosso_numero', 10)
 

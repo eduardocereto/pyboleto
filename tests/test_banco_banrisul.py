@@ -4,7 +4,7 @@ import unittest
 
 from pyboleto.bank.banrisul import BoletoBanrisul
 
-from testutils import BoletoTestCase
+from .testutils import BoletoTestCase
 
 
 class TestBancoBanrisul(BoletoTestCase):
@@ -19,9 +19,6 @@ class TestBancoBanrisul(BoletoTestCase):
         d.convenio = 7777777
         d.nosso_numero = '22832563'
         self.dados = d
-
-    def test_render(self):
-        self.check_pdf_rendering('banrisul', self.dados)
 
     def test_linha_digitavel(self):
         self.assertEqual(

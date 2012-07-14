@@ -4,7 +4,7 @@ import datetime
 
 from pyboleto.bank.real import BoletoReal
 
-from testutils import BoletoTestCase
+from .testutils import BoletoTestCase
 
 
 class TestBancoReal(BoletoTestCase):
@@ -20,9 +20,6 @@ class TestBancoReal(BoletoTestCase):
         d.nosso_numero = '123'
         d.numero_documento = '123'
         self.dados = d
-
-    def test_render(self):
-        self.check_pdf_rendering('real', self.dados)
 
     def test_linha_digitavel(self):
         self.assertEqual(self.dados.linha_digitavel,

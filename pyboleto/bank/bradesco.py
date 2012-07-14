@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-from pyboleto.data import BoletoData, CustomProperty
+from ..data import BoletoData, CustomProperty
 
 
 class BoletoBradesco(BoletoData):

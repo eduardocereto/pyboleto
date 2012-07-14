@@ -5,13 +5,25 @@ import difflib
 import fnmatch
 import os
 import re
+import sys
 import subprocess
 import tempfile
 import unittest
+
 from xml.etree.ElementTree import fromstring, tostring
 
 import pyboleto
-from pyboleto.pdf import BoletoPDF
+
+from .compat import skipIf
+
+
+try:
+    from pyboleto.pdf import BoletoPDF
+except ImportError as err:
+    if sys.version_info >= (3,):
+        pass  # Reportlab doesn;t support Python3
+    else:
+        raise(err)
 
 
 def list_recursively(directory, pattern):
@@ -38,7 +50,7 @@ def get_sources(root):
                 continue
             yield fname
 
-        yield os.path.join(root, 'setup.py')
+        #yield os.path.join(root, 'setup.py')
 
 
 def _diff(orig, new, short, verbose):
@@ -150,11 +162,14 @@ class BoletoTestCase(unittest.TestCase):
             open(fname, 'w').write(open(generated).read())
         return fname
 
-    def check_pdf_rendering(self, bank, dados):
+    @skipIf(sys.version_info >= (3,),
+                     "Reportlab unavailable on this version")
+    def test_pdf_rendering(self):
+        bank = type(self.dados).__name__
         filename = tempfile.mktemp(prefix="pyboleto-",
                                    suffix=".pdf")
         boleto = BoletoPDF(filename, True)
-        boleto.drawBoleto(dados)
+        boleto.drawBoleto(self.dados)
         boleto.nextPage()
         boleto.save()
 
@@ -163,6 +178,6 @@ class BoletoTestCase(unittest.TestCase):
         expected = self._get_expected(bank, generated)
         diff = diff_pdf_htmls(expected, generated)
         if diff:
-            self.fail("Error while checking xml for bank %r:\n%s" % (
+            self.fail("Error while checking xml for %r:\n%s" % (
                 bank, diff))
         os.unlink(generated)

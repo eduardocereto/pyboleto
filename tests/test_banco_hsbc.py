@@ -4,7 +4,7 @@ import datetime
 
 from pyboleto.bank.hsbc import BoletoHsbc
 
-from testutils import BoletoTestCase
+from .testutils import BoletoTestCase
 
 
 class TestBancoHsbc(BoletoTestCase):
@@ -12,16 +12,13 @@ class TestBancoHsbc(BoletoTestCase):
         d = BoletoHsbc()
         d.agencia_cedente = '1172-0'
         d.conta_cedente = '3903036'
-        d.data_vencimento = datetime.date(2009, 05, 25)
-        d.data_documento = datetime.date(2009, 05, 25)
-        d.data_processamento = datetime.date(2009, 05, 25)
+        d.data_vencimento = datetime.date(2009, 5, 25)
+        d.data_documento = datetime.date(2009, 5, 25)
+        d.data_processamento = datetime.date(2009, 5, 25)
         d.valor_documento = 35.00
         #d.nosso_numero = '2125525'
         d.numero_documento = '0100010103120'
         self.dados = d
-
-    def test_render(self):
-        self.check_pdf_rendering('hsbc', self.dados)
 
     def test_linha_digitavel(self):
         self.assertEqual(self.dados.linha_digitavel,

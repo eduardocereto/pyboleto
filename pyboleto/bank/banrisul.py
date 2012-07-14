@@ -1,13 +1,12 @@
-# -*- coding: utf-8
-from pyboleto.data import BoletoData, CustomProperty
+# -*- coding: utf-8 -*-
+from ..data import BoletoData, CustomProperty
 
-
-# From http://jrimum.org/bopepo/browser/trunk/src/br/com/nordestefomento/jrimum/bopepo/campolivre/AbstractCLBanrisul.java
 
 class BoletoBanrisul(BoletoData):
     nosso_numero = CustomProperty('nosso_numero', 8)
     conta = CustomProperty('conta', 6)
 
+    # From http://jrimum.org/bopepo/browser/trunk/src/br/com/nordestefomento/jrimum/bopepo/campolivre/AbstractCLBanrisul.java
     def calculaDuploDigito(self, seisPrimeirosCamposConcatenados):
 
         primeiroDV = self.modulo10(seisPrimeirosCamposConcatenados)

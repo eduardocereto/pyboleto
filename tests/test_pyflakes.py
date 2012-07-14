@@ -24,31 +24,36 @@
 """Test pyflakes on stoq, stoqlib and plugins directories
 
 Useful to early find syntax errors and other common problems.
-"""
 
+"""
 import _ast
-import compiler
 import sys
 import unittest
 
-from testutils import SourceTest
+from .testutils import SourceTest
+from .compat import skipIf
 
-import pyflakes
+
+try:
+    from pyflakes import checker
+except ImportError as err:
+    if sys.version_info >= (3,):
+        pass  # Pyflakes doesn't support Python3
+    else:
+        raise(err)
 
 
+@skipIf(sys.version_info >= (3,),
+                 "Pyflakes unavailable on this version")
 class TestPyflakes(SourceTest, unittest.TestCase):
     def setUp(self):
-        self.checker = __import__('pyflakes.checker').checker
+        pass
 
     # stolen from pyflakes
     def _check(self, codeString, filename, warnings):
         try:
-            if pyflakes.__version__ == '0.4.0':
-                compile(codeString, filename, "exec")
-                tree = compiler.parse(codeString)
-            else:
-                tree = compile(codeString, filename, "exec", _ast.PyCF_ONLY_AST)
-        except (SyntaxError, IndentationError), value:
+            tree = compile(codeString, filename, "exec", _ast.PyCF_ONLY_AST)
+        except (SyntaxError, IndentationError) as value:
             msg = value.args[0]
 
             (lineno, offset, text) = value.lineno, value.offset, value.text
@@ -58,7 +63,9 @@ class TestPyflakes(SourceTest, unittest.TestCase):
                 # Avoid using msg, since for the only known case, it contains a
                 # bogus message that claims the encoding the file declared was
                 # unknown.
-                print >> sys.stderr, "%s: problem decoding source" % (filename, )
+                print >> sys.stderr, "%s: problem decoding source" % (
+                        filename,
+                )
             else:
                 line = text.splitlines()[-1]
 
@@ -72,13 +79,13 @@ class TestPyflakes(SourceTest, unittest.TestCase):
                     print >> sys.stderr, " " * offset, "^"
 
             return 1
-        except UnicodeError, msg:
+        except UnicodeError as msg:
             print >> sys.stderr, 'encoding error at %r: %s' % (filename, msg)
             return 1
         else:
-            # Okay, it's syntactically valid.  Now parse it into an ast and check
-            # it.
-            w = self.checker.Checker(tree, filename)
+            # Okay, it's syntactically valid.
+            # Now parse it into an ast and check it.
+            w = checker.Checker(tree, filename)
             warnings.extend(w.messages)
             return len(warnings)
 
@@ -87,16 +94,16 @@ class TestPyflakes(SourceTest, unittest.TestCase):
         msgs = []
         result = 0
         try:
-            fd = file(filename, 'U')
+            fd = open(filename, 'U')
             try:
                 result = self._check(fd.read(), filename, warnings)
             finally:
                 fd.close()
-        except IOError, msg:
+        except IOError as msg:
             print >> sys.stderr, "%s: %s" % (filename, msg.args[1])
             result = 1
 
-        warnings.sort(lambda a, b: cmp(a.lineno, b.lineno))
+        warnings.sort(key=lambda w: w.lineno)
         for warning in warnings:
             msg = str(warning).replace(root, '')
             print msg

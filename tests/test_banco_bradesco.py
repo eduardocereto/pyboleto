@@ -4,7 +4,7 @@ import datetime
 
 from pyboleto.bank.bradesco import BoletoBradesco
 
-from testutils import BoletoTestCase
+from .testutils import BoletoTestCase
 
 
 class TestBancoBradesco(BoletoTestCase):
@@ -20,9 +20,6 @@ class TestBancoBradesco(BoletoTestCase):
         d.nosso_numero = '2125525'
         d.numero_documento = '2125525'
         self.dados = d
-
-    def test_render(self):
-        self.check_pdf_rendering('bradesco', self.dados)
 
     def test_linha_digitavel(self):
         self.assertEqual(self.dados.linha_digitavel,

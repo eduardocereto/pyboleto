@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-from pyboleto.data import BoletoData
+from ..data import BoletoData
 
 
 class BoletoReal(BoletoData):
