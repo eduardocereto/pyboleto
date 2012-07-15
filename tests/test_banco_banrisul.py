@@ -14,8 +14,8 @@ class TestBancoBanrisul(BoletoTestCase):
         d.data_vencimento = datetime.date(2000, 7, 4)
         d.data_processamento = datetime.date(2012, 7, 11)
         d.valor_documento = 550
-        d.agencia = '1102'
-        d.conta = '9000150'
+        d.agencia_cedente = '1102'
+        d.conta_cedente = '9000150'
         d.convenio = 7777777
         d.nosso_numero = '22832563'
         d.numero_documento = '22832563'

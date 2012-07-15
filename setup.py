@@ -75,6 +75,8 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Topic :: Office/Business :: Financial',
         'Topic :: Software Development :: Libraries :: Python Modules',
+        'Framework :: Django',
+        'Framework :: Django :: 1.3',
     ],
     platforms='any',
     test_suite='tests.alltests.suite',

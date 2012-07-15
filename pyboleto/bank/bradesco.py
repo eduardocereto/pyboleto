@@ -16,6 +16,7 @@ class BoletoBradesco(BoletoData):
 
         self.codigo_banco = "237"
         self.logo_image = "logo_bancobradesco.jpg"
+        self.carteira = '06'
 
     def format_nosso_numero(self):
         return "%s/%s-%s" % (

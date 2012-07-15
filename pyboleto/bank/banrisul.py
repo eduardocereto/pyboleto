@@ -4,7 +4,7 @@ from ..data import BoletoData, custom_property
 
 class BoletoBanrisul(BoletoData):
     nosso_numero = custom_property('nosso_numero', 8)
-    conta = custom_property('conta', 6)
+    conta_cedente = custom_property('conta_cedente', 6)
 
     # From http://jrimum.org/bopepo/browser/trunk/src/br/com/nordestefomento/
     # jrimum/bopepo/campolivre/AbstractCLBanrisul.java
@@ -39,8 +39,8 @@ class BoletoBanrisul(BoletoData):
 
     @property
     def campo_livre(self):
-        content = '21%04d%07d%08d40' % (int(self.agencia),
-                                        int(self.conta),
+        content = '21%04d%07d%08d40' % (int(self.agencia_cedente),
+                                        int(self.conta_cedente),
                                         int(self.nosso_numero))
         dv = self.calculaDuploDigito(content)
         return '%s%s' % (content, dv)

@@ -356,7 +356,7 @@ class BoletoData(object):
         20 a 44  Campo Livre definido por cada banco
 
         :return: linha digitável
-        :rtype: string
+        :rtype: str
 
         """
         linha = self.barcode
