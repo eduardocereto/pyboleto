@@ -77,10 +77,6 @@ class BoletoBB(BoletoData):
     def dv_nosso_numero(self):
         return self.modulo11(self.nosso_numero)
 
-    agencia_cedente = custom_property('agencia_cedente', 4)
-
-    conta_cedente = custom_property('conta_cedente', 8)
-
     @property
     def campo_livre(self):
         if self.format_convenio in (7, 8):

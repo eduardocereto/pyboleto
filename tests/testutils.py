@@ -170,6 +170,8 @@ class BoletoTestCase(unittest.TestCase):
                                    suffix=".pdf")
         boleto = BoletoPDF(filename, True)
         for i in range(3):
+            self.dados.nosso_numero = str(int(
+                self.dados._nosso_numero) + 1)
             self.dados.numero_documento = str(int(
                 self.dados.numero_documento) + 1)
             boleto.drawBoleto(self.dados)

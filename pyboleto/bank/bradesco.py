@@ -24,9 +24,6 @@ class BoletoBradesco(BoletoData):
             self.dv_nosso_numero
         )
 
-    # Nosso numero (sem dv) sao 11 digitos
-    nosso_numero = custom_property('nosso_numero', 11)
-
     @property
     def dv_nosso_numero(self):
         resto2 = self.modulo11(self.nosso_numero, 7, 1)

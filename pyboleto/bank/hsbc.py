@@ -19,10 +19,8 @@ class BoletoHsbc(BoletoData):
         self.logo_image = "logo_bancohsbc.jpg"
         self.carteira = 'CNR'
 
-    # Nosso número deve ser calculado automaticamente
-    @property
-    def nosso_numero(self):
-        nosso_numero = self.numero_documento
+    def format_nosso_numero(self):
+        nosso_numero = self.nosso_numero
         # Primeiro DV
         nosso_numero += str(self.modulo11(nosso_numero))
         # Cobrança com vencimento = 4
@@ -34,8 +32,6 @@ class BoletoHsbc(BoletoData):
         nosso_numero += str(self.modulo11(sum_params))
         return nosso_numero
 
-    numero_documento = custom_property('numero_documento', 13)
-
     @property
     def data_vencimento_juliano(self):
         data_vencimento = str(self.data_vencimento.timetuple().tm_yday)
@@ -45,7 +41,7 @@ class BoletoHsbc(BoletoData):
     @property
     def campo_livre(self):
         content = "%7s%13s%4s2" % (self.conta_cedente,
-                                   self.numero_documento,
+                                   self.nosso_numero,
                                    self.data_vencimento_juliano)
         return content
 
@@ -65,9 +61,6 @@ class BoletoHsbcComRegistro(BoletoData):
         self.logo_image = "logo_bancohsbc.jpg"
         self.carteira = 'CSB'
         self.especie_documento = 'PD'
-
-    # Nosso numero (sem dv) sao 10 digitos
-    nosso_numero = custom_property('nosso_numero', 10)
 
     @property
     def dv_nosso_numero(self):

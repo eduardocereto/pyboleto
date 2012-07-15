@@ -9,7 +9,7 @@ from .testutils import BoletoTestCase
 
 class TestBancoBrasil(BoletoTestCase):
     def setUp(self):
-        d = BoletoBB(7, '1')
+        d = BoletoBB(7, 1)
         d.carteira = '18'
         d.data_documento = datetime.date(2011, 3, 8)
         d.data_vencimento = datetime.date(2011, 3, 8)
@@ -17,7 +17,7 @@ class TestBancoBrasil(BoletoTestCase):
         d.valor_documento = 2952.95
         d.agencia = '9999'
         d.conta = '99999'
-        d.convenio = 7777777
+        d.convenio = '7777777'
         d.nosso_numero = '87654'
         d.numero_documento = '87654'
         self.dados = d

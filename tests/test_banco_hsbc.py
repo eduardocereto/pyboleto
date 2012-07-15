@@ -16,7 +16,7 @@ class TestBancoHsbc(BoletoTestCase):
         d.data_documento = datetime.date(2009, 5, 25)
         d.data_processamento = datetime.date(2009, 5, 25)
         d.valor_documento = 35.00
-        #d.nosso_numero = '2125525'
+        d.nosso_numero = '0100010103120'
         d.numero_documento = '0100010103120'
         self.dados = d
 
@@ -37,7 +37,7 @@ class TestBancoHsbc(BoletoTestCase):
         self.assertEqual(self.dados.conta_cedente, '3903036')
 
     def test_nosso_numero(self):
-        self.assertEqual(self.dados.nosso_numero, '0100010103120947')
+        self.assertEqual(self.dados.format_nosso_numero(), '0100010103120947')
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoHsbc)
 
