@@ -31,4 +31,5 @@ Subpackages
 .. toctree::
 
     pyboleto.bank
+    pyboleto.django
 

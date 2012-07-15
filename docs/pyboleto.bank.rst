@@ -1,6 +1,14 @@
 bank Package
 ============
 
+:mod:`bank` Package
+-------------------
+
+.. automodule:: pyboleto.bank
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`bancodobrasil` Module
 ---------------------------
 
@@ -10,7 +18,7 @@ bank Package
     :show-inheritance:
 
 :mod:`banrisul` Module
----------------------------
+----------------------
 
 .. automodule:: pyboleto.bank.banrisul
     :members:
