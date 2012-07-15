@@ -241,6 +241,9 @@ class BoletoData(object):
         return self._instrucoes
 
     def _instrucoes_set(self, list_inst):
+        if type(list_inst) in [str, unicode]:
+            list_inst = list_inst.splitlines()
+
         if len(list_inst) > 7:
             raise BoletoException(
                 u'Número de linhas de instruções maior que 7')
