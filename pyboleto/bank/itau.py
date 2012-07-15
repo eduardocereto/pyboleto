@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-from ..data import BoletoData, CustomProperty
+from ..data import BoletoData, custom_property
 
 ### CAUTION - NÃO TESTADO ###
 
@@ -12,11 +12,11 @@ class BoletoItau(BoletoData):
     '''
 
     # Nosso numero (sem dv) com 8 digitos
-    nosso_numero = CustomProperty('nosso_numero', 8)
+    nosso_numero = custom_property('nosso_numero', 8)
     # Conta (sem dv) com 5 digitos
-    conta_cedente = CustomProperty('conta_cedente', 5)
+    conta_cedente = custom_property('conta_cedente', 5)
     #  Agência (sem dv) com 4 digitos
-    agencia_cedente = CustomProperty('agencia_cedente', 4)
+    agencia_cedente = custom_property('agencia_cedente', 4)
 
     def __init__(self):
         super(BoletoItau, self).__init__()
@@ -24,6 +24,13 @@ class BoletoItau(BoletoData):
         self.codigo_banco = "341"
         self.logo_image = "logo_itau.jpg"
         self.especie_documento = 'DM'
+
+    # Nosso numero (sem dv) com 8 digitos
+    nosso_numero = custom_property('nosso_numero', 8)
+    # Conta (sem dv) com 5 digitos
+    conta_cedente = custom_property('conta_cedente', 5)
+    #  Agência (sem dv) com 4 digitos
+    agencia_cedente = custom_property('agencia_cedente', 4)
 
     @property
     def dv_nosso_numero(self):

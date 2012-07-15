@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-from ..data import BoletoData, CustomProperty
+from ..data import BoletoData, custom_property
 
 
 ### CAUTION - NÃO TESTADO ###
@@ -10,7 +10,7 @@ class BoletoHsbc(BoletoData):
         Gera Dados necessários para criação de boleto para o banco HSBC
     '''
 
-    numero_documento = CustomProperty('numero_documento', 13)
+    numero_documento = custom_property('numero_documento', 13)
 
     def __init__(self):
         super(BoletoHsbc, self).__init__()
@@ -34,6 +34,8 @@ class BoletoHsbc(BoletoData):
         nosso_numero += str(self.modulo11(sum_params))
         return nosso_numero
 
+    numero_documento = custom_property('numero_documento', 13)
+
     @property
     def data_vencimento_juliano(self):
         data_vencimento = str(self.data_vencimento.timetuple().tm_yday)
@@ -54,7 +56,7 @@ class BoletoHsbcComRegistro(BoletoData):
         com registro
     '''
     # Nosso numero (sem dv) sao 10 digitos
-    nosso_numero = CustomProperty('nosso_numero', 10)
+    nosso_numero = custom_property('nosso_numero', 10)
 
     def __init__(self):
         super(BoletoHsbcComRegistro, self).__init__()
@@ -63,6 +65,9 @@ class BoletoHsbcComRegistro(BoletoData):
         self.logo_image = "logo_bancohsbc.jpg"
         self.carteira = 'CSB'
         self.especie_documento = 'PD'
+
+    # Nosso numero (sem dv) sao 10 digitos
+    nosso_numero = custom_property('nosso_numero', 10)
 
     @property
     def dv_nosso_numero(self):

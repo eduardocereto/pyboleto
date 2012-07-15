@@ -20,36 +20,46 @@ class BoletoException(Exception):
         Exception.__init__(self, message)
 
 
-class CustomProperty(object):
-    """Properidade que aceita um numero com ou sem DV e remove o DV caso
-    exista. Então preenxe com zfill até o tamanho adequado.
+def custom_property(name, num_length):
+    """Função para criar propriedades nos boletos
 
-    Note que sempre que possível não use DVs ao entrar valores no pyboleto.
-    De preferência o pyboleto vai calcular todos os DVs quando necessário.
+    Cria propriedades com getter, setter e delattr.
+
+    Propriedades criadas com essa função sempre são strings internamente.
+
+    O Setter sempre tentará remover qualquer digito verificador se existir.
+
+    Aceita um numero com ou sem DV e remove o DV caso exista. Então preenxe
+    com zfill até o tamanho adequado. Note que sempre que possível não use DVs
+    ao entrar valores no pyboleto. De preferência o pyboleto vai calcular
+    todos os DVs quando necessário.
 
     :param name: O nome da propriedade.
     :param num_length: Tamanho para preencher com '0' na frente.
 
     """
-    def __init__(self, name, length):
-        self.name = name
-        self.length = length
-        self.value = '0' * length
+    internal_attr = '_%s' % name
 
-    def __get__(self, obj, class_):
-        if obj is None:
-            return self
-        return self.value
+    def _set_attr(self, val):
+        val = val.split('-')
 
-    def __set__(self, obj, value):
-        # Se tiver um DV, só aplica o length para a parte antes do
-        # digito verificador
-        if '-' in value:
-            values = value.split('-')
-            values[0] = values[0].zfill(self.length)
-            self.value = '-'.join(values)
+        if len(val) == 1:
+            val[0] = str(val[0]).zfill(num_length)
+            setattr(self, internal_attr, ''.join(val))
+
+        elif len(val) == 2:
+            val[0] = str(val[0]).zfill(num_length)
+            setattr(self, internal_attr, '-'.join(val))
+
         else:
-            self.value = value.zfill(self.length)
+            raise BoletoException('Wrong value format')
+
+    return property(
+        lambda self: getattr(self, internal_attr),
+        _set_attr,
+        lambda self: delattr(self, internal_attr),
+        name
+    )
 
 
 class BoletoData(object):
@@ -152,21 +162,21 @@ class BoletoData(object):
         """
         return self.nosso_numero
 
-    nosso_numero = CustomProperty('nosso_numero', 13)
+    nosso_numero = custom_property('nosso_numero', 13)
     """Nosso Número geralmente tem 13 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    agencia_cedente = CustomProperty('agencia_cedente', 4)
+    agencia_cedente = custom_property('agencia_cedente', 4)
     """Agência do Cedente geralmente tem 4 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    conta_cedente = CustomProperty('conta_cedente', 7)
+    conta_cedente = custom_property('conta_cedente', 7)
     """Conta do Cedente geralmente tem 7 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco

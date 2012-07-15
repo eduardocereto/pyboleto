@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from ..data import BoletoData, CustomProperty
+from ..data import BoletoData, custom_property
 
 
 class BoletoBanrisul(BoletoData):
-    nosso_numero = CustomProperty('nosso_numero', 8)
-    conta = CustomProperty('conta', 6)
+    nosso_numero = custom_property('nosso_numero', 8)
+    conta = custom_property('conta', 6)
 
     # From http://jrimum.org/bopepo/browser/trunk/src/br/com/nordestefomento/
     # jrimum/bopepo/campolivre/AbstractCLBanrisul.java

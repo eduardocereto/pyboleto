@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-from ..data import BoletoData, CustomProperty
+from ..data import BoletoData, custom_property
 
 
 class BoletoCaixa(BoletoData):
@@ -9,14 +9,14 @@ class BoletoCaixa(BoletoData):
 
     '''
 
-    conta_cedente = CustomProperty('conta_cedente', 11)
+    conta_cedente = custom_property('conta_cedente', 11)
     '''
         Este numero tem o inicio fixo
         Carteira SR: 80, 81 ou 82
         Carteira CR: 90 (Confirmar com gerente qual usar)
 
     '''
-    nosso_numero = CustomProperty('nosso_numero', 10)
+    nosso_numero = custom_property('nosso_numero', 10)
 
     def __init__(self):
         super(BoletoCaixa, self).__init__()
@@ -44,4 +44,4 @@ Agências da Caixa"
         return content
 
     def format_nosso_numero(self):
-        return self.nosso_numero + '-' + str(self.dv_nosso_numero)
+        return self._nosso_numero + '-' + str(self.dv_nosso_numero)
