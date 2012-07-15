@@ -19,6 +19,7 @@ class TestBancoBrasil(BoletoTestCase):
         d.conta = '99999'
         d.convenio = 7777777
         d.nosso_numero = '87654'
+        d.numero_documento = '87654'
         self.dados = d
 
     def test_linha_digitavel(self):

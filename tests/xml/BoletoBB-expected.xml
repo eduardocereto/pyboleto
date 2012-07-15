@@ -32,6 +32,7 @@
     <text font="0" height="8" left="509" top="520" width="83">Data processamento</text>
     <text font="0" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
     <text font="1" height="12" left="38" top="530" width="68">08/03/2011</text>
+    <text font="1" height="12" left="169" top="530" width="38">87654</text>
     <text font="1" height="12" left="424" top="530" width="10">N</text>
     <text font="1" height="12" left="509" top="530" width="68">04/07/2012</text>
     <text font="1" height="12" left="701" top="530" width="140">77777770000087654-1</text>
@@ -70,6 +71,7 @@
     <text font="1" height="12" left="722" top="-185" width="68">08/03/2011</text>
     <text font="1" height="12" left="41" top="-157" width="86"> - CPF/CNPJ: </text>
     <text font="1" height="12" left="403" top="-157" width="140">77777770000087654-1</text>
+    <text font="1" height="12" left="573" top="-157" width="38">87654</text>
     <text font="1" height="12" left="722" top="-157" width="68">08/03/2011</text>
     <text font="1" height="12" left="41" top="-130" width="48"> -  -  -  - </text>
     <text font="1" height="12" left="722" top="-130" width="49">2952,95</text>

@@ -164,6 +164,29 @@ class BoletoTestCase(unittest.TestCase):
 
     @skipIf(sys.version_info >= (3,),
                      "Reportlab unavailable on this version")
+    def test_pdf_triplo_rendering(self):
+        bank = type(self.dados).__name__
+        filename = tempfile.mktemp(prefix="pyboleto-triplo-",
+                                   suffix=".pdf")
+        boleto = BoletoPDF(filename, True)
+        for i in range(3):
+            self.dados.numero_documento = str(int(
+                self.dados.numero_documento) + 1)
+            boleto.drawBoleto(self.dados)
+            boleto.nextPage()
+        boleto.save()
+
+        generated = filename + '.xml'
+        pdftoxml(filename, generated)
+        expected = self._get_expected('Triplo-' + bank, generated)
+        diff = diff_pdf_htmls(expected, generated)
+        if diff:
+            self.fail("Error while checking xml for %r:\n%s" % (
+                bank, diff))
+        os.unlink(generated)
+
+    @skipIf(sys.version_info >= (3,),
+                     "Reportlab unavailable on this version")
     def test_pdf_rendering(self):
         bank = type(self.dados).__name__
         filename = tempfile.mktemp(prefix="pyboleto-",
