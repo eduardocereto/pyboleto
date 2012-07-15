@@ -54,7 +54,7 @@ class BoletoPDF(object):
         self.pdfCanvas.setStrokeColor(black)
 
     def _load_image(self, logo_image):
-        pyboleto_dir = os.path.basename(os.path.dirname(__file__))
+        pyboleto_dir = os.path.dirname(os.path.abspath(__file__))
         image_path = os.path.join(pyboleto_dir, 'media', logo_image)
         return image_path
 
