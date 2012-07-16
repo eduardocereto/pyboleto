@@ -241,7 +241,7 @@ class BoletoData(object):
         return self._instrucoes
 
     def _instrucoes_set(self, list_inst):
-        if type(list_inst) in [str, unicode]:
+        if isinstance(list_inst, basestring):
             list_inst = list_inst.splitlines()
 
         if len(list_inst) > 7:
