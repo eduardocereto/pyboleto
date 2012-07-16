@@ -445,10 +445,10 @@ class BoletoData(object):
     def modulo10(num):
         soma = 0
         peso = 2
-        for i in range(len(num) - 1, -1, -1):
-            parcial = int(num[i]) * peso
+        for c in reversed(num):
+            parcial = int(c) * peso
             if parcial > 9:
-                s = "%d" % parcial
+                s = str(parcial)
                 parcial = int(s[0]) + int(s[1])
             soma += parcial
             if peso == 2:
