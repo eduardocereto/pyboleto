@@ -24,7 +24,7 @@ class BoletoPDF(object):
 
     Esta classe é responsável por imprimir o boleto em PDF.
     Outras classes podem ser implementadas no futuro com a mesma interface,
-    para faer outut em HTML, LaTeX, ...
+    para faer output em HTML, LaTeX, ...
 
     Esta classe pode imprimir boletos em formato de carnê (2 boletos por
     página) ou em formato de folha cheia.
@@ -58,12 +58,12 @@ class BoletoPDF(object):
         image_path = os.path.join(pyboleto_dir, 'media', logo_image)
         return image_path
 
-    def drawReciboSacadoCanhoto(self, boletoDados, x, y):
+    def _drawReciboSacadoCanhoto(self, boletoDados, x, y):
         """Imprime o Recibo do Sacado para modelo de carnê
 
         :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
-        :type boletoDados: `BoletoData`
+        :type boletoDados: :class:`pyboleto.data.BoletoData`
 
         """
 
@@ -170,12 +170,12 @@ class BoletoPDF(object):
         return (self.widthCanhoto,
                 ((linhaInicial + 2) * self.heightLine))
 
-    def drawReciboSacado(self, boletoDados, x, y):
+    def _drawReciboSacado(self, boletoDados, x, y):
         """Imprime o Recibo do Sacado para modelo de página inteira
 
         :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
-        :type boletoDados: `BoletoData`
+        :type boletoDados: :class:`pyboleto.data.BoletoData`
 
         """
 
@@ -402,7 +402,7 @@ class BoletoPDF(object):
 
         return (self.width, ((linhaInicial + 3) * self.heightLine))
 
-    def drawHorizontalCorteLine(self, x, y, width):
+    def _drawHorizontalCorteLine(self, x, y, width):
         self.pdfCanvas.saveState()
         self.pdfCanvas.translate(x, y)
 
@@ -412,7 +412,7 @@ class BoletoPDF(object):
 
         self.pdfCanvas.restoreState()
 
-    def drawVerticalCorteLine(self, x, y, height):
+    def _drawVerticalCorteLine(self, x, y, height):
         self.pdfCanvas.saveState()
         self.pdfCanvas.translate(x, y)
 
@@ -422,12 +422,12 @@ class BoletoPDF(object):
 
         self.pdfCanvas.restoreState()
 
-    def drawReciboCaixa(self, boletoDados, x, y):
+    def _drawReciboCaixa(self, boletoDados, x, y):
         """Imprime o Recibo do Caixa
 
         :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
-        :type boletoDados: `BoletoData`
+        :type boletoDados: :class:`pyboleto.data.BoletoData`
 
         """
         self.pdfCanvas.saveState()
@@ -765,14 +765,14 @@ class BoletoPDF(object):
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
         :param boletoDados2: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
-        :type boletoDados1: `BoletoData`
-        :type boletoDados2: `BoletoData`
+        :type boletoDados1: :class:`pyboleto.data.BoletoData`
+        :type boletoDados2: :class:`pyboleto.data.BoletoData`
 
         """
         y = 5 * mm
         d = self.drawBoletoCarne(boletoDados1, y)
         y += d[1] + 6 * mm
-        #self.drawHorizontalCorteLine(0, y, d[0])
+        #self._drawHorizontalCorteLine(0, y, d[0])
         y += 7 * mm
         if boletoDados2:
             self.drawBoletoCarne(boletoDados2, y)
@@ -785,14 +785,14 @@ class BoletoPDF(object):
 
         :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
-        :type boletoDados: `BoletoData`
+        :type boletoDados: :class:`pyboleto.data.BoletoData`
         """
         x = 15 * mm
-        d = self.drawReciboSacadoCanhoto(boletoDados, x, y)
+        d = self._drawReciboSacadoCanhoto(boletoDados, x, y)
         x += d[0] + 8 * mm
-        self.drawVerticalCorteLine(x, y, d[1])
+        self._drawVerticalCorteLine(x, y, d[1])
         x += 8 * mm
-        d = self.drawReciboCaixa(boletoDados, x, y)
+        d = self._drawReciboCaixa(boletoDados, x, y)
         x += d[0]
         return x, d[1]
 
@@ -804,21 +804,21 @@ class BoletoPDF(object):
 
         :param boletoDados: Objeto com os dados do boleto a ser preenchido.
             Deve ser subclasse de :class:`pyboleto.data.BoletoData`
-        :type boletoDados: `BoletoData`
+        :type boletoDados: :class:`pyboleto.data.BoletoData`
         """
         x = 9 * mm  # margem esquerda
         y = 10 * mm  # margem inferior
 
-        self.drawHorizontalCorteLine(x, y, self.width)
+        self._drawHorizontalCorteLine(x, y, self.width)
         y += 4 * mm  # distancia entre linha de corte e barcode
 
-        d = self.drawReciboCaixa(boletoDados, x, y)
+        d = self._drawReciboCaixa(boletoDados, x, y)
         y += d[1] + (12 * mm)  # distancia entre Recibo caixa e linha de corte
 
-        self.drawHorizontalCorteLine(x, y, self.width)
+        self._drawHorizontalCorteLine(x, y, self.width)
 
         y += 20 * mm
-        d = self.drawReciboSacado(boletoDados, x, y)
+        d = self._drawReciboSacado(boletoDados, x, y)
         y += d[1]
         return (self.width, y)
 

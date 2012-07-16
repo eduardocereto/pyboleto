@@ -35,7 +35,9 @@ def custom_property(name, num_length):
     todos os DVs quando necessário.
 
     :param name: O nome da propriedade.
+    :type name: string
     :param num_length: Tamanho para preencher com '0' na frente.
+    :type num_length: integer
 
     """
     internal_attr = '_%s' % name
@@ -65,43 +67,98 @@ def custom_property(name, num_length):
 class BoletoData(object):
     """Interface para implementações específicas de bancos
 
+    Esta classe geralmente nunca será usada diretamente. Geralmente o usuário
+    irá usar uma das subclasses com a implementação específica de cada banco.
+
     As classes dentro do pacote :mod:`pyboleto.bank` extendem essa classe
     para implementar as especificações de cada banco.
     Portanto as especificações dentro desta classe são genéricas seguindo as
     normas da FEBRABAN.
 
+    Todos os parâmetros devem ser passados como ``**kwargs`` para o construtor
+    ou então devem ser passados depois, porém antes de imprimir o boleto.
+
+    eg::
+
+        bData = BoletoData(agencia='123', valor='650')
+        bData.cedente = u'João Ninguém'
+        bData.cedente_cidade = u'Rio de Janeiro'
+        bData.cedente_uf = u'RJ'
+        # Assim por diante até preencher todos os campos obrigatórios.
+
+    **Parâmetros obrigatórios**:
+
+    :param aceite: 'N' para o caixa não acetitar o boleto após a
+        validade ou 'A' para aceitar. *(default: 'N')*
+    :param agencia_cedente: Tamanho pode variar com o banco.
+    :param carteira: Depende do Banco.
+    :param cedente: Nome do Cedente
+    :param cedente_cidade:
+    :param cedente_uf:
+    :param cedente_logradouro: Endereço do Cedente
+    :param cedente_bairro:
+    :param cedente_cep:
+    :param cedente_documento: CPF ou CNPJ do Cedente.
+    :param conta_cedente: Conta do Cedente sem o dígito verificador.
+    :param data_documento:
+    :type data_documento: `datetime.date`
+    :param data_processamento:
+    :type data_processamento: `datetime.date`
+    :param data_vencimento:
+    :type data_vencimento: `datetime.date`
+    :param numero_documento: Número Customizado para controle. Pode ter até 13
+        caracteres dependendo do banco.
+    :param sacado_nome: Nome do Sacado
+    :param sacado_documento: CPF ou CNPJ do Sacado
+    :param sacado_cidade:
+    :param sacado_uf:
+    :param sacado_endereco: Endereco do Sacado
+    :param sacado_bairro:
+    :param sacado_cep:
+
+    **Parâmetros não obrigatórios**:
+
+    :param quantidade:
+    :param especie: Nunca precisa mudar essa opção *(default: 'R$')*
+    :param especie_documento:
+    :param local_pagamento: *(default: 'Pagável em qualquer banco
+        até o vencimento')*
+    :param moeda: Nunca precisa mudar essa opção *(default: '9')*
+
     """
 
-    def __init__(self):
-        self.aceite = "N"
-        self.agencia_cedente = ""
-        self.carteira = ""
-        self.cedente = ""
-        self.cedente_cidade = ""
-        self.cedente_uf = ""
-        self.cedente_logradouro = ""
-        self.cedente_bairro = ""
-        self.cedente_cep = ""
-        self.cedente_documento = ""
-        self.codigo_banco = ""
-        self.conta_cedente = ""
-        self.data_documento = ""
-        self.data_processamento = datetime.date.today()
-        self.data_vencimento = ""
-        self.especie = "R$"
-        self.especie_documento = ""
-        self.local_pagamento = u"Pagável em qualquer banco até o vencimento"
-        self.logo_image = ""
-        self.moeda = "9"
-        self.numero_documento = ""
-        self.quantidade = ""
-        self.sacado_nome = ""
-        self.sacado_documento = ""
-        self.sacado_cidade = ""
-        self.sacado_uf = ""
-        self.sacado_endereco = ""
-        self.sacado_bairro = ""
-        self.sacado_cep = ""
+    def __init__(self, **kwargs):
+        self.aceite = getattr(kwargs, 'aceite', "N")
+        self.agencia_cedente = getattr(kwargs, 'agencia_cedente', "")
+        self.carteira = getattr(kwargs, 'carteira', "")
+        self.cedente = getattr(kwargs, 'cedente', "")
+        self.cedente_cidade = getattr(kwargs, 'cedente_cidade', "")
+        self.cedente_uf = getattr(kwargs, 'cedente_uf', "")
+        self.cedente_logradouro = getattr(kwargs, 'cedente_logradouro', "")
+        self.cedente_bairro = getattr(kwargs, 'cedente_bairro', "")
+        self.cedente_cep = getattr(kwargs, 'cedente_cep', "")
+        self.cedente_documento = getattr(kwargs, 'cedente_documento', "")
+        self.codigo_banco = getattr(kwargs, 'codigo_banco', "")
+        self.conta_cedente = getattr(kwargs, 'conta_cedente', "")
+        self.data_documento = getattr(kwargs, 'data_documento', "")
+        self.data_processamento = getattr(kwargs, 'data_processamento',
+                                          datetime.date.today())
+        self.data_vencimento = getattr(kwargs, 'data_vencimento', "")
+        self.especie = getattr(kwargs, 'especie', "R$")
+        self.especie_documento = getattr(kwargs, 'especie_documento', "")
+        self.local_pagamento = getattr(kwargs, 'local_pagamento',
+            u"Pagável em qualquer banco até o vencimento")
+        self.logo_image = getattr(kwargs, 'logo_image', "")
+        self.moeda = getattr(kwargs, 'moeda', "9")
+        self.numero_documento = getattr(kwargs, 'numero_do_documento', "")
+        self.quantidade = getattr(kwargs, 'quantidade', "")
+        self.sacado_nome = getattr(kwargs, 'sacado_nome', "")
+        self.sacado_documento = getattr(kwargs, 'sacado_documento', "")
+        self.sacado_cidade = getattr(kwargs, 'sacado_cidade', "")
+        self.sacado_uf = getattr(kwargs, 'sacado_uf', "")
+        self.sacado_endereco = getattr(kwargs, 'sacado_endereco', "")
+        self.sacado_bairro = getattr(kwargs, 'sacado_bairro', "")
+        self.sacado_cep = getattr(kwargs, 'sacado_cep', "")
 
         self._cedente_endereco = None
         self._demonstrativo = []
@@ -144,7 +201,9 @@ class BoletoData(object):
     def calculate_dv_barcode(self, line):
         """Calcula DV para código de barras
 
-        Geralmente é implementado pela classe derivada
+        Está é uma implementação genérica mas pode ser reimplementada pela
+        classe derivada dependendo das definições de cada bancoGeralmente
+        é implementado pela classe derivada.
 
         """
         resto2 = self.modulo11(line, 9, 1)
@@ -156,9 +215,10 @@ class BoletoData(object):
 
     def format_nosso_numero(self):
         """
-            Formata Nosso Número
-
-            Geralmente é implementado pela classe derivada
+            Geralmente é implementado pela classe derivada. Usada para formatar
+            como o noso número será impresso no boleto. Às vezes é o mesmo
+            do :prop:`numero_do_documento` e às vezes contém outros campos
+            juntos.
         """
         return self.nosso_numero
 
@@ -200,7 +260,7 @@ class BoletoData(object):
                 u'Linha de endereço possui mais que 80 caracteres')
         self._cedente_endereco = endereco
     cedente_endereco = property(_cedente_endereco_get, _cedente_endereco_set)
-    """Endereço do cedento com no máximo 80 caracteres"""
+    """Endereço do Cedente com no máximo 80 caracteres"""
 
     def _get_valor(self):
         if self._valor is not None:
@@ -357,9 +417,6 @@ class BoletoData(object):
         5        Digito verificador do Código de Barras
         6 a 19   Valor (12 inteiros e 2 decimais)
         20 a 44  Campo Livre definido por cada banco
-
-        :return: linha digitável
-        :rtype: str
 
         """
         linha = self.barcode
