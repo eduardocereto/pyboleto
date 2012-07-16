@@ -37,7 +37,6 @@ class BoletoBradesco(BoletoData):
             dv = digito
         return dv
 
-
     @property
     def campo_livre(self):
         content = "%4s%2s%11s%7s%1s" % (self.agencia_cedente.split('-')[0],

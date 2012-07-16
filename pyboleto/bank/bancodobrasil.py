@@ -33,14 +33,15 @@ class BoletoBB(BoletoData):
         self.format_nnumero = format_nnumero
 
     def format_nosso_numero(self):
-        return "%s-%s" % (
+        return "%s%s-%s" % (
+            self.convenio,
             self.nosso_numero,
             self.dv_nosso_numero
         )
 
     # Nosso numero (sem dv) sao 11 digitos
     def _get_nosso_numero(self):
-        return self.convenio + self._nosso_numero
+        return self._nosso_numero
 
     def _set_nosso_numero(self, val):
         val = str(val)
@@ -75,21 +76,24 @@ class BoletoBB(BoletoData):
 
     @property
     def dv_nosso_numero(self):
-        return self.modulo11(self.nosso_numero)
+        return self.modulo11(self.convenio + self.nosso_numero)
 
     @property
     def campo_livre(self):
         if self.format_convenio in (7, 8):
-            content = "000000%s%s" % (self.nosso_numero,
-                                      self.carteira)
+            content = "000000%s%s%s" % (self.convenio,
+                                         self.nosso_numero,
+                                         self.carteira)
         elif self.format_convenio == 6:
             if self.format_nnumero == 1:
-                content = "%s%s%s%s" % (self.nosso_numero,
-                                        self.agencia_cedente,
-                                        self.conta_cedente,
-                                        self.carteira)
+                content = "%s%s%s%s%s" % (self.convenio,
+                                           self.nosso_numero,
+                                           self.agencia_cedente,
+                                           self.conta_cedente,
+                                           self.carteira)
             if self.format_nnumero == 2:
-                content = "%s%2s" % (self.nosso_numero,
-                                     '21'  # numero do serviço
-                                     )
+                content = "%2s%s%2s" % (self.convenio,
+                                        self.nosso_numero,
+                                        '21'  # numero do serviço
+                                        )
         return content
