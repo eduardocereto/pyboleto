@@ -265,6 +265,9 @@ class BoletoData(object):
         return self._demonstrativo
 
     def _demonstrativo_set(self, list_dem):
+        if isinstance(list_dem, basestring):
+            list_dem = list_dem.splitlines()
+
         if len(list_dem) > 12:
             raise BoletoException(
                 u'Número de linhas de demonstrativo maior que 12')
