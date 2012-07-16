@@ -44,4 +44,4 @@ Agências da Caixa"
         return content
 
     def format_nosso_numero(self):
-        return self._nosso_numero + '-' + str(self.dv_nosso_numero)
+        return self.nosso_numero + '-' + str(self.dv_nosso_numero)
