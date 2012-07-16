@@ -37,9 +37,6 @@ class BoletoBradesco(BoletoData):
             dv = digito
         return dv
 
-    agencia_cedente = custom_property('agencia_cedente', 4)
-
-    conta_cedente = custom_property('conta_cedente', 7)
 
     @property
     def campo_livre(self):

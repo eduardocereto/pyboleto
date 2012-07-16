@@ -5,7 +5,8 @@ from ..data import BoletoData, custom_property
 
 
 class BoletoItau(BoletoData):
-    '''
+    '''Implementa Boleto Itaú
+
         Gera Dados necessários para criação de boleto para o banco Itau
         Todas as carteiras com excessão das que utilizam 15 dígitos: (106,107,
         195,196,198)
