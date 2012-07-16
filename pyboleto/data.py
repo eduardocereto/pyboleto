@@ -20,6 +20,9 @@ class BoletoException(Exception):
         Exception.__init__(self, message)
 
 
+_EPOCH = datetime.date(1997, 10, 7)
+
+
 def custom_property(name, num_length):
     """Função para criar propriedades nos boletos
 
@@ -128,6 +131,9 @@ class BoletoData(object):
     """
 
     def __init__(self, **kwargs):
+        # FIXME: valor_documento should be a Decimal and only allow 2 decimals,
+        #        otherwise the printed value might diffent from the value in
+        #        the barcode.
         self.aceite = kwargs.pop('aceite', "N")
         self.agencia_cedente = kwargs.pop('agencia_cedente', "")
         self.carteira = kwargs.pop('carteira', "")
@@ -170,22 +176,54 @@ class BoletoData(object):
 
     @property
     def barcode(self):
-        num = "%s%1s%1s%4s%10s%24s" % (
-            self.codigo_banco,
-            self.moeda,
-            'X',
-            self.fator_vencimento,
-            self.formata_valor(self.valor_documento, 10),
-            self.campo_livre
-        )
+        """Essa função sempre é a mesma para todos os bancos. Então basta
+        implementar o método :func:`barcode` para o pyboleto calcular a linha
+        digitável.
 
-        dv = self.calculate_dv_barcode(num.replace('X', '', 1))
+        Posição  #   Conteúdo
+        01 a 03  03  Número do banco
+        04       01  Código da Moeda - 9 para Real
+        05       01  Digito verificador do Código de Barras
+        06 a 09  04  Data de vencimento em dias partis de 07/10/1997
+        10 a 19  10  Valor do boleto (8 inteiros e 2 decimais)
+        20 a 44  25  Campo Livre definido por cada banco
+        Total    44
+        """
 
-        num = num.replace('X', str(dv), 1)
-        if len(num) != 44:
+        for attr, length, data_type in [
+            ('codigo_banco', 3, str),
+            ('moeda', 1, str),
+            ('data_vencimento', None, datetime.date),
+            ('valor_documento', -1, str),
+            ('campo_livre', 25, str),
+            ]:
+            value = getattr(self, attr)
+            if not isinstance(value, data_type):
+                raise TypeError("%s.%s must be a %s, got %r (type %s)" % (
+                    self.__class__.__name__, attr, data_type.__name__, value,
+                    type(value).__name__))
+            if data_type == str and length != -1 and len(value) != length:
+                raise ValueError(
+                    "%s.%s must have a length of %d, not %r (len: %d)" % (
+                    self.__class__.__name__, attr, length, value, len(value)))
+
+        due_date_days = (self.data_vencimento - _EPOCH).days
+        if not (9999 >= due_date_days >= 0):
+            raise TypeError(
+                "Invalid date, must be between 1997/07/01 and "
+                "2024/11/15")
+        num = "%s%1s%04d%010d%24s" % (self.codigo_banco,
+                                      self.moeda,
+                                      due_date_days,
+                                      Decimal(self.valor_documento) * 100,
+                                      self.campo_livre)
+        dv = self.calculate_dv_barcode(num)
+
+        barcode = num[:4] + str(dv) + num[4:]
+        if len(barcode) != 44:
             raise BoletoException(
-                'The barcode must have 44 caracteres, found %d' % len(num))
-        return num
+                'The barcode must have 44 characteres, found %d' % len(barcode))
+        return barcode
 
     @property
     def dv_nosso_numero(self):
@@ -380,19 +418,6 @@ class BoletoData(object):
     """
 
     @property
-    def fator_vencimento(self):
-        """Usado na geração do barcode
-
-            :return: numero de dias entre 07/10/1997 e :attr:`data_vencimento`
-            :rtype: int
-
-        """
-        date_ref = datetime.date(2000, 7, 3)  # Fator = 1000
-        delta = self.data_vencimento - date_ref
-        fator = delta.days + 1000
-        return fator
-
-    @property
     def agencia_conta_cedente(self):
         return "%s/%s" % (self.agencia_cedente, self.conta_cedente)
 
@@ -407,18 +432,6 @@ class BoletoData(object):
 
         Esta é a linha que o cliente pode utilizar para digitar se o código
         de barras não estiver legível.
-
-        Essa função sempre é a mesma para todos os bancos. Então basta
-        implementar o método :func:`barcode` para o pyboleto calcular a linha
-        digitável.
-
-        Posição    Conteúdo
-        1 a 3    Número do banco
-        4        Código da Moeda - 9 para Real
-        5        Digito verificador do Código de Barras
-        6 a 19   Valor (12 inteiros e 2 decimais)
-        20 a 44  Campo Livre definido por cada banco
-
         """
         linha = self.barcode
         if not linha:
@@ -434,15 +447,10 @@ class BoletoData(object):
                          linha[4],
                          linha[5:19]])
 
-    def formata_valor(self, nfloat, tamanho):
-        txt = nfloat.replace('.', '')
-        if len(txt) > tamanho:
-            raise BoletoException(
-                u'Tamanho em caracteres do número está maior que o permitido')
-        return txt.zfill(tamanho)
-
     @staticmethod
     def modulo10(num):
+        if not isinstance(num, basestring):
+            raise TypeError
         soma = 0
         peso = 2
         for c in reversed(num):
@@ -466,9 +474,11 @@ class BoletoData(object):
 
     @staticmethod
     def modulo11(num, base=9, r=0):
+        if not isinstance(num, basestring):
+            raise TypeError
         soma = 0
         fator = 2
-        for c in reversed(str(num)):
+        for c in reversed(num):
             soma += int(c) * fator
             if fator == base:
                 fator = 1
