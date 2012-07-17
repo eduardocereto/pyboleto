@@ -18,8 +18,8 @@ class TestBancoHsbc(BoletoTestCase):
             d.data_documento = datetime.date(2009, 5, 25)
             d.data_processamento = datetime.date(2009, 5, 25)
             d.valor_documento = 35.00
-            d.nosso_numero = '0' + str(100010103120 + i)
-            d.numero_documento = '0' + str(100010103120 + i)
+            d.nosso_numero = str(100010103120 + i)
+            d.numero_documento = str(100010103120 + i)
             self.dados.append(d)
 
     def test_linha_digitavel(self):
