@@ -23,7 +23,7 @@ class BoletoException(Exception):
 _EPOCH = datetime.date(1997, 10, 7)
 
 
-def custom_property(name, num_length):
+class custom_property(object):
     """Função para criar propriedades nos boletos
 
     Cria propriedades com getter, setter e delattr.
@@ -39,32 +39,30 @@ def custom_property(name, num_length):
 
     :param name: O nome da propriedade.
     :type name: string
-    :param num_length: Tamanho para preencher com '0' na frente.
-    :type num_length: integer
+    :param length: Tamanho para preencher com '0' na frente.
+    :type length: integer
 
     """
-    internal_attr = '_%s' % name
+    def __init__(self, name, length):
+        self.name = name
+        self.length = length
+        self._instance_state = {}
 
-    def _set_attr(self, val):
-        val = val.split('-')
-
-        if len(val) == 1:
-            val[0] = str(val[0]).zfill(num_length)
-            setattr(self, internal_attr, ''.join(val))
-
-        elif len(val) == 2:
-            val[0] = str(val[0]).zfill(num_length)
-            setattr(self, internal_attr, '-'.join(val))
-
+    def __set__(self, instance, value):
+        if instance is None:
+            raise TypeError("can't modify custom class properties")
+        if '-' in value:
+            values = value.split('-')
+            values[0] = values[0].zfill(self.length)
+            value = '-'.join(values)
         else:
-            raise BoletoException('Wrong value format')
+            value = value.zfill(self.length)
+        self._instance_state[instance] = value
 
-    return property(
-        lambda self: getattr(self, internal_attr),
-        _set_attr,
-        lambda self: delattr(self, internal_attr),
-        name
-    )
+    def __get__(self, instance, class_):
+        if instance is None:
+            return self
+        return self._instance_state.get(instance, '0' * self.length)
 
 
 class BoletoData(object):
