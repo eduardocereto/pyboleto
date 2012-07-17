@@ -165,16 +165,12 @@ class BoletoTestCase(unittest.TestCase):
     @skipIf(sys.version_info >= (3,),
                      "Reportlab unavailable on this version")
     def test_pdf_triplo_rendering(self):
-        bank = type(self.dados).__name__
+        bank = type(self.dados[0]).__name__
         filename = tempfile.mktemp(prefix="pyboleto-triplo-",
                                    suffix=".pdf")
         boleto = BoletoPDF(filename, True)
-        for i in range(3):
-            self.dados.nosso_numero = str(int(
-                self.dados.nosso_numero) + 1)
-            self.dados.numero_documento = str(int(
-                self.dados.numero_documento) + 1)
-            boleto.drawBoleto(self.dados)
+        for d in self.dados:
+            boleto.drawBoleto(d)
             boleto.nextPage()
         boleto.save()
 
@@ -190,11 +186,12 @@ class BoletoTestCase(unittest.TestCase):
     @skipIf(sys.version_info >= (3,),
                      "Reportlab unavailable on this version")
     def test_pdf_rendering(self):
-        bank = type(self.dados).__name__
+        dados = self.dados[0]
+        bank = type(dados).__name__
         filename = tempfile.mktemp(prefix="pyboleto-",
                                    suffix=".pdf")
         boleto = BoletoPDF(filename, True)
-        boleto.drawBoleto(self.dados)
+        boleto.drawBoleto(dados)
         boleto.nextPage()
         boleto.save()
 
