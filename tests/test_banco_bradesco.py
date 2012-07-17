@@ -19,8 +19,8 @@ class TestBancoBradesco(BoletoTestCase):
             d.data_documento = datetime.date(2011, 1, 18)
             d.data_processamento = datetime.date(2011, 1, 18)
             d.valor_documento = 8280.00
-            d.nosso_numero = '2125525'
-            d.numero_documento = '2125525'
+            d.nosso_numero = str(2125525 + i)
+            d.numero_documento = str(2125525 + i)
             self.dados.append(d)
 
     def test_linha_digitavel(self):

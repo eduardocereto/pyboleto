@@ -18,8 +18,8 @@ class TestBancoSantander(BoletoTestCase):
             d.data_documento = datetime.date(2012, 7, 17)
             d.data_processamento = datetime.date(2012, 7, 17)
             d.valor_documento = 2952.95
-            d.nosso_numero = '1234567'
-            d.numero_documento = '12345'
+            d.nosso_numero = str(1234567 + i)
+            d.numero_documento = str(12345 + i)
             d.ios = '0'
             self.dados.append(d)
 

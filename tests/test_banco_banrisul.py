@@ -19,8 +19,8 @@ class TestBancoBanrisul(BoletoTestCase):
             d.agencia_cedente = '1102'
             d.conta_cedente = '9000150'
             d.convenio = 7777777
-            d.nosso_numero = '22832563'
-            d.numero_documento = '22832563'
+            d.nosso_numero = str(22832563 + i)
+            d.numero_documento = str(22832563 + i)
             self.dados.append(d)
 
     def test_linha_digitavel(self):

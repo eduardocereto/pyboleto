@@ -19,8 +19,8 @@ class TestBancoItau(BoletoTestCase):
             d.data_documento = datetime.date(2009, 10, 19)
             d.data_processamento = datetime.date(2009, 10, 19)
             d.valor_documento = 29.80
-            d.nosso_numero = '157'
-            d.numero_documento = '456'
+            d.nosso_numero = str(157 + i)
+            d.numero_documento = str(456 + i)
             self.dados.append(d)
 
     def test_linha_digitavel(self):

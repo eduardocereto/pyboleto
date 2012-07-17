@@ -20,8 +20,8 @@ class TestBancoBrasil(BoletoTestCase):
             d.agencia = '9999'
             d.conta = '99999'
             d.convenio = '7777777'
-            d.nosso_numero = '87654'
-            d.numero_documento = '87654'
+            d.nosso_numero = str(87654 + i)
+            d.numero_documento = str(87654 + i)
             self.dados.append(d)
 
     def test_linha_digitavel(self):

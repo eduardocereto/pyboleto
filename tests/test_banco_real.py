@@ -19,8 +19,8 @@ class TestBancoReal(BoletoTestCase):
             d.data_documento = datetime.date(2011, 1, 18)
             d.data_processamento = datetime.date(2011, 1, 18)
             d.valor_documento = 355.00
-            d.nosso_numero = '123'
-            d.numero_documento = '123'
+            d.nosso_numero = str(123 + i)
+            d.numero_documento = str(123 + i)
             self.dados.append(d)
 
     def test_linha_digitavel(self):
