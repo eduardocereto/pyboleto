@@ -20,12 +20,13 @@ def suite():
     modules_to_test = [
         'tests.test_banco_banrisul',
         'tests.test_banco_bradesco',
+        'tests.test_banco_caixa',
         'tests.test_banco_do_brasil',
         'tests.test_banco_hsbc',
         'tests.test_banco_hsbc_com_registro',
-        'tests.test_banco_caixa',
         'tests.test_banco_itau',
         'tests.test_banco_real',
+        'tests.test_banco_santander',
         'tests.test_pep8',
         'tests.test_pyflakes',
     ]

@@ -65,3 +65,11 @@ bank Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`santander` Module
+------------------
+
+.. automodule:: pyboleto.bank.santander
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

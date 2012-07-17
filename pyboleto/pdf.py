@@ -855,7 +855,7 @@ class BoletoPDF(object):
     def _codigoBarraI25(self, num, x, y):
         """Imprime Código de barras otimizado para boletos
 
-        O código de barras é tomizado para que o comprimeto seja sempre o
+        O código de barras é otmizado para que o comprimeto seja sempre o
         estipulado pela febraban de 103mm.
 
         """

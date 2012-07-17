@@ -1,0 +1,225 @@
+<pdf2xml>
+  <page height="892" left="0" number="1" position="absolute" top="0" width="1262">
+    <fontspec color="#000000" family="Helvetica" id="0" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="1" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="2" size="25" />
+    <fontspec color="#000000" family="Helvetica" id="3" size="15" />
+    <text font="0" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
+    <text font="0" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
+    <text font="0" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
+    <text font="0" height="8" left="38" top="713" width="31">Sacado</text>
+    <text font="1" height="12" left="102" top="714" width="86"> - CPF/CNPJ: </text>
+    <text font="1" height="12" left="102" top="744" width="36"> -  -  - </text>
+    <text font="0" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
+    <text font="0" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
+    <text font="0" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
+    <text font="0" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
+    <text font="0" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
+    <text font="0" height="8" left="38" top="575" width="42">Instru&#231;&#245;es</text>
+    <text font="0" height="8" left="38" top="547" width="56">Uso do banco</text>
+    <text font="0" height="8" left="169" top="547" width="32">Carteira</text>
+    <text font="0" height="8" left="254" top="547" width="32">Esp&#233;cie</text>
+    <text font="0" height="8" left="339" top="547" width="47">Quantidade</text>
+    <text font="0" height="8" left="509" top="547" width="21">Valor</text>
+    <text font="0" height="8" left="658" top="547" width="82">(=) Valor documento</text>
+    <text font="1" height="12" left="169" top="558" width="23">102</text>
+    <text font="1" height="12" left="254" top="558" width="17">R$</text>
+    <text font="1" height="12" left="791" top="558" width="49">2952,95</text>
+    <text font="0" height="8" left="38" top="520" width="79">Data do documento</text>
+    <text font="0" height="8" left="169" top="520" width="69">N. do documento</text>
+    <text font="0" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
+    <text font="0" height="8" left="424" top="520" width="25">Aceite</text>
+    <text font="0" height="8" left="509" top="520" width="83">Data processamento</text>
+    <text font="0" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
+    <text font="1" height="12" left="38" top="530" width="68">17/07/2012</text>
+    <text font="1" height="12" left="169" top="530" width="38">12346</text>
+    <text font="1" height="12" left="424" top="530" width="10">N</text>
+    <text font="1" height="12" left="509" top="530" width="68">17/07/2012</text>
+    <text font="1" height="12" left="738" top="530" width="102">000001234568-7</text>
+    <text font="0" height="8" left="38" top="492" width="34">Cedente</text>
+    <text font="0" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
+    <text font="1" height="12" left="754" top="503" width="86">1333/0707077</text>
+    <text font="0" height="8" left="38" top="464" width="82">Local de pagamento</text>
+    <text font="0" height="8" left="658" top="464" width="48">Vencimento</text>
+    <text font="1" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
+    <text font="1" height="12" left="773" top="475" width="68">22/07/2012</text>
+    <text font="2" height="25" left="216" top="435" width="69">
+      <b>033-7</b>
+    </text>
+    <text font="3" height="16" left="362" top="442" width="484">
+      <b>03399.07073 07700.000123 34568.701022 1 54020000295295</b>
+    </text>
+    <text font="2" height="25" left="216" top="-224" width="69">
+      <b>033-7</b>
+    </text>
+    <text font="3" height="16" left="697" top="-217" width="150">
+      <b>Recibo do Sacado</b>
+    </text>
+    <text font="0" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
+    <text font="0" height="8" left="38" top="-196" width="34">Cedente</text>
+    <text font="0" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
+    <text font="0" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
+    <text font="0" height="8" left="722" top="-196" width="48">Vencimento</text>
+    <text font="0" height="8" left="38" top="-168" width="31">Sacado</text>
+    <text font="0" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
+    <text font="0" height="8" left="573" top="-168" width="69">N. do documento</text>
+    <text font="0" height="8" left="722" top="-168" width="68">Data Documento</text>
+    <text font="0" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
+    <text font="0" height="8" left="722" top="-141" width="70">Valor Documento</text>
+    <text font="0" height="8" left="38" top="-13" width="58">Demonstrativo</text>
+    <text font="1" height="12" left="403" top="-185" width="86">1333/0707077</text>
+    <text font="1" height="12" left="722" top="-185" width="68">22/07/2012</text>
+    <text font="1" height="12" left="41" top="-157" width="86"> - CPF/CNPJ: </text>
+    <text font="1" height="12" left="403" top="-157" width="102">000001234568-7</text>
+    <text font="1" height="12" left="573" top="-157" width="38">12346</text>
+    <text font="1" height="12" left="722" top="-157" width="68">17/07/2012</text>
+    <text font="1" height="12" left="41" top="-130" width="48"> -  -  -  - </text>
+    <text font="1" height="12" left="722" top="-130" width="49">2952,95</text>
+  </page>
+  <page height="892" left="0" number="2" position="absolute" top="0" width="1262">
+    <text font="0" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
+    <text font="0" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
+    <text font="0" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
+    <text font="0" height="8" left="38" top="713" width="31">Sacado</text>
+    <text font="1" height="12" left="102" top="714" width="86"> - CPF/CNPJ: </text>
+    <text font="1" height="12" left="102" top="744" width="36"> -  -  - </text>
+    <text font="0" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
+    <text font="0" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
+    <text font="0" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
+    <text font="0" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
+    <text font="0" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
+    <text font="0" height="8" left="38" top="575" width="42">Instru&#231;&#245;es</text>
+    <text font="0" height="8" left="38" top="547" width="56">Uso do banco</text>
+    <text font="0" height="8" left="169" top="547" width="32">Carteira</text>
+    <text font="0" height="8" left="254" top="547" width="32">Esp&#233;cie</text>
+    <text font="0" height="8" left="339" top="547" width="47">Quantidade</text>
+    <text font="0" height="8" left="509" top="547" width="21">Valor</text>
+    <text font="0" height="8" left="658" top="547" width="82">(=) Valor documento</text>
+    <text font="1" height="12" left="169" top="558" width="23">102</text>
+    <text font="1" height="12" left="254" top="558" width="17">R$</text>
+    <text font="1" height="12" left="791" top="558" width="49">2952,95</text>
+    <text font="0" height="8" left="38" top="520" width="79">Data do documento</text>
+    <text font="0" height="8" left="169" top="520" width="69">N. do documento</text>
+    <text font="0" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
+    <text font="0" height="8" left="424" top="520" width="25">Aceite</text>
+    <text font="0" height="8" left="509" top="520" width="83">Data processamento</text>
+    <text font="0" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
+    <text font="1" height="12" left="38" top="530" width="68">17/07/2012</text>
+    <text font="1" height="12" left="169" top="530" width="38">12347</text>
+    <text font="1" height="12" left="424" top="530" width="10">N</text>
+    <text font="1" height="12" left="509" top="530" width="68">17/07/2012</text>
+    <text font="1" height="12" left="738" top="530" width="102">000001234569-5</text>
+    <text font="0" height="8" left="38" top="492" width="34">Cedente</text>
+    <text font="0" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
+    <text font="1" height="12" left="754" top="503" width="86">1333/0707077</text>
+    <text font="0" height="8" left="38" top="464" width="82">Local de pagamento</text>
+    <text font="0" height="8" left="658" top="464" width="48">Vencimento</text>
+    <text font="1" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
+    <text font="1" height="12" left="773" top="475" width="68">22/07/2012</text>
+    <text font="2" height="25" left="216" top="435" width="69">
+      <b>033-7</b>
+    </text>
+    <text font="3" height="16" left="362" top="442" width="484">
+      <b>03399.07073 07700.000123 34569.501025 4 54020000295295</b>
+    </text>
+    <text font="2" height="25" left="216" top="-224" width="69">
+      <b>033-7</b>
+    </text>
+    <text font="3" height="16" left="697" top="-217" width="150">
+      <b>Recibo do Sacado</b>
+    </text>
+    <text font="0" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
+    <text font="0" height="8" left="38" top="-196" width="34">Cedente</text>
+    <text font="0" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
+    <text font="0" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
+    <text font="0" height="8" left="722" top="-196" width="48">Vencimento</text>
+    <text font="0" height="8" left="38" top="-168" width="31">Sacado</text>
+    <text font="0" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
+    <text font="0" height="8" left="573" top="-168" width="69">N. do documento</text>
+    <text font="0" height="8" left="722" top="-168" width="68">Data Documento</text>
+    <text font="0" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
+    <text font="0" height="8" left="722" top="-141" width="70">Valor Documento</text>
+    <text font="0" height="8" left="38" top="-13" width="58">Demonstrativo</text>
+    <text font="1" height="12" left="403" top="-185" width="86">1333/0707077</text>
+    <text font="1" height="12" left="722" top="-185" width="68">22/07/2012</text>
+    <text font="1" height="12" left="41" top="-157" width="86"> - CPF/CNPJ: </text>
+    <text font="1" height="12" left="403" top="-157" width="102">000001234569-5</text>
+    <text font="1" height="12" left="573" top="-157" width="38">12347</text>
+    <text font="1" height="12" left="722" top="-157" width="68">17/07/2012</text>
+    <text font="1" height="12" left="41" top="-130" width="48"> -  -  -  - </text>
+    <text font="1" height="12" left="722" top="-130" width="49">2952,95</text>
+  </page>
+  <page height="892" left="0" number="3" position="absolute" top="0" width="1262">
+    <text font="0" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
+    <text font="0" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
+    <text font="0" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
+    <text font="0" height="8" left="38" top="713" width="31">Sacado</text>
+    <text font="1" height="12" left="102" top="714" width="86"> - CPF/CNPJ: </text>
+    <text font="1" height="12" left="102" top="744" width="36"> -  -  - </text>
+    <text font="0" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
+    <text font="0" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
+    <text font="0" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
+    <text font="0" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
+    <text font="0" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
+    <text font="0" height="8" left="38" top="575" width="42">Instru&#231;&#245;es</text>
+    <text font="0" height="8" left="38" top="547" width="56">Uso do banco</text>
+    <text font="0" height="8" left="169" top="547" width="32">Carteira</text>
+    <text font="0" height="8" left="254" top="547" width="32">Esp&#233;cie</text>
+    <text font="0" height="8" left="339" top="547" width="47">Quantidade</text>
+    <text font="0" height="8" left="509" top="547" width="21">Valor</text>
+    <text font="0" height="8" left="658" top="547" width="82">(=) Valor documento</text>
+    <text font="1" height="12" left="169" top="558" width="23">102</text>
+    <text font="1" height="12" left="254" top="558" width="17">R$</text>
+    <text font="1" height="12" left="791" top="558" width="49">2952,95</text>
+    <text font="0" height="8" left="38" top="520" width="79">Data do documento</text>
+    <text font="0" height="8" left="169" top="520" width="69">N. do documento</text>
+    <text font="0" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
+    <text font="0" height="8" left="424" top="520" width="25">Aceite</text>
+    <text font="0" height="8" left="509" top="520" width="83">Data processamento</text>
+    <text font="0" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
+    <text font="1" height="12" left="38" top="530" width="68">17/07/2012</text>
+    <text font="1" height="12" left="169" top="530" width="38">12348</text>
+    <text font="1" height="12" left="424" top="530" width="10">N</text>
+    <text font="1" height="12" left="509" top="530" width="68">17/07/2012</text>
+    <text font="1" height="12" left="738" top="530" width="102">000001234570-9</text>
+    <text font="0" height="8" left="38" top="492" width="34">Cedente</text>
+    <text font="0" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
+    <text font="1" height="12" left="754" top="503" width="86">1333/0707077</text>
+    <text font="0" height="8" left="38" top="464" width="82">Local de pagamento</text>
+    <text font="0" height="8" left="658" top="464" width="48">Vencimento</text>
+    <text font="1" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
+    <text font="1" height="12" left="773" top="475" width="68">22/07/2012</text>
+    <text font="2" height="25" left="216" top="435" width="69">
+      <b>033-7</b>
+    </text>
+    <text font="3" height="16" left="362" top="442" width="484">
+      <b>03399.07073 07700.000123 34570.901024 2 54020000295295</b>
+    </text>
+    <text font="2" height="25" left="216" top="-224" width="69">
+      <b>033-7</b>
+    </text>
+    <text font="3" height="16" left="697" top="-217" width="150">
+      <b>Recibo do Sacado</b>
+    </text>
+    <text font="0" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
+    <text font="0" height="8" left="38" top="-196" width="34">Cedente</text>
+    <text font="0" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
+    <text font="0" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
+    <text font="0" height="8" left="722" top="-196" width="48">Vencimento</text>
+    <text font="0" height="8" left="38" top="-168" width="31">Sacado</text>
+    <text font="0" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
+    <text font="0" height="8" left="573" top="-168" width="69">N. do documento</text>
+    <text font="0" height="8" left="722" top="-168" width="68">Data Documento</text>
+    <text font="0" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
+    <text font="0" height="8" left="722" top="-141" width="70">Valor Documento</text>
+    <text font="0" height="8" left="38" top="-13" width="58">Demonstrativo</text>
+    <text font="1" height="12" left="403" top="-185" width="86">1333/0707077</text>
+    <text font="1" height="12" left="722" top="-185" width="68">22/07/2012</text>
+    <text font="1" height="12" left="41" top="-157" width="86"> - CPF/CNPJ: </text>
+    <text font="1" height="12" left="403" top="-157" width="102">000001234570-9</text>
+    <text font="1" height="12" left="573" top="-157" width="38">12348</text>
+    <text font="1" height="12" left="722" top="-157" width="68">17/07/2012</text>
+    <text font="1" height="12" left="41" top="-130" width="48"> -  -  -  - </text>
+    <text font="1" height="12" left="722" top="-130" width="49">2952,95</text>
+  </page>
+</pdf2xml>

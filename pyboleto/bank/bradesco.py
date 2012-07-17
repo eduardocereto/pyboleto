@@ -1,4 +1,14 @@
 # -*- coding: utf-8
+"""
+    pyboleto.bank.bradesco
+    ~~~~~~~~~~~~~~~~~~~~~~
+
+    Lógica para boletos do banco Bradesco.
+
+    :copyright: © 2011 - 2012 by Eduardo Cereto Carvalho
+    :license: BSD, see LICENSE for more details.
+
+"""
 from ..data import BoletoData, custom_property
 
 
