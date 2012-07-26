@@ -37,7 +37,7 @@ class BoletoHTML(object):
         self.fileDescr = file_descr # Posso atribuir um file handler também aqui
 
         if landscape:
-            style = '' # Tratar landscape
+            raise NotImplementedError('Em desenvolvimento')
         else:
             style = """html,body{{margin:0;padding:0}}
             hr{{border:1px dashed #000}}
