@@ -19,11 +19,18 @@ from .compat import skipIf
 
 try:
     from pyboleto.pdf import BoletoPDF
+    from pyboleto.html import BoletoHTML
 except ImportError as err:
     if sys.version_info >= (3,):
         pass  # Reportlab doesn;t support Python3
     else:
         raise(err)
+
+
+# From django.utils.html
+def strip_spaces_between_tags(value):
+    """Returns the given HTML with spaces between tags removed."""
+    return re.sub(r'>\s+<', '><', value)
 
 
 def list_recursively(directory, pattern):
@@ -78,6 +85,7 @@ def diff_pdf_htmls(original_filename, filename):
             data = re.sub(r'name="date" content="(.*)"',
                           r'name="date" content="%%DATE%%"', data)
             data = re.sub(r'<pdf2xml[^>]+>', r'<pdf2xml>', data)
+            data = strip_spaces_between_tags(data)
         with open(fname, 'w') as f:
             f.write(data)
 
@@ -155,9 +163,16 @@ def pdftoxml(filename, output):
 
 
 class BoletoTestCase(unittest.TestCase):
-    def _get_expected(self, bank, generated):
-        fname = os.path.join(os.path.dirname(pyboleto.__file__),
-                             "..", "tests", "xml", bank + '-expected.xml')
+    def _get_expected(self, bank, generated, renderer='PDF'):
+        if renderer == 'PDF':
+            fname = os.path.join(os.path.dirname(pyboleto.__file__),
+                                 "..", "tests", "xml", bank + '-expected.xml')
+        elif renderer == 'HTML':
+            fname = os.path.join(os.path.dirname(pyboleto.__file__),
+                                 "..", "tests", "html", bank + '-expected.html')
+        else:
+            raise ValueError('%s é um renderer invalido')
+        
         if not os.path.exists(fname):
             open(fname, 'w').write(open(generated).read())
         return fname
@@ -203,3 +218,20 @@ class BoletoTestCase(unittest.TestCase):
             self.fail("Error while checking xml for %r:\n%s" % (
                 bank, diff))
         os.unlink(generated)
+
+    def test_html_rendering(self):
+        dados = self.dados[0]
+        bank = type(dados).__name__
+        filename = tempfile.mktemp(prefix="pyboleto-",
+                                   suffix=".html")
+        boleto = BoletoHTML(filename)
+        boleto.drawBoleto(dados)
+        boleto.nextPage()
+        boleto.save()
+
+        expected = self._get_expected(bank, filename, 'HTML')
+        diff = diff_pdf_htmls(expected, filename)
+        if diff:
+            self.fail("Error while checking html for %r:\n%s" % (
+                bank, diff))
+        os.unlink(filename)
