@@ -11,6 +11,20 @@
 """
 import os
 import string
+from itertools import izip_longest, chain
+
+DIGITS = [
+    ['n', 'n', 'w', 'w', 'n'],
+    ['w', 'n', 'n', 'n', 'w'],
+    ['n', 'w', 'n', 'n', 'w'],
+    ['w', 'w', 'n', 'n', 'n'],
+    ['n', 'n', 'w', 'n', 'w'],
+    ['w', 'n', 'w', 'n', 'n'],
+    ['n', 'w', 'w', 'n', 'n'],
+    ['n', 'n', 'n', 'w', 'w'],
+    ['w', 'n', 'n', 'w', 'n'],
+    ['n', 'w', 'n', 'w', 'n'],
+]
 
 class BoletoHTML(object):
     """Geração do Boleto em HTML
@@ -164,6 +178,9 @@ class BoletoHTML(object):
         for linha_sacado in boletoDados.sacado:
             tpl_data['sacado_info'] += '<p>{0}</p>'.format(linha_sacado)
 
+        # Código de barras
+        tpl_data['barcode'] = self._codigoBarraI25(boletoDados.barcode)
+
         self.html += tpl.substitute(tpl_data)
 
     def drawBoleto(self, boletoDados):
@@ -201,3 +218,30 @@ class BoletoHTML(object):
         else:
             txt = ""
         return txt
+
+    def _codigoBarraI25(self, code):
+        """Imprime Código de barras otimizado para boletos
+        http://en.wikipedia.org/wiki/Interleaved_2_of_5
+        """
+        digits = ['n', 'n s', 'n', 'n s']
+
+        if len(code) % 2 != 0:
+            code = '0' + code
+
+        for digt1, digt2 in self._grouper(2, code):
+            digt1_repr = DIGITS[int(digt1)]
+            digt2_repr = map(lambda x: x + ' s', DIGITS[int(digt2)])
+            digits.extend(chain(*zip(digt1_repr, digt2_repr)))
+
+        digits.extend(['w', 'n s', 'n'])
+
+        result = []
+        for digit in digits:
+             result.append('<span class="{0}"></span>'.format(digit))
+
+        return ''.join(result)
+
+    def _grouper(self, n, iterable, fillvalue=None):
+        """grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"""
+        args = [iter(iterable)] * n
+        return izip_longest(fillvalue=fillvalue, *args)
