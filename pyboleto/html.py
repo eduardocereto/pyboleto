@@ -5,11 +5,12 @@
 
     Classe Responsável por fazer o output do boleto em html.
 
-    :copyright: © 2011 - 2012 by Eduardo Cereto Carvalho
+    :copyright: © 2012 by Artur Felipe de Sousa
     :license: BSD, see LICENSE for more details.
 
 """
 import os
+import string
 
 class BoletoHTML(object):
     """Geração do Boleto em HTML
@@ -28,53 +29,30 @@ class BoletoHTML(object):
     """
 
     def __init__(self, file_descr, landscape=False):
+        # Tamanhos em px
         self.width = 750
         self.widthCanhoto = 0
         self.fontSizeTitle = 9
         self.heightLine = 27
         self.fontSizeValue = 12
-        self.htmlTitle = 'Boleto bancário'
-        self.fileDescr = file_descr # Posso atribuir um file handler também aqui
+        self.title = 'Boleto bancário'
+        self.fileDescr = file_descr
 
         if landscape:
-            raise NotImplementedError('Em desenvolvimento')
+            raise NotImplementedError('Em desenvolvimento...')
         else:
-            style = """html,body{{margin:0;padding:0}}
-            hr{{border:1px dashed #000}}
-            p{{margin:0}}
-            .pagina{{width:{}px;font-family:Helvetica, Arial, "Lucida Grande", sans-serif;font-size:{}px;margin:50px auto;page-break-a}}
-            .recibo-sacado{{margin-bottom:50px}}
-            .demonstrativo{{height:190px}}
-            .autenticacao-mecanica{{height:80px}}
-            .recibo-caixa{{margin-top:30px}}
-            .cabecalho td{{border-bottom:4px solid #000;vertical-align:bottom;padding:0}}
-            .cabecalho td.banco-logo{{width:170px}}
-            .cabecalho td.banco-logo img{{float:left;margin:0;padding:0}}
-            .cabecalho td.banco-codigo{{width:70px;font-size:22px;font-weight:700;text-align:center}}
-            .cabecalho td.bol-linha-digitavel{{border-right:none;text-align:right;font-size:16px;font-weight:700}}
-            .cabecalho .linhas-v{{border-left:3px solid #000;border-right:3px solid #000}}
-            .corpo td{{border-bottom:1px solid #000;border-right:1px solid #000;vertical-align:top;height:{}px;padding:0 2px}}
-            .corpo td.linha-vazia{{border-bottom:none}}
-            .recibo-sacado .corpo tr td:last-child{{border-right:none;text-align:left}}
-            .recibo-caixa .corpo tr td:last-child{{border-right:none;text-align:right;width:140px}}
-            .rodape td{{border:none;vertical-align:top;padding-left:2px}}
-            .rodape td.bol-codigo-barras{{padding:8px 6px}}
-            .rotulo{{text-align:left;font-size:{}px;margin-bottom:2px}}
-            .autenticacao-mecanica .rotulo{{text-align:right}}
-            tr.linha-grossa td{{border-bottom:3px solid #000}}
-            .recibo-sacado .corpo .col-cedente-agencia,.recibo-sacado .corpo .col-cedente-documento{{width:130px}}
-            .recibo-sacado .corpo .col-vencimento{{width:100px}}
-            .recibo-caixa .corpo .col-data-documento{{width:120px}}
-            .recibo-caixa .corpo .col-numero-documento{{width:140px}}
-            .recibo-caixa .rodape .col-sacado{{width:40px}}
-            .recibo-caixa .rodape .col-codigo-baixa{{width:210px}}
-            .cabecalho,.corpo,.rodape{{width:100%;border-collapse:collapse}}
-            .recibo-caixa .corpo .col-especie-documento,.recibo-caixa .corpo .col-aceite{{width:70px}}
-            .bol-codigo-barras{{height:40px}}
-            /* @media print{{.pagina {{page-break-after:always}} }} */
-            """.format(self.width, self.fontSizeValue, self.heightLine, self.fontSizeTitle)
+            tpl = string.Template(self._load_template('head.html'))
+            self.html = tpl.substitute(title=self.title, width=self.width,
+                                       font_size_value=self.fontSizeValue,
+                                       height_line=self.heightLine,
+                                       font_size_title=self.fontSizeTitle)
 
-        self.html = '<!DOCTYPE html><html lang="en"><head><title>{}</title><meta charset="utf-8" /><style>{}</style></head><body><div class="pagina">'.format(self.htmlTitle, style)
+    def _load_template(self, template):
+        pyboleto_dir = os.path.dirname(os.path.abspath(__file__))
+        template_path = os.path.join(pyboleto_dir, 'templates', template)
+        with open(template_path, 'r') as tpl:
+            template_content = tpl.read()
+        return template_content
 
     def _load_image(self, logo_image):
         pyboleto_dir = os.path.dirname(os.path.abspath(__file__))
@@ -89,89 +67,39 @@ class BoletoHTML(object):
         :type boletoDados: :class:`pyboleto.data.BoletoData`
 
         """
+        tpl = string.Template(self._load_template('recibo_sacado.html'))
+        tpl_data = {}
 
         # Cabeçalho
-        logo_image_path = ''
+        tpl_data['logo_img'] = ''
         if boletoDados.logo_image:
-            # Verificar carregamento da imagem
-            logo_image_path = '<img src="{}" alt="Logo do banco" />'.format(self._load_image(boletoDados.logo_image))
+            tpl_data['logo_img'] = self._load_image(boletoDados.logo_image)
+        tpl_data['codigo_dv_banco'] = boletoDados.codigo_dv_banco
 
-        self.html += """<div class="recibo-sacado">
-        <table class="cabecalho">
-            <tbody>
-                <tr>
-                    <td class="banco-logo">{}</td>
-                    <td class="banco-codigo"><div class="linhas-v">{}</div></td>
-                    <td class="bol-linha-digitavel">Recibo do Sacado</td>
-                </tr>
-            </tbody>
-        </table>
-        """.format(logo_image_path, boletoDados.codigo_dv_banco)
-        
         # Corpo
-        self.html += """<table class="corpo">
-        <tbody>
-            <tr>
-                <td>
-                    <div class="rotulo">Cedente</div> {}
-                </td>
-                <td class="col-cedente-agencia">
-                    <div class="rotulo">Agência/Código Cedente</div> {}
-                </td>
-                <td class="col-cedente-documento">
-                    <div class="rotulo">CPF/CNPJ Cedente</div> {}
-                </td>
-                <td class="col-vencimento">
-                    <div class="rotulo">Vencimento</div> {}
-                </td>
-            </tr>
-        """.format(boletoDados.cedente, boletoDados.agencia_conta_cedente, 
-            boletoDados.cedente_documento, boletoDados.data_vencimento.strftime('%d/%m/%Y'))
+        tpl_data['cedente'] = boletoDados.cedente
+        tpl_data['agencia_conta_cedente'] = boletoDados.agencia_conta_cedente
+        tpl_data['cedente_documento'] = boletoDados.cedente_documento
 
-        sacado0 = boletoDados.sacado[0]
-        if len(sacado0) > 63: # Melhorar isso
-            sacado0 = sacado0[:63-len(sacado0)-4] + ' ...'
+        data_vencimento = boletoDados.data_vencimento
+        tpl_data['data_vencimento'] = data_vencimento.strftime('%d/%m/%Y')
+        tpl_data['sacado'] = boletoDados.sacado[0]
+        tpl_data['nosso_numero_format'] = boletoDados.format_nosso_numero()
+        tpl_data['numero_documento'] = boletoDados.numero_documento
 
-        self.html += """<tr>
-                <td>
-                    <div class="rotulo">Sacado</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">Nosso Número</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">N. do documento</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">Data Documento</div> {}
-                </td>
-            </tr>
-        """.format(sacado0, boletoDados.format_nosso_numero(), 
-            boletoDados.numero_documento, boletoDados.data_documento.strftime('%d/%m/%Y'))
+        data_documento = boletoDados.data_documento
+        tpl_data['data_documento'] = data_documento
+        tpl_data['cedente_endereco'] = boletoDados.cedente_endereco
 
-        valorDocumento = self._formataValorParaExibir(boletoDados.valor_documento)
-
-        self.html += """<tr>
-                <td colspan="3">
-                    <div class="rotulo">Endereço Cedente</div> {}
-                </td>
-                <td width="100px" class="col-dir">
-                    <div class="rotulo">Valor Documento</div> {}
-                </td>
-            </tr>
-        </tbody></table></div>
-        """.format(boletoDados.cedente_endereco, valorDocumento)
+        valor_doc = self._formataValorParaExibir(boletoDados.valor_documento)
+        tpl_data['valor_documento'] = valor_doc
 
         # Demonstrativo
-        self.html += '<div class="demonstrativo"><div class="rotulo">Demonstrativo</div>'
+        tpl_data['demonstrativo'] = ''
         for dm in boletoDados.demonstrativo:
-            self.html += '<p>{}</p>'.format(dm)
-        self.html += '</div>'
+            tpl_data['demonstrativo'] += '<p>{0}</p>'.format(dm)
 
-        # Autenticação mecânica
-        self.html += """<div class="autenticacao-mecanica">
-            <div class="rotulo">Autenticação Mecânica</div>
-        </div>"""
+        self.html += tpl.substitute(tpl_data)
 
     def _drawHorizontalCorteLine(self):
         self.html += '<hr />'
@@ -184,162 +112,59 @@ class BoletoHTML(object):
         :type boletoDados: :class:`pyboleto.data.BoletoData`
 
         """
+        tpl = string.Template(self._load_template('recibo_caixa.html'))
+        tpl_data = {}
 
         # Cabeçalho
-        logo_image_path = ''
+        tpl_data['logo_img'] = ''
         if boletoDados.logo_image:
-            # Verificar carregamento da imagem
-            logo_image_path = '<img src="{}" alt="Logo do banco" />'.format(self._load_image(boletoDados.logo_image))
-
-        self.html += """<div class="recibo-caixa">
-        <table class="cabecalho">
-            <tbody>
-                <tr>
-                    <td class="banco-logo">{}</td>
-                    <td class="banco-codigo"><div class="linhas-v">{}</div></td>
-                    <td class="bol-linha-digitavel">{}</td>
-                </tr>
-            </tbody>
-        </table>
-        """.format(logo_image_path, boletoDados.codigo_dv_banco, boletoDados.linha_digitavel)
+            tpl_data['logo_img'] = self._load_image(boletoDados.logo_image)
+        tpl_data['codigo_dv_banco'] = boletoDados.codigo_dv_banco
+        tpl_data['linha_digitavel'] = boletoDados.linha_digitavel
 
         # Corpo
-        self.html += """<table class="corpo">
-        <tbody>
-            <tr>
-                <td colspan="6">
-                    <div class="rotulo">Local de pagamento</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">Vencimento</div> {}
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6">
-                    <div class="rotulo">Cedente</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">Agência/Código cedente</div> {}
-                </td>
-            </tr>
-        """.format(boletoDados.local_pagamento.encode('utf-8'), boletoDados.data_vencimento.strftime('%d/%m/%Y'),
-            boletoDados.cedente, boletoDados.agencia_conta_cedente)
+        data_vencimento = boletoDados.data_vencimento
+        tpl_data['data_vencimento'] = data_vencimento.strftime('%d/%m/%Y')
 
-        self.html += """<tr>
-                <td class="col-data-documento">
-                    <div class="rotulo">Data do documento</div> {}
-                </td>
-                <td class="col-numero-documento" colspan="2">
-                    <div class="rotulo">N. do documento</div> {}
-                </td>
-                <td class="col-especie-documento">
-                    <div class="rotulo">Espécie doc</div> {}
-                </td>
-                <td class="col-aceite">
-                    <div class="rotulo">Aceite</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">Data processamento</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">Nosso número</div> {}
-                </td>
-            </tr>
-        """.format(boletoDados.data_documento.strftime('%d/%m/%Y'), boletoDados.numero_documento,
-            boletoDados.especie_documento, boletoDados.aceite, 
-            boletoDados.data_processamento.strftime('%d/%m/%Y'), boletoDados.format_nosso_numero())
+        # Não sei pq o attr local_pagamento é o único que possui default
+        # value em unicode em data.py
+        if isinstance(boletoDados.local_pagamento, unicode):
+            tpl_data['local_pagamento'] = boletoDados.local_pagamento.encode('utf-8')
+        else:
+            tpl_data['local_pagamento'] = boletoDados.local_pagamento
+        tpl_data['cedente'] = boletoDados.cedente
+        tpl_data['agencia_conta_cedente'] = boletoDados.agencia_conta_cedente
 
-        valorDocumento = self._formataValorParaExibir(boletoDados.valor_documento)
+        data_documento = boletoDados.data_documento
+        tpl_data['data_documento'] = data_documento.strftime('%d/%m/%Y')
+        tpl_data['numero_documento'] = boletoDados.numero_documento
+        tpl_data['especie_documento'] = boletoDados.especie_documento
+        tpl_data['aceite'] = boletoDados.aceite
+
+        data_process = boletoDados.data_processamento
+        tpl_data['data_processamento'] = data_process.strftime('%d/%m/%Y')
+        tpl_data['nosso_numero_format'] = boletoDados.format_nosso_numero()
+        tpl_data['carteira'] = boletoDados.carteira
+        tpl_data['especie'] = boletoDados.especie
+        tpl_data['quantidade'] = boletoDados.quantidade
+
         valor = self._formataValorParaExibir(boletoDados.valor)
-        self.html += """<tr>
-                <td>
-                    <div class="rotulo">Uso do banco</div>
-                </td>
-                <td>
-                    <div class="rotulo">Carteira</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">Espécie</div> {}
-                </td>
-                <td colspan="2">
-                    <div class="rotulo">Quantidade</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">Valor</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">(=) Valor documento</div> {}
-                </td>
-            </tr>
-        """.format(boletoDados.carteira, boletoDados.especie, boletoDados.quantidade, valor, valorDocumento)
+        tpl_data['valor'] = valor
 
-        intrucoes = ['','','']
-        for i in range(3):
-            try:
-                intrucoes[i] = boletoDados.instrucoes[i]
-            except:
-                pass
+        valor_doc = self._formataValorParaExibir(boletoDados.valor_documento)
+        tpl_data['valor_documento'] = valor_doc
 
-        self.html += """<tr>
-                <td colspan="6" class="linha-vazia">
-                    <div class="rotulo">Instruções 
-                    (Todas as informações deste bloqueto são de exclusiva responsabilidade do cedente)</div> {}
-                </td>
-                <td>
-                    <div class="rotulo">(-) Descontos/Abatimentos</div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6" class="linha-vazia">{}</td>
-                <td>
-                    <div class="rotulo">(-) Outras deduções</div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6" class="linha-vazia">{}</td>
-                <td>
-                    <div class="rotulo">(+) Mora/Multa</div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6" class="linha-vazia"></td>
-                <td>
-                    <div class="rotulo">(+) Outros acréscimos</div>
-                </td>
-            </tr>
-            <tr class="linha-grossa">
-                <td colspan="6"></td>
-                <td>
-                    <div class="rotulo">(=) Valor cobrado</div>
-                </td>
-            </tr>
-        </tbody></table>
-        """.format(intrucoes[0], intrucoes[1], intrucoes[2])
+        # Instruções
+        tpl_data['instrucoes'] = ''
+        for instrucao in boletoDados.instrucoes:
+            tpl_data['instrucoes'] += '<p>{0}</p>'.format(instrucao)
 
         # Rodapé
-        self.html += """<table class="rodape">
-        <tbody>
-            <tr>
-                <td class="col-sacado"><div class="rotulo">Sacado</div></td>
-                <td colspan="3">"""
-
+        tpl_data['sacado_info'] = ''
         for linha_sacado in boletoDados.sacado:
-            self.html += '<p>{}</p>'.format(linha_sacado)
+            tpl_data['sacado_info'] += '<p>{0}</p>'.format(linha_sacado)
 
-        self.html += """</td>
-            </tr>
-            <tr class="linha-grossa">
-                <td colspan="3"><div class="rotulo">Sacador / Avalista</div></td>
-                <td class="col-codigo-baixa"><div class="rotulo">Código de baixa</div></td>
-            </tr>
-            <tr>
-                <td colspan="3" class="bol-codigo-barras">
-                    <!--<img src="cod_barras.jpg" alt="Código de barras" />-->
-                </td>
-                <td><div class="rotulo">Autenticação Mecânica / Ficha de Compensação</div></td>
-            </tr>
-        </tbody></table></div>
-        """.format()
+        self.html += tpl.substitute(tpl_data)
 
     def drawBoleto(self, boletoDados):
         """Imprime Boleto Convencional
@@ -358,20 +183,16 @@ class BoletoHTML(object):
 
     def nextPage(self):
         """Força início de nova página"""
-
-        self.html += """</div><div class="pagina">"""
+        self.html += '</div><div class="pagina">'
 
     def save(self):
         """Fecha boleto e constroi o arquivo"""
-
-        self.html += """</div></body></html>"""
-        try:
-            fd = open(self.fileDescr, 'w')
-            fd.write(self.html)
-        except:
-            raise IOError('Falha ao escrever o arquivo')
+        self.html += '</div></body></html>'
+        if hasattr(self.fileDescr, 'write'):
+            self.fileDescr.write(self.html)
         else:
-            fd.close()
+            with open(self.fileDescr, 'w') as fd:
+                fd.write(self.html)
 
     def _formataValorParaExibir(self, nfloat):
         if nfloat:
