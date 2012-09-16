@@ -183,6 +183,19 @@ class BoletoHTML(object):
 
         self.html += tpl.substitute(tpl_data)
 
+    def drawBoletoCarneDuplo(self, boletoDados1, boletoDados2=None):
+        """Imprime um boleto tipo carnê com 2 boletos por página.
+
+        :param boletoDados1: Objeto com os dados do boleto a ser preenchido.
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :param boletoDados2: Objeto com os dados do boleto a ser preenchido.
+            Deve ser subclasse de :class:`pyboleto.data.BoletoData`
+        :type boletoDados1: :class:`pyboleto.data.BoletoData`
+        :type boletoDados2: :class:`pyboleto.data.BoletoData`
+
+        """
+        raise NotImplementedError('Em desenvolvimento')
+
     def drawBoleto(self, boletoDados):
         """Imprime Boleto Convencional
 
