@@ -26,6 +26,7 @@ DIGITS = [
     ['n', 'w', 'n', 'w', 'n'],
 ]
 
+
 class BoletoHTML(object):
     """Geração do Boleto em HTML
 
@@ -250,7 +251,7 @@ class BoletoHTML(object):
 
         result = []
         for digit in digits:
-             result.append('<span class="{0}"></span>'.format(digit))
+            result.append('<span class="{0}"></span>'.format(digit))
 
         return ''.join(result)
 

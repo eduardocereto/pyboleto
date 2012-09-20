@@ -172,7 +172,12 @@ class BoletoTestCase(unittest.TestCase):
                                  "..", "tests", "html", bank + '-expected.html')
         else:
             raise ValueError('%s é um renderer invalido')
-        
+
+        if not os.path.exists('tests/html'):
+            crpast = os.path.join(os.path.dirname(pyboleto.__file__),
+                                 "..", "tests", "html")
+            os.makedirs(crpast)
+
         if not os.path.exists(fname):
             open(fname, 'w').write(open(generated).read())
         return fname
