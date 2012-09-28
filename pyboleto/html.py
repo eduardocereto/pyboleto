@@ -103,7 +103,7 @@ class BoletoHTML(object):
         tpl_data['numero_documento'] = boletoDados.numero_documento
 
         data_documento = boletoDados.data_documento
-        tpl_data['data_documento'] = data_documento
+        tpl_data['data_documento'] = data_documento.strftime('%d/%m/%Y')
         tpl_data['cedente_endereco'] = boletoDados.cedente_endereco
 
         valor_doc = self._formataValorParaExibir(boletoDados.valor_documento)
