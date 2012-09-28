@@ -1,17 +1,21 @@
 #!/Users/dudus/Work/pyboleto/venv/bin/python
 # -*- coding: utf-8 -*-
 import pyboleto
+import sys
 from pyboleto.bank.real import BoletoReal
 from pyboleto.bank.bradesco import BoletoBradesco
 from pyboleto.bank.caixa import BoletoCaixa
 from pyboleto.bank.bancodobrasil import BoletoBB
 from pyboleto.bank.santander import BoletoSantander
-from pyboleto.pdf import BoletoPDF
 from pyboleto.html import BoletoHTML
 import datetime
 
 
-def print_bb():
+if sys.version_info < (3,):
+    from pyboleto.pdf import BoletoPDF
+
+
+def get_data_bb():
     listaDados = []
     for i in range(2):
         d = BoletoBB(7, 2)
@@ -48,19 +52,10 @@ def print_bb():
             ""
             ]
         listaDados.append(d)
-
-    boleto_PDF = BoletoPDF('boleto-bb-formato-normal-teste.pdf')
-    boleto_HTML = BoletoHTML('boleto-bb-formato-normal-teste.html')
-    for i in range(len(listaDados)):
-        boleto_PDF.drawBoleto(listaDados[i])
-        boleto_PDF.nextPage()
-        boleto_HTML.drawBoleto(listaDados[i])
-        boleto_HTML.nextPage()
-    boleto_PDF.save()
-    boleto_HTML.save()
+    return listaDados
 
 
-def print_real():
+def get_data_real():
     listaDados = []
     for i in range(2):
         d = BoletoReal()
@@ -94,20 +89,10 @@ def print_real():
             ""
             ]
         listaDados.append(d)
-
-    # Real Formato normal - uma pagina por folha A4
-    boleto_PDF = BoletoPDF('boleto-real-formato-normal-teste.pdf')
-    boleto_HTML = BoletoHTML('boleto-real-formato-normal-teste.html')
-    for i in range(len(listaDados)):
-        boleto_PDF.drawBoleto(listaDados[i])
-        boleto_PDF.nextPage()
-        boleto_HTML.drawBoleto(listaDados[i])
-        boleto_HTML.nextPage()
-    boleto_PDF.save()
-    boleto_HTML.save()
+    return listaDados
 
 
-def print_bradesco():
+def get_data_bradesco():
     listaDados = []
     for i in range(2):
         d = BoletoBradesco()
@@ -141,20 +126,10 @@ def print_bradesco():
             ""
             ]
         listaDados.append(d)
-
-    # Bradesco Formato carne - duas paginas por folha A4
-    boleto_PDF = BoletoPDF('boleto-bradesco-formato-normal-teste.pdf')
-    boleto_HTML = BoletoHTML('boleto-bradesco-formato-normal-teste.html')
-    for i in range(len(listaDados)):
-        boleto_PDF.drawBoleto(listaDados[i])
-        boleto_PDF.nextPage()
-        boleto_HTML.drawBoleto(listaDados[i])
-        boleto_HTML.nextPage()
-    boleto_PDF.save()
-    boleto_HTML.save()
+    return listaDados
 
 
-def print_santander():
+def get_data_santander():
     listaDados = []
     for i in range(2):
         d = BoletoSantander()
@@ -189,20 +164,10 @@ def print_santander():
             ""
             ]
         listaDados.append(d)
-
-    # Caixa Formato normal - uma pagina por folha A4
-    boleto_PDF = BoletoPDF('boleto-santander-formato-normal-teste.pdf')
-    boleto_HTML = BoletoHTML('boleto-santander-formato-normal-teste.html')
-    for i in range(len(listaDados)):
-        boleto_PDF.drawBoleto(listaDados[i])
-        boleto_PDF.nextPage()
-        boleto_HTML.drawBoleto(listaDados[i])
-        boleto_HTML.nextPage()
-    boleto_PDF.save()
-    boleto_HTML.save()
+    return listaDados
 
 
-def print_caixa():
+def get_data_caixa():
     listaDados = []
     for i in range(2):
         d = BoletoCaixa()
@@ -236,20 +201,10 @@ def print_caixa():
             ""
             ]
         listaDados.append(d)
-
-    # Caixa Formato normal - uma pagina por folha A4
-    boleto_PDF = BoletoPDF('boleto-caixa-formato-normal-teste.pdf')
-    boleto_HTML = BoletoHTML('boleto-caixa-formato-normal-teste.html')
-    for i in range(len(listaDados)):
-        boleto_PDF.drawBoleto(listaDados[i])
-        boleto_PDF.nextPage()
-        boleto_HTML.drawBoleto(listaDados[i])
-        boleto_HTML.nextPage()
-    boleto_PDF.save()
-    boleto_HTML.save()
+    return listaDados
 
 
-def print_itau():
+def get_data_itau():
     listaDados = []
     for i in range(2):
         d = BoletoItau()
@@ -284,44 +239,34 @@ def print_itau():
             ""
             ]
         listaDados.append(d)
-
-    boleto_PDF = BoletoPDF('boleto-itau-formato-normal-teste.pdf')
-    boleto_HTML = BoletoHTML('boleto-itau-formato-normal-teste.html')
-    for i in range(len(listaDados)):
-        boleto_PDF.drawBoleto(listaDados[i])
-        boleto_PDF.nextPage()
-        boleto_HTML.drawBoleto(listaDados[i])
-        boleto_HTML.nextPage()
-    boleto_PDF.save()
-    boleto_HTML.save()
+    return listaDados
 
 
 def print_all():
-    print ("Pyboleto version: %s" % pyboleto.__version__)
-    print ("----------------------------------")
-    print ("     Printing Example Boletos     ")
-    print ("----------------------------------")
-
-    print ("Banco do Brasil")
-    print_bb()
-
-    print ("Bradesco")
-    print_bradesco()
-
-    #print "Itau"
-    #print_itau()
-
-    print ("Caixa")
-    print_caixa()
-
-    print ("Real")
-    print_real()
-
-    print ("Santander")
-    print_santander()
-
-    print ("----------------------------------")
-    print ("Ok")
+    banks = {
+        #"itau": "Itau",
+        "bb": "Banco do Brasil",
+        "caixa": "Caixa",
+        "real": "Real",
+        "santander": "Santander",
+        "bradesco": "Bradesco",
+    }
+    for bank in banks:
+        print("Gerando boleto para: "+ banks[bank])
+        data_func_name = "get_data_" + bank
+        data_func = eval(data_func_name)
+        boleto_datas = data_func()
+        if sys.version_info < (3,):
+            boleto_PDF = BoletoPDF('boleto-'+ bank + '-normal-teste.pdf')
+        boleto_HTML = BoletoHTML('boleto-'+ bank + '-normal-teste.html')
+        for boleto_data in boleto_datas:
+            if sys.version_info < (3,):
+                boleto_PDF.drawBoleto(boleto_data)
+                boleto_PDF.nextPage()
+                boleto_PDF.save()
+            boleto_HTML.drawBoleto(boleto_data)
+            boleto_HTML.nextPage()
+            boleto_HTML.save()
 
 
 if __name__ == "__main__":
