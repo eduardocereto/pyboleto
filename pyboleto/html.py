@@ -11,7 +11,14 @@
 """
 import os
 import string
-from itertools import izip_longest, chain
+import sys
+
+
+if sys.version_info < (3,):
+    from itertools import izip_longest, chain
+else:
+    from itertools import zip_longest as izip_longest, chain
+
 
 DIGITS = [
     ['n', 'n', 'w', 'w', 'n'],
@@ -141,12 +148,7 @@ class BoletoHTML(object):
         data_vencimento = boletoDados.data_vencimento
         tpl_data['data_vencimento'] = data_vencimento.strftime('%d/%m/%Y')
 
-        # Não sei pq o attr local_pagamento é o único que possui default
-        # value em unicode em data.py
-        if isinstance(boletoDados.local_pagamento, unicode):
-            tpl_data['local_pagamento'] = boletoDados.local_pagamento.encode('utf-8')
-        else:
-            tpl_data['local_pagamento'] = boletoDados.local_pagamento
+        tpl_data['local_pagamento'] = boletoDados.local_pagamento
         tpl_data['cedente'] = boletoDados.cedente
         tpl_data['agencia_conta_cedente'] = boletoDados.agencia_conta_cedente
 

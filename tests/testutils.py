@@ -159,7 +159,9 @@ def pdftoxml(filename, output):
 
     root = fromstring(stdout)
     indent(root)
-    open(output, 'w').write(tostring(root))
+    f = open(output, 'w')
+    f.write(tostring(root))
+    f.close()
 
 
 class BoletoTestCase(unittest.TestCase):
@@ -173,13 +175,17 @@ class BoletoTestCase(unittest.TestCase):
         else:
             raise ValueError('%s é um renderer invalido')
 
-        if not os.path.exists('tests/html'):
-            crpast = os.path.join(os.path.dirname(pyboleto.__file__),
-                                 "..", "tests", "html")
-            os.makedirs(crpast)
+        html_test_path = os.path.join(os.path.dirname(pyboleto.__file__),
+                                "..", "tests", "html")
+        if not os.path.exists(html_test_path):
+            os.makedirs(html_test_path)
 
         if not os.path.exists(fname):
-            open(fname, 'w').write(open(generated).read())
+            f_generated = open(generated)
+            f = open(fname, 'w')
+            f.write(f_generated.read())
+            f.close()
+            f_generated.close()
         return fname
 
     @skipIf(sys.version_info >= (3,),

@@ -12,7 +12,10 @@
 """
 import datetime
 from decimal import Decimal
+import sys
 
+if sys.version_info >= (3,):
+    basestring = str
 
 class BoletoException(Exception):
     """ Exceções para erros no pyboleto"""
@@ -151,7 +154,7 @@ class BoletoData(object):
         self.especie = kwargs.pop('especie', "R$")
         self.especie_documento = kwargs.pop('especie_documento', "")
         self.local_pagamento = kwargs.pop(
-            'local_pagamento', u"Pagável em qualquer banco até o vencimento")
+            'local_pagamento', "Pagável em qualquer banco até o vencimento")
         self.logo_image = kwargs.pop('logo_image', "")
         self.moeda = kwargs.pop('moeda', "9")
         self.numero_documento = kwargs.pop('numero_do_documento', "")
@@ -294,7 +297,7 @@ class BoletoData(object):
     def _cedente_endereco_set(self, endereco):
         if len(endereco) > 80:
             raise BoletoException(
-                u'Linha de endereço possui mais que 80 caracteres')
+                'Linha de endereço possui mais que 80 caracteres')
         self._cedente_endereco = endereco
     cedente_endereco = property(_cedente_endereco_get, _cedente_endereco_set)
     """Endereço do Cedente com no máximo 80 caracteres"""
@@ -343,11 +346,11 @@ class BoletoData(object):
 
         if len(list_inst) > 7:
             raise BoletoException(
-                u'Número de linhas de instruções maior que 7')
+                'Número de linhas de instruções maior que 7')
         for line in list_inst:
             if len(line) > 90:
                 raise BoletoException(
-                    u'Linha de instruções possui mais que 90 caracteres')
+                    'Linha de instruções possui mais que 90 caracteres')
         self._instrucoes = list_inst
     instrucoes = property(_instrucoes_get, _instrucoes_set)
     """Instruções para o caixa do banco que recebe o bilhete
@@ -367,11 +370,11 @@ class BoletoData(object):
 
         if len(list_dem) > 12:
             raise BoletoException(
-                u'Número de linhas de demonstrativo maior que 12')
+                'Número de linhas de demonstrativo maior que 12')
         for line in list_dem:
             if len(line) > 90:
                 raise BoletoException(
-                    u'Linha de demonstrativo possui mais que 90 caracteres')
+                    'Linha de demonstrativo possui mais que 90 caracteres')
         self._demonstrativo = list_dem
     demonstrativo = property(_demonstrativo_get, _demonstrativo_set)
     """Texto que vai impresso no corpo do Recibo do Sacado
@@ -405,7 +408,7 @@ class BoletoData(object):
 
     def _sacado_set(self, list_sacado):
         if len(list_sacado) > 3:
-            raise BoletoException(u'Número de linhas do sacado maior que 3')
+            raise BoletoException('Número de linhas do sacado maior que 3')
         self._sacado = list_sacado
     sacado = property(_sacado_get, _sacado_set)
     """Campo sacado composto por até 3 linhas.
