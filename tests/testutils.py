@@ -15,11 +15,11 @@ from xml.etree.ElementTree import fromstring, tostring
 import pyboleto
 
 from .compat import skipIf
+from pyboleto.html import BoletoHTML
 
 
 try:
     from pyboleto.pdf import BoletoPDF
-    from pyboleto.html import BoletoHTML
 except ImportError as err:
     if sys.version_info >= (3,):
         pass  # Reportlab doesn;t support Python3
