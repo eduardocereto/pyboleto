@@ -7,6 +7,7 @@ from pyboleto.bank.caixa import BoletoCaixa
 from pyboleto.bank.bancodobrasil import BoletoBB
 from pyboleto.bank.santander import BoletoSantander
 from pyboleto.pdf import BoletoPDF
+from pyboleto.html import BoletoHTML
 import datetime
 
 
@@ -48,15 +49,19 @@ def print_bb():
             ]
         listaDados.append(d)
 
-    boleto = BoletoPDF('boleto-bb-formato-normal-teste.pdf')
+    boleto_PDF = BoletoPDF('boleto-bb-formato-normal-teste.pdf')
+    boleto_HTML = BoletoHTML('boleto-bb-formato-normal-teste.html')
     for i in range(len(listaDados)):
-        boleto.drawBoleto(listaDados[i])
-        boleto.nextPage()
-    boleto.save()
+        boleto_PDF.drawBoleto(listaDados[i])
+        boleto_PDF.nextPage()
+        boleto_HTML.drawBoleto(listaDados[i])
+        boleto_HTML.nextPage()
+    boleto_PDF.save()
+    boleto_HTML.save()
 
 
 def print_real():
-    listaDadosReal = []
+    listaDados = []
     for i in range(2):
         d = BoletoReal()
         d.carteira = '57'  # Contrato firmado com o Banco Real
@@ -88,18 +93,22 @@ def print_real():
             "Rua Desconhecida, 00/0000 - Não Sei - Cidade - Cep. 00000-000",
             ""
             ]
-        listaDadosReal.append(d)
+        listaDados.append(d)
 
     # Real Formato normal - uma pagina por folha A4
-    boleto = BoletoPDF('boleto-real-formato-normal-teste.pdf')
-    for i in range(len(listaDadosReal)):
-        boleto.drawBoleto(listaDadosReal[i])
-        boleto.nextPage()
-    boleto.save()
+    boleto_PDF = BoletoPDF('boleto-real-formato-normal-teste.pdf')
+    boleto_HTML = BoletoHTML('boleto-real-formato-normal-teste.html')
+    for i in range(len(listaDados)):
+        boleto_PDF.drawBoleto(listaDados[i])
+        boleto_PDF.nextPage()
+        boleto_HTML.drawBoleto(listaDados[i])
+        boleto_HTML.nextPage()
+    boleto_PDF.save()
+    boleto_HTML.save()
 
 
 def print_bradesco():
-    listaDadosBradesco = []
+    listaDados = []
     for i in range(2):
         d = BoletoBradesco()
         d.carteira = '06'  # Contrato firmado com o Banco Bradesco
@@ -131,28 +140,22 @@ def print_bradesco():
             "Rua Desconhecida, 00/0000 - Não Sei - Cidade - Cep. 00000-000",
             ""
             ]
-        listaDadosBradesco.append(d)
+        listaDados.append(d)
 
     # Bradesco Formato carne - duas paginas por folha A4
-    boleto = BoletoPDF('boleto-bradesco-formato-carne-teste.pdf', True)
-    for i in range(0, len(listaDadosBradesco), 2):
-        boleto.drawBoletoCarneDuplo(
-            listaDadosBradesco[i],
-            listaDadosBradesco[i + 1]
-        )
-        boleto.nextPage()
-    boleto.save()
-
-    # Bradesco Formato normal - uma pagina por folha A4
-    boleto = BoletoPDF('boleto-bradesco-formato-normal-teste.pdf')
-    for i in range(len(listaDadosBradesco)):
-        boleto.drawBoleto(listaDadosBradesco[i])
-        boleto.nextPage()
-    boleto.save()
+    boleto_PDF = BoletoPDF('boleto-bradesco-formato-normal-teste.pdf')
+    boleto_HTML = BoletoHTML('boleto-bradesco-formato-normal-teste.html')
+    for i in range(len(listaDados)):
+        boleto_PDF.drawBoleto(listaDados[i])
+        boleto_PDF.nextPage()
+        boleto_HTML.drawBoleto(listaDados[i])
+        boleto_HTML.nextPage()
+    boleto_PDF.save()
+    boleto_HTML.save()
 
 
 def print_santander():
-    listaDadosSantander = []
+    listaDados = []
     for i in range(2):
         d = BoletoSantander()
         d.agencia_cedente = '1333'
@@ -185,18 +188,22 @@ def print_santander():
             "Rua Desconhecida, 00/0000 - Não Sei - Cidade - Cep. 00000-000",
             ""
             ]
-        listaDadosSantander.append(d)
+        listaDados.append(d)
 
     # Caixa Formato normal - uma pagina por folha A4
-    boleto = BoletoPDF('boleto-santander-formato-normal-teste.pdf')
-    for i in range(len(listaDadosSantander)):
-        boleto.drawBoleto(listaDadosSantander[i])
-        boleto.nextPage()
-    boleto.save()
+    boleto_PDF = BoletoPDF('boleto-santander-formato-normal-teste.pdf')
+    boleto_HTML = BoletoHTML('boleto-santander-formato-normal-teste.html')
+    for i in range(len(listaDados)):
+        boleto_PDF.drawBoleto(listaDados[i])
+        boleto_PDF.nextPage()
+        boleto_HTML.drawBoleto(listaDados[i])
+        boleto_HTML.nextPage()
+    boleto_PDF.save()
+    boleto_HTML.save()
 
 
 def print_caixa():
-    listaDadosCaixa = []
+    listaDados = []
     for i in range(2):
         d = BoletoCaixa()
         d.carteira = 'SR'  # Contrato firmado com o Banco Bradesco
@@ -228,28 +235,65 @@ def print_caixa():
             "Rua Desconhecida, 00/0000 - Não Sei - Cidade - Cep. 00000-000",
             ""
             ]
-        listaDadosCaixa.append(d)
+        listaDados.append(d)
 
     # Caixa Formato normal - uma pagina por folha A4
-    boleto = BoletoPDF('boleto-caixa-formato-carne-teste.pdf', True)
-    for i in range(0, len(listaDadosCaixa), 2):
-        boleto.drawBoletoCarneDuplo(
-            listaDadosCaixa[i],
-            listaDadosCaixa[i + 1]
-        )
-        boleto.nextPage()
-    boleto.save()
-
-    # Caixa Formato normal - uma pagina por folha A4
-    boleto = BoletoPDF('boleto-caixa-formato-normal-teste.pdf')
-    for i in range(len(listaDadosCaixa)):
-        boleto.drawBoleto(listaDadosCaixa[i])
-        boleto.nextPage()
-    boleto.save()
+    boleto_PDF = BoletoPDF('boleto-caixa-formato-normal-teste.pdf')
+    boleto_HTML = BoletoHTML('boleto-caixa-formato-normal-teste.html')
+    for i in range(len(listaDados)):
+        boleto_PDF.drawBoleto(listaDados[i])
+        boleto_PDF.nextPage()
+        boleto_HTML.drawBoleto(listaDados[i])
+        boleto_HTML.nextPage()
+    boleto_PDF.save()
+    boleto_HTML.save()
 
 
 def print_itau():
-    pass
+    listaDados = []
+    for i in range(2):
+        d = BoletoItau()
+        d.nosso_numero = '87654'
+        d.numero_documento = '27.030195.10'
+
+        d.carteira = '18'
+        d.cedente = 'Empresa ACME LTDA'
+        d.cedente_documento = "102.323.777-01"
+        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
+        d.agencia_cedente = '9999'
+        d.conta_cedente = '99999'
+
+        d.data_vencimento = datetime.date(2010, 3, 27)
+        d.data_documento = datetime.date(2010, 2, 12)
+        d.data_processamento = datetime.date(2010, 2, 12)
+
+        d.instrucoes = [
+            "- Linha 1",
+            "- Sr Caixa, cobrar multa de 2% após o vencimento",
+            "- Receber até 10 dias após o vencimento",
+            ]
+        d.demonstrativo = [
+            "- Serviço Teste R$ 5,00",
+            "- Total R$ 5,00",
+            ]
+        d.valor_documento = 255.00
+
+        d.sacado = [
+            "Cliente Teste %d" % (i + 1),
+            "Rua Desconhecida, 00/0000 - Não Sei - Cidade - Cep. 00000-000",
+            ""
+            ]
+        listaDados.append(d)
+
+    boleto_PDF = BoletoPDF('boleto-itau-formato-normal-teste.pdf')
+    boleto_HTML = BoletoHTML('boleto-itau-formato-normal-teste.html')
+    for i in range(len(listaDados)):
+        boleto_PDF.drawBoleto(listaDados[i])
+        boleto_PDF.nextPage()
+        boleto_HTML.drawBoleto(listaDados[i])
+        boleto_HTML.nextPage()
+    boleto_PDF.save()
+    boleto_HTML.save()
 
 
 def print_all():
