@@ -349,7 +349,7 @@ class BoletoPDF(object):
               self.pdfCanvas._fontname,
               self.pdfCanvas._fontsize) > 8.4 * cm):
             #sacado0 = sacado0[:-2] + u'\u2026'
-            sacado0 = sacado0[:-4] + '...'
+            sacado0 = sacado0[:-4] + u'...'
 
         self.pdfCanvas.drawString(
             0 + self.space,
