@@ -252,7 +252,7 @@ def print_all():
         "bradesco": "Bradesco",
     }
     for bank in banks:
-        print("Gerando boleto para: "+ banks[bank])
+        print("Gerando boleto para o banco "+ banks[bank])
         data_func_name = "get_data_" + bank
         data_func = eval(data_func_name)
         boleto_datas = data_func()
