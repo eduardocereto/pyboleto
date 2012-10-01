@@ -13,12 +13,12 @@ import os
 import string
 import sys
 
-
+from itertools import chain
 if sys.version_info < (3,):
-    from itertools import izip_longest, chain
+    from itertools import izip_longest as zip_longest
+    zip_longest # chamando para evitar erro de nao uso do zip_longest
 else:
-    from itertools import zip_longest as izip_longest, chain
-
+    from itertools import zip_longest
 
 DIGITS = [
     ['n', 'n', 'w', 'w', 'n'],
@@ -260,4 +260,4 @@ class BoletoHTML(object):
     def _grouper(self, n, iterable, fillvalue=None):
         """grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"""
         args = [iter(iterable)] * n
-        return izip_longest(fillvalue=fillvalue, *args)
+        return zip_longest(fillvalue=fillvalue, *args)
