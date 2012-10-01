@@ -17,6 +17,7 @@ import sys
 if sys.version_info >= (3,):
     basestring = str
 
+
 class BoletoException(Exception):
     """ Exceções para erros no pyboleto"""
     def __init__(self, message):
