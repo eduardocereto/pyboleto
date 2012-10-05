@@ -95,7 +95,10 @@ class BoletoHTML(object):
         # Cabeçalho
         tpl_data['logo_img'] = ''
         if boletoDados.logo_image:
-            tpl_data['logo_img'] = self._load_image(boletoDados.logo_image)
+            aux = open(self._load_image(boletoDados.logo_image)).read().encode(
+                                                    'base64').replace('\n', '')
+            img_base64 = 'data:image/jpg;base64,{0}'.format(aux)
+            tpl_data['logo_img'] = img_base64
         tpl_data['codigo_dv_banco'] = boletoDados.codigo_dv_banco
 
         # Corpo
