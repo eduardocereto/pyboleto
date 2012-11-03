@@ -25,6 +25,14 @@ pyboleto Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`html` Module
+------------------
+
+.. automodule:: pyboleto.html
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Subpackages
 -----------
 

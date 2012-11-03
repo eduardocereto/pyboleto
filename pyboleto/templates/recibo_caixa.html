@@ -1,0 +1,131 @@
+<div class="recibo-caixa">
+  <table class="cabecalho">
+    <tbody>
+      <tr>
+        <td class="banco-logo">
+          <img src="${logo_img}" alt="Logo do banco" />
+        </td>
+        <td class="banco-codigo">
+          <div class="linhas-v">${codigo_dv_banco}</div>
+        </td>
+        <td class="bol-linha-digitavel">${linha_digitavel}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="corpo">
+    <tbody>
+      <tr>
+        <td colspan="6">
+          <div class="rotulo">Local de pagamento</div> ${local_pagamento}
+        </td>
+        <td>
+          <div class="rotulo">Vencimento</div> ${data_vencimento}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <div class="rotulo">Cedente</div> ${cedente}
+        </td>
+        <td>
+          <div class="rotulo">Agência/Código cedente</div>
+          ${agencia_conta_cedente}
+        </td>
+      </tr>
+      <tr>
+        <td class="col-data-documento">
+          <div class="rotulo">Data do documento</div> ${data_documento}
+        </td>
+        <td class="col-numero-documento" colspan="2">
+          <div class="rotulo">N. do documento</div> ${numero_documento}
+        </td>
+        <td class="col-especie-documento">
+          <div class="rotulo">Espécie doc</div> ${especie_documento}
+        </td>
+        <td class="col-aceite">
+          <div class="rotulo">Aceite</div> ${aceite}
+        </td>
+        <td>
+          <div class="rotulo">Data processamento</div> ${data_processamento}
+        </td>
+        <td>
+          <div class="rotulo">Nosso número</div> ${nosso_numero_format}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="rotulo">Uso do banco</div>
+        </td>
+        <td>
+          <div class="rotulo">Carteira</div> ${carteira}
+        </td>
+        <td>
+          <div class="rotulo">Espécie</div> ${especie}
+        </td>
+        <td colspan="2">
+          <div class="rotulo">Quantidade</div> ${quantidade}
+        </td>
+        <td>
+          <div class="rotulo">Valor</div> ${valor}
+        </td>
+        <td>
+          <div class="rotulo">(=) Valor documento</div> ${valor_documento}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="5" class="linha-grossa">
+          <div class="rotulo">Instruções
+          (Todas as informações deste bloqueto são de exclusiva
+           responsabilidade do cedente)</div>
+           <div class="instrucoes-content">${instrucoes}</div>
+        </td>
+        <td>
+          <div class="rotulo">(-) Descontos/Abatimentos</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="rotulo">(-) Outras deduções</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="rotulo">(+) Mora/Multa</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="rotulo">(+) Outros acréscimos</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="linha-grossa">
+          <div class="rotulo">(=) Valor cobrado</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="rodape">
+    <tbody>
+      <tr>
+        <td class="col-sacado"><div class="rotulo">Sacado</div></td>
+        <td colspan="3">${sacado_info}</td>
+      </tr>
+      <tr class="linha-grossa">
+        <td colspan="3">
+          <div class="rotulo">Sacador / Avalista</div>
+        </td>
+        <td class="col-codigo-baixa">
+          <div class="rotulo">Código de baixa</div>
+        </td>
+      </tr>
+      <tr>
+      <td colspan="3" class="bol-codigo-barras">
+         <div id="barcode">${barcode}</div>
+      </td>
+      <td>
+        <div class="rotulo">Autenticação Mecânica / Ficha de Compensação</div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

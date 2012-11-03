@@ -12,6 +12,10 @@
 """
 import datetime
 from decimal import Decimal
+import sys
+
+if sys.version_info >= (3,):
+    basestring = str
 
 
 class BoletoException(Exception):
@@ -151,7 +155,7 @@ class BoletoData(object):
         self.especie = kwargs.pop('especie', "R$")
         self.especie_documento = kwargs.pop('especie_documento', "")
         self.local_pagamento = kwargs.pop(
-            'local_pagamento', u"Pagável em qualquer banco até o vencimento")
+            'local_pagamento', "Pagável em qualquer banco até o vencimento")
         self.logo_image = kwargs.pop('logo_image', "")
         self.moeda = kwargs.pop('moeda', "9")
         self.numero_documento = kwargs.pop('numero_do_documento', "")

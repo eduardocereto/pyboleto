@@ -15,11 +15,11 @@ from xml.etree.ElementTree import fromstring, tostring
 import pyboleto
 
 from .compat import skipIf
+from pyboleto.html import BoletoHTML
 
 
 try:
     from pyboleto.pdf import BoletoPDF
-    from pyboleto.html import BoletoHTML
 except ImportError as err:
     if sys.version_info >= (3,):
         pass  # Reportlab doesn;t support Python3
@@ -159,7 +159,9 @@ def pdftoxml(filename, output):
 
     root = fromstring(stdout)
     indent(root)
-    open(output, 'w').write(tostring(root))
+    f = open(output, 'w')
+    f.write(tostring(root))
+    f.close()
 
 
 class BoletoTestCase(unittest.TestCase):
@@ -172,9 +174,18 @@ class BoletoTestCase(unittest.TestCase):
                                  "..", "tests", "html", bank + '-expected.html')
         else:
             raise ValueError('%s é um renderer invalido')
-        
+
+        html_test_path = os.path.join(os.path.dirname(pyboleto.__file__),
+                                "..", "tests", "html")
+        if not os.path.exists(html_test_path):
+            os.makedirs(html_test_path)
+
         if not os.path.exists(fname):
-            open(fname, 'w').write(open(generated).read())
+            f_generated = open(generated)
+            f = open(fname, 'w')
+            f.write(f_generated.read())
+            f.close()
+            f_generated.close()
         return fname
 
     @skipIf(sys.version_info >= (3,),

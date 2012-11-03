@@ -50,7 +50,7 @@ setup(
     packages=find_packages(),
     package_data={
         '': ['LICENSE'],
-        'pyboleto': ['media/*.jpg'],
+        'pyboleto': ['media/*.jpg', 'templates/*.html'],
     },
     zip_safe=False,
     provides=[
