@@ -13,7 +13,7 @@ class BoletoCaixaSigcb(BoletoData):
     nosso_numero = custom_property('nosso_numero', 18)
 
     def __init__(self):
-        super(BoletoCaixaCigcb, self).__init__()
+        super(BoletoCaixaSigcb, self).__init__()
 
         self.codigo_banco = "104"
         self.local_pagamento = "Preferencialmente nas Casas Lotéricas e \
