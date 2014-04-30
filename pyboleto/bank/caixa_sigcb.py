@@ -21,16 +21,6 @@ Agências da Caixa"
         self.logo_image = "logo_bancocaixa.jpg"
 
     @property
-    def dv_nosso_numero(self):
-        resto2 = self.modulo11(self.nosso_numero[9:].split('-')[0], 9, 1)
-        digito = 11 - resto2
-        if digito == 10 or digito == 11:
-            dv = 0
-        else:
-            dv = digito
-        return dv
-
-    @property
     def campo_livre(self):  #24 digits
         content = "%6s%1s%3s%1s%3s%1s%9s" % ((self.conta_cedente.split('-')[0]),
                                              (self.modulo11(self.conta_cedente.split('-')[0])),
@@ -43,6 +33,5 @@ Agências da Caixa"
 
         return "%24s%1s" % (content, dv_content)
 
-
     def format_nosso_numero(self):
-        return self.nosso_numero + '-' + str(self.dv_nosso_numero)
+        return self.nosso_numero
