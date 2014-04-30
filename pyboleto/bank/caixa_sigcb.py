@@ -10,7 +10,7 @@ class BoletoCaixaSigcb(BoletoData):
 
     agencia_cedente = custom_property('agencia_cedente', 4)
     conta_cedente = custom_property('conta_cedente', 6)
-    nosso_numero = custom_property('nosso_numero', 18)
+    nosso_numero = custom_property('nosso_numero', 17)
 
     def __init__(self):
         super(BoletoCaixaSigcb, self).__init__()
@@ -32,16 +32,17 @@ Agências da Caixa"
 
     @property
     def campo_livre(self):  #24 digits
-        content = "%6s%1s%3s%1s%3s%1s%9s%1s" % ((self.conta_cedente.split('-')[0]),
-                                             (self.conta_cedente.split('-')[1]),
+        content = "%6s%1s%3s%1s%3s%1s%9s" % ((self.conta_cedente.split('-')[0]),
+                                             (self.modulo11(self.conta_cedente.split('-')[0])),
                                              self.nosso_numero[2:5],
                                              self.nosso_numero[0:1],
-                                             self.nosso_numero[6:9],
+                                             self.nosso_numero[5:8],
                                              self.nosso_numero[1:2],
-                                             self.nosso_numero[9:],
-                                             self.dv_nosso_numero)
+                                             self.nosso_numero[8:17])
+        dv_content = self.modulo11(content)
 
-        return content
+        return "%24s%1s" % (content, dv_content)
+
 
     def format_nosso_numero(self):
         return self.nosso_numero + '-' + str(self.dv_nosso_numero)
