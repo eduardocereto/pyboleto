@@ -189,18 +189,18 @@ class BoletoData(object):
         """
 
         for attr, length, data_type in [
-            ('codigo_banco', 3, str),
-            ('moeda', 1, str),
+            ('codigo_banco', 3, basestring),
+            ('moeda', 1, basestring),
             ('data_vencimento', None, datetime.date),
-            ('valor_documento', -1, str),
-            ('campo_livre', 25, str),
+            ('valor_documento', -1, basestring),
+            ('campo_livre', 25, basestring),
             ]:
             value = getattr(self, attr)
             if not isinstance(value, data_type):
                 raise TypeError("%s.%s must be a %s, got %r (type %s)" % (
                     self.__class__.__name__, attr, data_type.__name__, value,
                     type(value).__name__))
-            if data_type == str and length != -1 and len(value) != length:
+            if data_type == basestring and length != -1 and len(value) != length:
                 raise ValueError(
                     "%s.%s must have a length of %d, not %r (len: %d)" % (
                     self.__class__.__name__, attr, length, value, len(value)))
