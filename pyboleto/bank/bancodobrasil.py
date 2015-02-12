@@ -51,7 +51,7 @@ class BoletoBB(BoletoData):
         self.format_nnumero = format_nnumero
 
     def format_nosso_numero(self):
-        if self.format_convenio === 7:
+        if self.format_convenio == 7:
             return "%7s%10s" % (
                 self.convenio,
                 self.nosso_numero
@@ -69,8 +69,8 @@ class BoletoBB(BoletoData):
 
     def _set_nosso_numero(self, val):
         val = str(val)
-        if: self.format_convenio == 4:
-            nn=val.zfill(7)
+        if self.format_convenio == 4:
+            nn = val.zfill(7)
         elif self.format_convenio == 6:
             if self.format_nnumero == 1:
                 nn = val.zfill(5)
@@ -118,7 +118,6 @@ class BoletoBB(BoletoData):
         if r == 10:
             return 'X'
         return r
-
 
     @property
     def campo_livre(self):
