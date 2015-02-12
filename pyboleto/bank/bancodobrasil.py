@@ -1,6 +1,23 @@
 # -*- coding: utf-8 -*-
 from ..data import BoletoData, custom_property
 
+'''
+/*
+#################################################
+- Convenio de 4 digitos
+  Nosso número: pode ser de até 7 dígitos
+- Convenio de 6 digitos
+  Nosso número:
+  de 1 a 99999 para opção de até 5 dígitos
+  de 1 a 99999999999999999 para opção de até 17 dígitos
+- Convenio de 7 digitos
+  Nosso número: pode ser até 10 dígitos (Carteiras 16 e 18)
+- Convenio de 8 digitos
+  Nosso número: pode ser até 9 dígitos
+#################################################
+*/
+'''
+
 
 class BoletoBB(BoletoData):
     '''
@@ -15,8 +32,8 @@ class BoletoBB(BoletoData):
             Construtor para boleto do Banco deo Brasil
 
             Args:
-                format_convenio Formato do convenio 6, 7 ou 8
-                format_nnumero Formato nosso numero 1 ou 2
+                format_convenio Formato do convenio 4, 6, 7 ou 8
+                format_nnumero Formato nosso numero 1 ou 2 (apenas para convenio 6)
         '''
         super(BoletoBB, self).__init__()
 
@@ -24,20 +41,27 @@ class BoletoBB(BoletoData):
         self.carteira = 18
         self.logo_image = "logo_bb.jpg"
 
-        # Size of convenio 6, 7 or 8
+        # Size of convenio 4, 6, 7 or 8
         self.format_convenio = format_convenio
 
         #  Nosso Numero format. 1 or 2
+        #  Used only for convenio=6
         #  1: Nosso Numero with 5 positions
         #  2: Nosso Numero with 17 positions
         self.format_nnumero = format_nnumero
 
     def format_nosso_numero(self):
-        return "%s%s-%s" % (
-            self.convenio,
-            self.nosso_numero,
-            self.dv_nosso_numero
-        )
+        if self.format_convenio == 7:
+            return "%7s%10s" % (
+                self.convenio,
+                self.nosso_numero
+            )
+        else:
+            return "%s%s-%s" % (
+                self.convenio,
+                self.nosso_numero,
+                self.dv_nosso_numero
+            )
 
     # Nosso numero (sem dv) sao 11 digitos
     def _get_nosso_numero(self):
@@ -45,7 +69,9 @@ class BoletoBB(BoletoData):
 
     def _set_nosso_numero(self, val):
         val = str(val)
-        if self.format_convenio == 6:
+        if self.format_convenio == 4:
+            nn = val.zfill(7)
+        elif self.format_convenio == 6:
             if self.format_nnumero == 1:
                 nn = val.zfill(5)
             elif self.format_nnumero == 2:
@@ -76,11 +102,32 @@ class BoletoBB(BoletoData):
 
     @property
     def dv_nosso_numero(self):
-        return self.modulo11(self.convenio + self.nosso_numero)
+        '''
+            This function uses a modified version of modulo11
+        '''
+        num = self.convenio + self.nosso_numero
+        base = 2
+        fator = 9
+        soma = 0
+        for c in reversed(num):
+            soma += int(c) * fator
+            if fator == base:
+                fator = 10
+            fator -= 1
+        r = soma % 11
+        if r == 10:
+            return 'X'
+        return r
 
     @property
     def campo_livre(self):
-        if self.format_convenio in (7, 8):
+        if self.format_convenio == 4:
+                content = "%s%s%s%s%s" % (self.convenio,
+                                           self.nosso_numero,
+                                           self.agencia_cedente,
+                                           self.conta_cedente,
+                                           self.carteira)
+        elif self.format_convenio in (7, 8):
             content = "000000%s%s%s" % (self.convenio,
                                          self.nosso_numero,
                                          self.carteira)
@@ -92,7 +139,7 @@ class BoletoBB(BoletoData):
                                            self.conta_cedente,
                                            self.carteira)
             if self.format_nnumero == 2:
-                content = "%2s%s%2s" % (self.convenio,
+                content = "%s%s%s" % (self.convenio,
                                         self.nosso_numero,
                                         '21'  # numero do serviço
                                         )
