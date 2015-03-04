@@ -1,5 +1,7 @@
 include README.rst
 include LICENSE
 recursive-include pyboleto/media *
+recursive-include pyboleto/templates *
 recursive-include tests *
-include bin/pyboleto_sample.py
+include bin/pdf_pyboleto_sample.py
+include bin/html_pyboleto_sample.py

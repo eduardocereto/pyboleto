@@ -24,7 +24,7 @@ class BoletoPDF(object):
 
     Esta classe é responsável por imprimir o boleto em PDF.
     Outras classes podem ser implementadas no futuro com a mesma interface,
-    para faer output em HTML, LaTeX, ...
+    para fazer output em HTML, LaTeX, ...
 
     Esta classe pode imprimir boletos em formato de carnê (2 boletos por
     página) ou em formato de folha cheia.

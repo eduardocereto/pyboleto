@@ -50,7 +50,7 @@ setup(
     packages=find_packages(),
     package_data={
         '': ['LICENSE'],
-        'pyboleto': ['media/*.jpg'],
+        'pyboleto': ['media/*.jpg', 'templates/*.html'],
     },
     zip_safe=False,
     provides=[
@@ -60,7 +60,10 @@ setup(
     description='Python Library to create "boletos de cobrança bancária" for several Brazilian banks',
     long_description=read('README.rst'),
     download_url='http://pypi.python.org/pypi/pyboleto',
-    scripts=['bin/pyboleto_sample.py'],
+    scripts=[
+        'bin/html_pyboleto_sample.py',
+        'bin/pdf_pyboleto_sample.py'
+    ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Operating System :: OS Independent',

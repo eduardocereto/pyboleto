@@ -1,0 +1,64 @@
+<div class="recibo-sacado">
+  <table class="cabecalho">
+    <tbody>
+      <tr>
+        <td class="banco-logo">
+          <img src="${logo_img}" alt="Logo do banco" />
+        </td>
+        <td class="banco-codigo">
+          <div class="linhas-v">${codigo_dv_banco}</div>
+        </td>
+        <td class="bol-linha-digitavel">Recibo do Sacado</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="corpo">
+    <tbody>
+      <tr>
+        <td>
+          <div class="rotulo">Cedente</div>
+          ${cedente}
+        </td>
+        <td class="col-cedente-agencia">
+          <div class="rotulo">Agência/Código Cedente</div>
+          ${agencia_conta_cedente}
+        </td>
+        <td class="col-cedente-documento">
+          <div class="rotulo">CPF/CNPJ Cedente</div> ${cedente_documento}
+        </td>
+        <td class="col-vencimento">
+          <div class="rotulo">Vencimento</div> ${data_vencimento}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="rotulo">Sacado</div> ${sacado}
+        </td>
+        <td>
+          <div class="rotulo">Nosso Número</div> ${nosso_numero_format}
+        </td>
+        <td>
+          <div class="rotulo">N. do documento</div> ${numero_documento}
+        </td>
+        <td>
+          <div class="rotulo">Data Documento</div> ${data_documento}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="rotulo">Endereço Cedente</div> ${cedente_endereco}
+        </td>
+        <td width="100px" class="col-dir">
+          <div class="rotulo">Valor Documento</div> ${valor_documento}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="demonstrativo">
+  <div class="rotulo">Demonstrativo</div>
+  <div class="demonstrativo-content">${demonstrativo}</div>
+</div>
+<div class="autenticacao-mecanica">
+  <div class="rotulo">Autenticação Mecânica</div>
+</div>
