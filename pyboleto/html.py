@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyboleto.html
-    ~~~~~~~~~~~~
+    ~~~~~~~~~~~~~
 
     Classe Responsável por fazer o output do boleto em html.
 

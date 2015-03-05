@@ -254,7 +254,7 @@ class BoletoData(object):
         """
             Geralmente é implementado pela classe derivada. Usada para formatar
             como o noso número será impresso no boleto. Às vezes é o mesmo
-            do :prop:`numero_do_documento` e às vezes contém outros campos
+            do `numero_documento` e às vezes contém outros campos
             juntos.
         """
         return self.nosso_numero
