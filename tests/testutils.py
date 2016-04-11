@@ -14,8 +14,6 @@ from xml.etree.ElementTree import fromstring, tostring
 
 import pyboleto
 
-from .compat import skipIf
-
 
 try:
     from pyboleto.pdf import BoletoPDF
@@ -32,11 +30,11 @@ def list_recursively(directory, pattern):
     :param pattern: glob mattern to match
     """
     matches = []
-    for root, dirnames, filenames in os.walk(directory):
+    for root, _, filenames in os.walk(directory):
         for filename in fnmatch.filter(filenames, pattern):
             # skip backup files
             if (filename.startswith('.#') or
-                filename.endswith('~')):
+                    filename.endswith('~')):
                 continue
             matches.append(os.path.join(root, filename))
     return matches
@@ -50,7 +48,7 @@ def get_sources(root):
                 continue
             yield fname
 
-        #yield os.path.join(root, 'setup.py')
+        # yield os.path.join(root, 'setup.py')
 
 
 def _diff(orig, new, short, verbose):
@@ -104,7 +102,10 @@ class SourceTest(object):
                 continue
             testname = testname[:-3].replace('/', '_')
             name = 'test_%s' % (testname, )
-            func = lambda self, r=root, f=filename: self.check_filename(r, f)
+            # func = lambda self, r=root, f=filename: self.check_filename(r, f)
+
+            def func(self, r=root, f=filename):
+                self.check_filename(r, f)
             func.__name__ = name
             setattr(cls, name, func)
 
@@ -136,7 +137,6 @@ def indent(elem, level=0):
 
 
 def pdftoxml(filename, output):
-    # FIXME: Change this to use popen
     p = subprocess.Popen(['pdftohtml',
                           '-stdout',
                           '-xml',
@@ -151,7 +151,8 @@ def pdftoxml(filename, output):
 
     root = fromstring(stdout)
     indent(root)
-    open(output, 'w').write(tostring(root))
+    with open(output, 'wb') as f:
+        f.write(tostring(root))
 
 
 class BoletoTestCase(unittest.TestCase):
@@ -159,11 +160,11 @@ class BoletoTestCase(unittest.TestCase):
         fname = os.path.join(os.path.dirname(pyboleto.__file__),
                              "..", "tests", "xml", bank + '-expected.xml')
         if not os.path.exists(fname):
-            open(fname, 'w').write(open(generated).read())
+            with open(fname, 'wb') as f:
+                with open(generated) as g:
+                    f.write(g.read())
         return fname
 
-    @skipIf(sys.version_info >= (3,),
-                     "Reportlab unavailable on this version")
     def test_pdf_triplo_rendering(self):
         bank = type(self.dados[0]).__name__
         filename = tempfile.mktemp(prefix="pyboleto-triplo-",
@@ -183,8 +184,6 @@ class BoletoTestCase(unittest.TestCase):
                 bank, diff))
         os.unlink(generated)
 
-    @skipIf(sys.version_info >= (3,),
-                     "Reportlab unavailable on this version")
     def test_pdf_rendering(self):
         dados = self.dados[0]
         bank = type(dados).__name__

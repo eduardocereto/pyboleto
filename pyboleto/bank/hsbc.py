@@ -1,8 +1,5 @@
-# -*- coding: utf-8
-from ..data import BoletoData, custom_property
-
-
-### CAUTION - NÃO TESTADO ###
+# -*- coding: utf-8 -*-
+from pyboleto.data import BoletoData, CustomProperty
 
 
 class BoletoHsbc(BoletoData):
@@ -10,7 +7,7 @@ class BoletoHsbc(BoletoData):
         Gera Dados necessários para criação de boleto para o banco HSBC
     '''
 
-    numero_documento = custom_property('numero_documento', 13)
+    numero_documento = CustomProperty('numero_documento', 13)
 
     def __init__(self):
         super(BoletoHsbc, self).__init__()
@@ -52,7 +49,7 @@ class BoletoHsbcComRegistro(BoletoData):
         com registro
     '''
     # Nosso numero (sem dv) sao 10 digitos
-    nosso_numero = custom_property('nosso_numero', 10)
+    nosso_numero = CustomProperty('nosso_numero', 10)
 
     def __init__(self):
         super(BoletoHsbcComRegistro, self).__init__()

@@ -4,222 +4,254 @@
     <fontspec color="#000000" family="Helvetica" id="1" size="11" />
     <fontspec color="#000000" family="Helvetica" id="2" size="25" />
     <fontspec color="#000000" family="Helvetica" id="3" size="15" />
-    <text font="0" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
-    <text font="0" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
-    <text font="0" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
+    <fontspec color="#000000" family="Helvetica" id="4" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="5" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="6" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="7" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="8" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="9" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="10" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="11" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="12" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="13" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="14" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="15" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="16" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="17" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="18" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="19" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="20" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="21" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="22" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="23" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="24" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="25" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="26" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="27" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="28" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="29" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="30" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="31" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="32" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="33" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="34" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="35" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="36" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="37" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="38" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="39" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="40" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="41" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="42" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="43" size="15" />
+    <fontspec color="#000000" family="Helvetica" id="44" size="15" />
+    <fontspec color="#000000" family="Helvetica" id="45" size="15" />
+    <fontspec color="#000000" family="Helvetica" id="46" size="15" />
+    <fontspec color="#000000" family="Helvetica" id="47" size="15" />
+    <fontspec color="#000000" family="Helvetica" id="48" size="15" />
+    <fontspec color="#000000" family="Helvetica" id="49" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="50" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="51" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="52" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="53" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="54" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="55" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="56" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="57" size="7" />
+    <fontspec color="#000000" family="Helvetica" id="58" size="11" />
+    <fontspec color="#000000" family="Helvetica" id="59" size="11" />
+    <text font="8" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
+    <text font="10" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
+    <text font="12" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
     <text font="0" height="8" left="38" top="713" width="31">Sacado</text>
-    <text font="1" height="12" left="102" top="714" width="86"> - CPF/CNPJ: </text>
-    <text font="1" height="12" left="102" top="744" width="36"> -  -  - </text>
-    <text font="0" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
-    <text font="0" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
-    <text font="0" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
-    <text font="0" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
-    <text font="0" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
+    <text font="13" height="12" left="106" top="714" width="78">- CPF/CNPJ:</text>
+    <text font="15" height="12" left="106" top="744" width="28">- - -</text>
+    <text font="17" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
+    <text font="19" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
+    <text font="20" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
+    <text font="22" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
+    <text font="23" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
     <text font="0" height="8" left="38" top="575" width="42">Instru&#231;&#245;es</text>
-    <text font="0" height="8" left="38" top="547" width="56">Uso do banco</text>
+    <text font="25" height="8" left="38" top="547" width="56">Uso do banco</text>
     <text font="0" height="8" left="169" top="547" width="32">Carteira</text>
     <text font="0" height="8" left="254" top="547" width="32">Esp&#233;cie</text>
     <text font="0" height="8" left="339" top="547" width="47">Quantidade</text>
     <text font="0" height="8" left="509" top="547" width="21">Valor</text>
-    <text font="0" height="8" left="658" top="547" width="82">(=) Valor documento</text>
+    <text font="26" height="8" left="658" top="547" width="82">(=) Valor documento</text>
     <text font="1" height="12" left="169" top="558" width="15">06</text>
     <text font="1" height="12" left="254" top="558" width="17">R$</text>
     <text font="1" height="12" left="799" top="558" width="41">355,00</text>
-    <text font="0" height="8" left="38" top="520" width="79">Data do documento</text>
-    <text font="0" height="8" left="169" top="520" width="69">N. do documento</text>
-    <text font="0" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
+    <text font="28" height="8" left="38" top="520" width="79">Data do documento</text>
+    <text font="30" height="8" left="169" top="520" width="69">N. do documento</text>
+    <text font="31" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
     <text font="0" height="8" left="424" top="520" width="25">Aceite</text>
-    <text font="0" height="8" left="509" top="520" width="83">Data processamento</text>
-    <text font="0" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
+    <text font="32" height="8" left="509" top="520" width="83">Data processamento</text>
+    <text font="33" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
     <text font="1" height="12" left="38" top="530" width="68">18/01/2011</text>
     <text font="1" height="12" left="169" top="530" width="23">123</text>
     <text font="1" height="12" left="424" top="530" width="10">N</text>
     <text font="1" height="12" left="509" top="530" width="68">18/01/2011</text>
     <text font="1" height="12" left="743" top="530" width="98">0000000000123</text>
     <text font="0" height="8" left="38" top="492" width="34">Cedente</text>
-    <text font="0" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
+    <text font="34" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
     <text font="1" height="12" left="743" top="503" width="98">0531/5705853/9</text>
-    <text font="0" height="8" left="38" top="464" width="82">Local de pagamento</text>
+    <text font="36" height="8" left="38" top="464" width="82">Local de pagamento</text>
     <text font="0" height="8" left="658" top="464" width="48">Vencimento</text>
-    <text font="1" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
+    <text font="42" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
     <text font="1" height="12" left="773" top="475" width="68">05/02/2011</text>
-    <text font="2" height="25" left="216" top="435" width="69">
-      <b>356-5</b>
-    </text>
-    <text font="3" height="16" left="362" top="442" width="484">
-      <b>35690.53154 70585.390001 00000.001230 8 48690000035500</b>
-    </text>
-    <text font="2" height="25" left="216" top="-224" width="69">
-      <b>356-5</b>
-    </text>
-    <text font="3" height="16" left="697" top="-217" width="150">
-      <b>Recibo do Sacado</b>
-    </text>
-    <text font="0" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
+    <text font="2" height="25" left="216" top="435" width="69">356-5</text>
+    <text font="46" height="16" left="362" top="442" width="484">35690.53154 70585.390001 00000.001230 8 48690000035500</text>
+    <text font="2" height="25" left="216" top="-224" width="69">356-5</text>
+    <text font="48" height="16" left="697" top="-217" width="150">Recibo do Sacado</text>
+    <text font="49" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
     <text font="0" height="8" left="38" top="-196" width="34">Cedente</text>
-    <text font="0" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
-    <text font="0" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
+    <text font="50" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
+    <text font="51" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
     <text font="0" height="8" left="722" top="-196" width="48">Vencimento</text>
     <text font="0" height="8" left="38" top="-168" width="31">Sacado</text>
-    <text font="0" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
-    <text font="0" height="8" left="573" top="-168" width="69">N. do documento</text>
-    <text font="0" height="8" left="722" top="-168" width="68">Data Documento</text>
-    <text font="0" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
-    <text font="0" height="8" left="722" top="-141" width="70">Valor Documento</text>
+    <text font="52" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
+    <text font="54" height="8" left="573" top="-168" width="69">N. do documento</text>
+    <text font="55" height="8" left="722" top="-168" width="68">Data Documento</text>
+    <text font="56" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
+    <text font="57" height="8" left="722" top="-141" width="70">Valor Documento</text>
     <text font="0" height="8" left="38" top="-13" width="58">Demonstrativo</text>
     <text font="1" height="12" left="403" top="-185" width="98">0531/5705853/9</text>
     <text font="1" height="12" left="722" top="-185" width="68">05/02/2011</text>
-    <text font="1" height="12" left="41" top="-157" width="86"> - CPF/CNPJ: </text>
+    <text font="13" height="12" left="45" top="-157" width="78">- CPF/CNPJ:</text>
     <text font="1" height="12" left="403" top="-157" width="98">0000000000123</text>
     <text font="1" height="12" left="573" top="-157" width="23">123</text>
     <text font="1" height="12" left="722" top="-157" width="68">18/01/2011</text>
-    <text font="1" height="12" left="41" top="-130" width="48"> -  -  -  - </text>
+    <text font="59" height="12" left="45" top="-130" width="41">- - - -</text>
     <text font="1" height="12" left="722" top="-130" width="41">355,00</text>
   </page>
   <page height="892" left="0" number="2" position="absolute" top="0" width="1262">
-    <text font="0" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
-    <text font="0" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
-    <text font="0" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
+    <text font="8" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
+    <text font="10" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
+    <text font="12" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
     <text font="0" height="8" left="38" top="713" width="31">Sacado</text>
-    <text font="1" height="12" left="102" top="714" width="86"> - CPF/CNPJ: </text>
-    <text font="1" height="12" left="102" top="744" width="36"> -  -  - </text>
-    <text font="0" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
-    <text font="0" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
-    <text font="0" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
-    <text font="0" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
-    <text font="0" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
+    <text font="13" height="12" left="106" top="714" width="78">- CPF/CNPJ:</text>
+    <text font="15" height="12" left="106" top="744" width="28">- - -</text>
+    <text font="17" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
+    <text font="19" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
+    <text font="20" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
+    <text font="22" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
+    <text font="23" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
     <text font="0" height="8" left="38" top="575" width="42">Instru&#231;&#245;es</text>
-    <text font="0" height="8" left="38" top="547" width="56">Uso do banco</text>
+    <text font="25" height="8" left="38" top="547" width="56">Uso do banco</text>
     <text font="0" height="8" left="169" top="547" width="32">Carteira</text>
     <text font="0" height="8" left="254" top="547" width="32">Esp&#233;cie</text>
     <text font="0" height="8" left="339" top="547" width="47">Quantidade</text>
     <text font="0" height="8" left="509" top="547" width="21">Valor</text>
-    <text font="0" height="8" left="658" top="547" width="82">(=) Valor documento</text>
+    <text font="26" height="8" left="658" top="547" width="82">(=) Valor documento</text>
     <text font="1" height="12" left="169" top="558" width="15">06</text>
     <text font="1" height="12" left="254" top="558" width="17">R$</text>
     <text font="1" height="12" left="799" top="558" width="41">355,00</text>
-    <text font="0" height="8" left="38" top="520" width="79">Data do documento</text>
-    <text font="0" height="8" left="169" top="520" width="69">N. do documento</text>
-    <text font="0" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
+    <text font="28" height="8" left="38" top="520" width="79">Data do documento</text>
+    <text font="30" height="8" left="169" top="520" width="69">N. do documento</text>
+    <text font="31" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
     <text font="0" height="8" left="424" top="520" width="25">Aceite</text>
-    <text font="0" height="8" left="509" top="520" width="83">Data processamento</text>
-    <text font="0" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
+    <text font="32" height="8" left="509" top="520" width="83">Data processamento</text>
+    <text font="33" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
     <text font="1" height="12" left="38" top="530" width="68">18/01/2011</text>
     <text font="1" height="12" left="169" top="530" width="23">124</text>
     <text font="1" height="12" left="424" top="530" width="10">N</text>
     <text font="1" height="12" left="509" top="530" width="68">18/01/2011</text>
     <text font="1" height="12" left="743" top="530" width="98">0000000000124</text>
     <text font="0" height="8" left="38" top="492" width="34">Cedente</text>
-    <text font="0" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
+    <text font="34" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
     <text font="1" height="12" left="743" top="503" width="98">0531/5705853/8</text>
-    <text font="0" height="8" left="38" top="464" width="82">Local de pagamento</text>
+    <text font="36" height="8" left="38" top="464" width="82">Local de pagamento</text>
     <text font="0" height="8" left="658" top="464" width="48">Vencimento</text>
-    <text font="1" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
+    <text font="42" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
     <text font="1" height="12" left="773" top="475" width="68">05/02/2011</text>
-    <text font="2" height="25" left="216" top="435" width="69">
-      <b>356-5</b>
-    </text>
-    <text font="3" height="16" left="362" top="442" width="484">
-      <b>35690.53154 70585.380002 00000.001248 2 48690000035500</b>
-    </text>
-    <text font="2" height="25" left="216" top="-224" width="69">
-      <b>356-5</b>
-    </text>
-    <text font="3" height="16" left="697" top="-217" width="150">
-      <b>Recibo do Sacado</b>
-    </text>
-    <text font="0" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
+    <text font="2" height="25" left="216" top="435" width="69">356-5</text>
+    <text font="46" height="16" left="362" top="442" width="484">35690.53154 70585.380002 00000.001248 2 48690000035500</text>
+    <text font="2" height="25" left="216" top="-224" width="69">356-5</text>
+    <text font="48" height="16" left="697" top="-217" width="150">Recibo do Sacado</text>
+    <text font="49" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
     <text font="0" height="8" left="38" top="-196" width="34">Cedente</text>
-    <text font="0" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
-    <text font="0" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
+    <text font="50" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
+    <text font="51" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
     <text font="0" height="8" left="722" top="-196" width="48">Vencimento</text>
     <text font="0" height="8" left="38" top="-168" width="31">Sacado</text>
-    <text font="0" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
-    <text font="0" height="8" left="573" top="-168" width="69">N. do documento</text>
-    <text font="0" height="8" left="722" top="-168" width="68">Data Documento</text>
-    <text font="0" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
-    <text font="0" height="8" left="722" top="-141" width="70">Valor Documento</text>
+    <text font="52" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
+    <text font="54" height="8" left="573" top="-168" width="69">N. do documento</text>
+    <text font="55" height="8" left="722" top="-168" width="68">Data Documento</text>
+    <text font="56" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
+    <text font="57" height="8" left="722" top="-141" width="70">Valor Documento</text>
     <text font="0" height="8" left="38" top="-13" width="58">Demonstrativo</text>
     <text font="1" height="12" left="403" top="-185" width="98">0531/5705853/8</text>
     <text font="1" height="12" left="722" top="-185" width="68">05/02/2011</text>
-    <text font="1" height="12" left="41" top="-157" width="86"> - CPF/CNPJ: </text>
+    <text font="13" height="12" left="45" top="-157" width="78">- CPF/CNPJ:</text>
     <text font="1" height="12" left="403" top="-157" width="98">0000000000124</text>
     <text font="1" height="12" left="573" top="-157" width="23">124</text>
     <text font="1" height="12" left="722" top="-157" width="68">18/01/2011</text>
-    <text font="1" height="12" left="41" top="-130" width="48"> -  -  -  - </text>
+    <text font="59" height="12" left="45" top="-130" width="41">- - - -</text>
     <text font="1" height="12" left="722" top="-130" width="41">355,00</text>
   </page>
   <page height="892" left="0" number="3" position="absolute" top="0" width="1262">
-    <text font="0" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
-    <text font="0" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
-    <text font="0" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
+    <text font="8" height="8" left="651" top="770" width="196">Autentica&#231;&#227;o Mec&#226;nica / Ficha de Compensa&#231;&#227;o</text>
+    <text font="10" height="8" left="658" top="755" width="65">C&#243;digo de baixa</text>
+    <text font="12" height="8" left="38" top="755" width="73">Sacador / Avalista</text>
     <text font="0" height="8" left="38" top="713" width="31">Sacado</text>
-    <text font="1" height="12" left="102" top="714" width="86"> - CPF/CNPJ: </text>
-    <text font="1" height="12" left="102" top="744" width="36"> -  -  - </text>
-    <text font="0" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
-    <text font="0" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
-    <text font="0" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
-    <text font="0" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
-    <text font="0" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
+    <text font="13" height="12" left="106" top="714" width="78">- CPF/CNPJ:</text>
+    <text font="15" height="12" left="106" top="744" width="28">- - -</text>
+    <text font="17" height="8" left="658" top="685" width="70">(=) Valor cobrado</text>
+    <text font="19" height="8" left="658" top="658" width="89">(+) Outros acr&#233;scimos</text>
+    <text font="20" height="8" left="658" top="630" width="59">(+) Mora/Multa</text>
+    <text font="22" height="8" left="658" top="603" width="80">(-) Outras dedu&#231;&#245;es</text>
+    <text font="23" height="8" left="658" top="575" width="107">(-) Descontos/Abatimentos</text>
     <text font="0" height="8" left="38" top="575" width="42">Instru&#231;&#245;es</text>
-    <text font="0" height="8" left="38" top="547" width="56">Uso do banco</text>
+    <text font="25" height="8" left="38" top="547" width="56">Uso do banco</text>
     <text font="0" height="8" left="169" top="547" width="32">Carteira</text>
     <text font="0" height="8" left="254" top="547" width="32">Esp&#233;cie</text>
     <text font="0" height="8" left="339" top="547" width="47">Quantidade</text>
     <text font="0" height="8" left="509" top="547" width="21">Valor</text>
-    <text font="0" height="8" left="658" top="547" width="82">(=) Valor documento</text>
+    <text font="26" height="8" left="658" top="547" width="82">(=) Valor documento</text>
     <text font="1" height="12" left="169" top="558" width="15">06</text>
     <text font="1" height="12" left="254" top="558" width="17">R$</text>
     <text font="1" height="12" left="799" top="558" width="41">355,00</text>
-    <text font="0" height="8" left="38" top="520" width="79">Data do documento</text>
-    <text font="0" height="8" left="169" top="520" width="69">N. do documento</text>
-    <text font="0" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
+    <text font="28" height="8" left="38" top="520" width="79">Data do documento</text>
+    <text font="30" height="8" left="169" top="520" width="69">N. do documento</text>
+    <text font="31" height="8" left="339" top="520" width="49">Esp&#233;cie doc</text>
     <text font="0" height="8" left="424" top="520" width="25">Aceite</text>
-    <text font="0" height="8" left="509" top="520" width="83">Data processamento</text>
-    <text font="0" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
+    <text font="32" height="8" left="509" top="520" width="83">Data processamento</text>
+    <text font="33" height="8" left="658" top="520" width="59">Nosso n&#250;mero</text>
     <text font="1" height="12" left="38" top="530" width="68">18/01/2011</text>
     <text font="1" height="12" left="169" top="530" width="23">125</text>
     <text font="1" height="12" left="424" top="530" width="10">N</text>
     <text font="1" height="12" left="509" top="530" width="68">18/01/2011</text>
     <text font="1" height="12" left="743" top="530" width="98">0000000000125</text>
     <text font="0" height="8" left="38" top="492" width="34">Cedente</text>
-    <text font="0" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
+    <text font="34" height="8" left="658" top="492" width="98">Ag&#234;ncia/C&#243;digo cedente</text>
     <text font="1" height="12" left="743" top="503" width="98">0531/5705853/7</text>
-    <text font="0" height="8" left="38" top="464" width="82">Local de pagamento</text>
+    <text font="36" height="8" left="38" top="464" width="82">Local de pagamento</text>
     <text font="0" height="8" left="658" top="464" width="48">Vencimento</text>
-    <text font="1" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
+    <text font="42" height="12" left="38" top="475" width="275">Pag&#225;vel em qualquer banco at&#233; o vencimento</text>
     <text font="1" height="12" left="773" top="475" width="68">05/02/2011</text>
-    <text font="2" height="25" left="216" top="435" width="69">
-      <b>356-5</b>
-    </text>
-    <text font="3" height="16" left="362" top="442" width="484">
-      <b>35690.53154 70585.370003 00000.001255 7 48690000035500</b>
-    </text>
-    <text font="2" height="25" left="216" top="-224" width="69">
-      <b>356-5</b>
-    </text>
-    <text font="3" height="16" left="697" top="-217" width="150">
-      <b>Recibo do Sacado</b>
-    </text>
-    <text font="0" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
+    <text font="2" height="25" left="216" top="435" width="69">356-5</text>
+    <text font="46" height="16" left="362" top="442" width="484">35690.53154 70585.370003 00000.001255 7 48690000035500</text>
+    <text font="2" height="25" left="216" top="-224" width="69">356-5</text>
+    <text font="48" height="16" left="697" top="-217" width="150">Recibo do Sacado</text>
+    <text font="49" height="8" left="753" top="262" width="93">Autentica&#231;&#227;o Mec&#226;nica</text>
     <text font="0" height="8" left="38" top="-196" width="34">Cedente</text>
-    <text font="0" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
-    <text font="0" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
+    <text font="50" height="8" left="403" top="-196" width="100">Ag&#234;ncia/C&#243;digo Cedente</text>
+    <text font="51" height="8" left="573" top="-196" width="81">CPF/CNPJ Cedente</text>
     <text font="0" height="8" left="722" top="-196" width="48">Vencimento</text>
     <text font="0" height="8" left="38" top="-168" width="31">Sacado</text>
-    <text font="0" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
-    <text font="0" height="8" left="573" top="-168" width="69">N. do documento</text>
-    <text font="0" height="8" left="722" top="-168" width="68">Data Documento</text>
-    <text font="0" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
-    <text font="0" height="8" left="722" top="-141" width="70">Valor Documento</text>
+    <text font="52" height="8" left="403" top="-168" width="60">Nosso N&#250;mero</text>
+    <text font="54" height="8" left="573" top="-168" width="69">N. do documento</text>
+    <text font="55" height="8" left="722" top="-168" width="68">Data Documento</text>
+    <text font="56" height="8" left="38" top="-141" width="75">Endere&#231;o Cedente</text>
+    <text font="57" height="8" left="722" top="-141" width="70">Valor Documento</text>
     <text font="0" height="8" left="38" top="-13" width="58">Demonstrativo</text>
     <text font="1" height="12" left="403" top="-185" width="98">0531/5705853/7</text>
     <text font="1" height="12" left="722" top="-185" width="68">05/02/2011</text>
-    <text font="1" height="12" left="41" top="-157" width="86"> - CPF/CNPJ: </text>
+    <text font="13" height="12" left="45" top="-157" width="78">- CPF/CNPJ:</text>
     <text font="1" height="12" left="403" top="-157" width="98">0000000000125</text>
     <text font="1" height="12" left="573" top="-157" width="23">125</text>
     <text font="1" height="12" left="722" top="-157" width="68">18/01/2011</text>
-    <text font="1" height="12" left="41" top="-130" width="48"> -  -  -  - </text>
+    <text font="59" height="12" left="45" top="-130" width="41">- - - -</text>
     <text font="1" height="12" left="722" top="-130" width="41">355,00</text>
   </page>
 </pdf2xml>

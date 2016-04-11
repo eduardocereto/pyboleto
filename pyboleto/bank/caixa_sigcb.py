@@ -1,5 +1,5 @@
-#-*- coding: utf-8 -*-
-from ..data import BoletoData, custom_property
+# -*- coding: utf-8 -*-
+from pyboleto.data import BoletoData, CustomProperty
 
 
 class BoletoCaixaSigcb(BoletoData):
@@ -8,9 +8,9 @@ class BoletoCaixaSigcb(BoletoData):
         Economica Federal
     '''
 
-    agencia_cedente = custom_property('agencia_cedente', 4)
-    conta_cedente = custom_property('conta_cedente', 6)
-    nosso_numero = custom_property('nosso_numero', 17)
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
+    conta_cedente = CustomProperty('conta_cedente', 6)
+    nosso_numero = CustomProperty('nosso_numero', 17)
 
     def __init__(self):
         super(BoletoCaixaSigcb, self).__init__()

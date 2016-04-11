@@ -4,6 +4,7 @@ import unittest
 
 
 def suite():
+    """suite that tests all banks"""
     def my_import(name):
         # See http://docs.python.org/lib/built-in-funcs.html#l2h-6
         components = name.split('.')
@@ -27,11 +28,9 @@ def suite():
         'tests.test_banco_itau',
         'tests.test_banco_real',
         'tests.test_banco_santander',
-        'tests.test_pep8',
-        'tests.test_pyflakes',
     ]
     alltests = unittest.TestSuite()
-    for module in map(my_import, modules_to_test):
+    for module in [my_import(x) for x in modules_to_test]:
         alltests.addTest(module.suite)
     return alltests
 

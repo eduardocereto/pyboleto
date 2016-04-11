@@ -23,7 +23,7 @@ class BoletoException(Exception):
 _EPOCH = datetime.date(1997, 10, 7)
 
 
-class custom_property(object):
+class CustomProperty(object):
     """Função para criar propriedades nos boletos
 
     Cria propriedades com getter, setter e delattr.
@@ -129,7 +129,6 @@ class BoletoData(object):
     """
 
     def __init__(self, **kwargs):
-        # FIXME: valor_documento should be a Decimal and only allow 2 decimals,
         #        otherwise the printed value might diffent from the value in
         #        the barcode.
         self.aceite = kwargs.pop('aceite', "N")
@@ -189,21 +188,26 @@ class BoletoData(object):
         """
 
         for attr, length, data_type in [
-            ('codigo_banco', 3, basestring),
-            ('moeda', 1, basestring),
-            ('data_vencimento', None, datetime.date),
-            ('valor_documento', -1, basestring),
-            ('campo_livre', 25, basestring),
-            ]:
+                ('codigo_banco', 3, str),
+                ('moeda', 1, str),
+                ('data_vencimento', None, datetime.date),
+                ('valor_documento', -1, str),
+                ('campo_livre', 25, str)]:
             value = getattr(self, attr)
             if not isinstance(value, data_type):
                 raise TypeError("%s.%s must be a %s, got %r (type %s)" % (
                     self.__class__.__name__, attr, data_type.__name__, value,
                     type(value).__name__))
-            if data_type == basestring and length != -1 and len(value) != length:
+            if (data_type == str and
+                    length != -1 and
+                    len(value) != length):
                 raise ValueError(
-                    "%s.%s must have a length of %d, not %r (len: %d)" % (
-                    self.__class__.__name__, attr, length, value, len(value)))
+                    "%s.%s must have a length of %d, not %r (len: %d)" %
+                    (self.__class__.__name__,
+                     attr,
+                     length,
+                     value,
+                     len(value)))
 
         due_date_days = (self.data_vencimento - _EPOCH).days
         if not (9999 >= due_date_days >= 0):
@@ -220,16 +224,16 @@ class BoletoData(object):
         barcode = num[:4] + str(dv) + num[4:]
         if len(barcode) != 44:
             raise BoletoException(
-                'The barcode must have 44 characteres, found %d' % len(barcode))
+                'The barcode must have 44 characteres, found %d' %
+                len(barcode))
         return barcode
 
     @property
-    def dv_nosso_numero(self):
-        """Retorna DV do nosso número
+    def campo_livre(self):
+        """Must be overriden by child class property
 
-        :exception NotImplementedError: Precisa ser implementado pela classe
-            derivada
-
+        :exception NotImplementedError: Needs to be implemented by derived
+            class
         """
         raise NotImplementedError(
             'This method has not been implemented by this class'
@@ -259,21 +263,21 @@ class BoletoData(object):
         """
         return self.nosso_numero
 
-    nosso_numero = custom_property('nosso_numero', 13)
+    nosso_numero = CustomProperty('nosso_numero', 13)
     """Nosso Número geralmente tem 13 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    agencia_cedente = custom_property('agencia_cedente', 4)
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
     """Agência do Cedente geralmente tem 4 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    conta_cedente = custom_property('conta_cedente', 7)
+    conta_cedente = CustomProperty('conta_cedente', 7)
     """Conta do Cedente geralmente tem 7 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
@@ -307,7 +311,7 @@ class BoletoData(object):
         if type(val) is Decimal:
             self._valor = val
         else:
-            self._valor = Decimal(str(val), 2)
+            self._valor = Decimal(str(val))
     valor = property(_get_valor, _set_valor)
     """Valor convertido para :class:`Decimal`.
 
@@ -325,7 +329,7 @@ class BoletoData(object):
         if type(val) is Decimal:
             self._valor_documento = val
         else:
-            self._valor_documento = Decimal(str(val), 2)
+            self._valor_documento = Decimal(str(val))
     valor_documento = property(_get_valor_documento, _set_valor_documento)
     """Valor do Documento convertido para :class:`Decimal`.
 
@@ -338,7 +342,7 @@ class BoletoData(object):
         return self._instrucoes
 
     def _instrucoes_set(self, list_inst):
-        if isinstance(list_inst, basestring):
+        if isinstance(list_inst, str):
             list_inst = list_inst.splitlines()
 
         if len(list_inst) > 7:
@@ -362,7 +366,7 @@ class BoletoData(object):
         return self._demonstrativo
 
     def _demonstrativo_set(self, list_dem):
-        if isinstance(list_dem, basestring):
+        if isinstance(list_dem, str):
             list_dem = list_dem.splitlines()
 
         if len(list_dem) > 12:
@@ -447,7 +451,7 @@ class BoletoData(object):
 
     @staticmethod
     def modulo10(num):
-        if not isinstance(num, basestring):
+        if not isinstance(num, str):
             raise TypeError
         soma = 0
         peso = 2
@@ -472,7 +476,7 @@ class BoletoData(object):
 
     @staticmethod
     def modulo11(num, base=9, r=0):
-        if not isinstance(num, basestring):
+        if not isinstance(num, str):
             raise TypeError
         soma = 0
         fator = 2

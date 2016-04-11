@@ -1,4 +1,4 @@
-# -*- coding: utf-8
+# -*- coding: utf-8 -*-
 """
     pyboleto.bank.bradesco
     ~~~~~~~~~~~~~~~~~~~~~~
@@ -9,7 +9,7 @@
     :license: BSD, see LICENSE for more details.
 
 """
-from ..data import BoletoData, custom_property
+from pyboleto.data import BoletoData, CustomProperty
 
 
 class BoletoBradesco(BoletoData):
@@ -17,9 +17,9 @@ class BoletoBradesco(BoletoData):
         Gera Dados necessários para criação de boleto para o banco Bradesco
     '''
 
-    nosso_numero = custom_property('nosso_numero', 11)
-    agencia_cedente = custom_property('agencia_cedente', 4)
-    conta_cedente = custom_property('conta_cedente', 7)
+    nosso_numero = CustomProperty('nosso_numero', 11)
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
+    conta_cedente = CustomProperty('conta_cedente', 7)
 
     def __init__(self):
         super(BoletoBradesco, self).__init__()

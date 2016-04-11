@@ -1,7 +1,5 @@
-# -*- coding: utf-8
-from ..data import BoletoData, custom_property
-
-### CAUTION - NÃO TESTADO ###
+# -*- coding: utf-8 -*-
+from pyboleto.data import BoletoData, CustomProperty
 
 
 class BoletoItau(BoletoData):
@@ -13,12 +11,12 @@ class BoletoItau(BoletoData):
     '''
 
     # Nosso numero (sem dv) com 8 digitos
-    nosso_numero = custom_property('nosso_numero', 8)
+    nosso_numero = CustomProperty('nosso_numero', 8)
     # Conta (sem dv) com 5 digitos
-    conta_cedente = custom_property('conta_cedente', 5)
+    conta_cedente = CustomProperty('conta_cedente', 5)
     #  Agência (sem dv) com 4 digitos
-    agencia_cedente = custom_property('agencia_cedente', 4)
-    carteira = custom_property('carteira', 3)
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
+    carteira = CustomProperty('carteira', 3)
 
     def __init__(self):
         super(BoletoItau, self).__init__()

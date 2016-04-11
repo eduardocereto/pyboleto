@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from ..data import BoletoData, custom_property
+from pyboleto.data import BoletoData, CustomProperty
 
 
 class BoletoBanrisul(BoletoData):
-    conta_cedente = custom_property('conta_cedente', 6)
-    nosso_numero = custom_property('nosso_numero', 8)
+    conta_cedente = CustomProperty('conta_cedente', 6)
+    nosso_numero = CustomProperty('nosso_numero', 8)
 
     def __init__(self):
         BoletoData.__init__(self)

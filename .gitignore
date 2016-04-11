@@ -2,6 +2,10 @@
 
 *.swp
 .DS_Store
+.eggs
+.tox
+.coverage.*
+*/__pycache__
 
 # Packages
 *.egg

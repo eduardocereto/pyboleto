@@ -1,4 +1,4 @@
-# -*- coding: utf-8
+# -*- coding: utf-8 -*-
 """
     pyboleto.bank.santander
     ~~~~~~~~~~~~~~~~~~~~~~~
@@ -14,7 +14,7 @@
     :license: BSD, see LICENSE for more details.
 
 """
-from ..data import BoletoData, custom_property
+from pyboleto.data import BoletoData, CustomProperty
 
 
 class BoletoSantander(BoletoData):
@@ -22,14 +22,14 @@ class BoletoSantander(BoletoData):
         Gera Dados necessários para criação de boleto para o banco Santander
     '''
 
-    nosso_numero = custom_property('nosso_numero', 12)
+    nosso_numero = CustomProperty('nosso_numero', 12)
 
     #: Também chamado de "ponto de venda"
-    agencia_cedente = custom_property('agencia_cedente', 4)
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
 
     #: Também chamdo de código do cedente, se for uma conta de 9 dígitos
     #: ignorar os 2 primeiros
-    conta_cedente = custom_property('conta_cedente', 7)
+    conta_cedente = CustomProperty('conta_cedente', 7)
 
     def __init__(self):
         super(BoletoSantander, self).__init__()

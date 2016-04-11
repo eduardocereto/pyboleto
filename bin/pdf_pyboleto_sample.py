@@ -1,4 +1,4 @@
-#!/Users/dudus/Work/pyboleto/venv/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import pyboleto
 from pyboleto.bank.real import BoletoReal
@@ -22,7 +22,9 @@ def print_bb():
         d.carteira = '18'
         d.cedente = 'Empresa ACME LTDA'
         d.cedente_documento = "102.323.777-01"
-        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
+        d.cedente_endereco = ("Rua Acme, 123 - " +
+                              "Centro - Sao Paulo/SP - " +
+                              "CEP: 12345-678")
         d.agencia_cedente = '9999'
         d.conta_cedente = '99999'
 
@@ -62,7 +64,8 @@ def print_real():
         d.carteira = '57'  # Contrato firmado com o Banco Real
         d.cedente = 'Empresa ACME LTDA'
         d.cedente_documento = "102.323.777-01"
-        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
+        d.cedente_endereco = ("Rua Acme, 123 - Centro - Sao Paulo/SP - " +
+                              "CEP: 12345-678")
         d.agencia_cedente = '0531'
         d.conta_cedente = '5705853'
 
@@ -105,7 +108,8 @@ def print_bradesco():
         d.carteira = '06'  # Contrato firmado com o Banco Bradesco
         d.cedente = 'Empresa ACME LTDA'
         d.cedente_documento = "102.323.777-01"
-        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
+        d.cedente_endereco = ("Rua Acme, 123 - Centro - Sao Paulo/SP - " +
+                              "CEP: 12345-678")
         d.agencia_cedente = '0278-0'
         d.conta_cedente = '43905-3'
 
@@ -167,7 +171,8 @@ def print_santander():
 
         d.cedente = 'Empresa ACME LTDA'
         d.cedente_documento = "102.323.777-01"
-        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
+        d.cedente_endereco = ("Rua Acme, 123 - Centro - Sao Paulo/SP - " +
+                              "CEP: 12345-678")
 
         d.instrucoes = [
             "- Linha 1",
@@ -202,7 +207,8 @@ def print_caixa():
         d.carteira = 'SR'  # Contrato firmado com o Banco Bradesco
         d.cedente = 'Empresa ACME LTDA'
         d.cedente_documento = "102.323.777-01"
-        d.cedente_endereco = "Rua Acme, 123 - Centro - Sao Paulo/SP - CEP: 12345-678"
+        d.cedente_endereco = ("Rua Acme, 123 - Centro - Sao Paulo/SP - " +
+                              "CEP: 12345-678")
         d.agencia_cedente = '1565'
         d.conta_cedente = '414-3'
 
@@ -253,31 +259,31 @@ def print_itau():
 
 
 def print_all():
-    print "Pyboleto version: %s" % pyboleto.__version__
-    print "----------------------------------"
-    print "     Printing Example Boletos     "
-    print "----------------------------------"
+    print("Pyboleto version: %s" % pyboleto.__version__)
+    print("----------------------------------")
+    print("     Printing Example Boletos     ")
+    print("----------------------------------")
 
-    print "Banco do Brasil"
+    print("Banco do Brasil")
     print_bb()
 
-    print "Bradesco"
+    print("Bradesco")
     print_bradesco()
 
-    #print "Itau"
-    #print_itau()
+    # print "Itau"
+    # print_itau()
 
-    print "Caixa"
+    print("Caixa")
     print_caixa()
 
-    print "Real"
+    print("Real")
     print_real()
 
-    print "Santander"
+    print("Santander")
     print_santander()
 
-    print "----------------------------------"
-    print "Ok"
+    print("----------------------------------")
+    print("Ok")
 
 
 if __name__ == "__main__":

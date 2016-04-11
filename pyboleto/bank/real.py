@@ -1,8 +1,9 @@
-# -*- coding: utf-8
-from ..data import BoletoData
+# -*- coding: utf-8 -*-
+from pyboleto.data import BoletoData
 
 
 class BoletoReal(BoletoData):
+    """Real Bank Boleto Implementation"""
 
     def __init__(self):
         super(BoletoReal, self).__init__()

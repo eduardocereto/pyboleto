@@ -5,8 +5,8 @@ from datetime import date
 from django.http import HttpResponse
 from django.contrib import admin
 
-from .models import Boleto
-from ..pdf import BoletoPDF
+from pyboleto.django.models import Boleto
+from pyboleto.pdf import BoletoPDF
 
 
 def print_boletos(modeladmin, request, queryset):

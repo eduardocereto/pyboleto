@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-from setuptools import setup, find_packages
-import sys
+
 import os
 import re
+import sys
+
+from setuptools import setup, find_packages
 
 
 def read(fname):
@@ -16,30 +18,10 @@ def get_version(package):
                    'r').read()
     return re.search("^__version__ = ['\"]([^'\"]+)['\"]",
                      init_py, re.MULTILINE
-    ).group(1)
+                     ).group(1)
 
 
-extra = {}
-if sys.version_info >= (3,):
-    extra['use_2to3'] = True
-    #extra['convert_2to3_doctests'] = ['src/your/module/README.txt']
-    #extra['use_2to3_fixers'] = ['your.fixers']
-    extra['install_requires'] = [
-        'distribute',
-    ]
-    extra['tests_require'] = [
-        'pep8>=0.6.1',
-        'pep8<1.3',
-    ],
-else:
-    extra['install_requires'] = [
-        'reportlab>=2.5',
-    ]
-    extra['tests_require'] = [
-        'pep8>=0.6.1',
-        'pep8<1.3',
-        'pyflakes>=0.5.0',
-    ]
+
 
 setup(
     name='pyboleto',
@@ -51,13 +33,15 @@ setup(
     package_data={
         '': ['LICENSE'],
         'pyboleto': ['media/*.jpg', 'templates/*.html'],
+        'tests': ['xml/*.xml']
     },
     zip_safe=False,
     provides=[
         'pyboleto'
     ],
     license='BSD',
-    description='Python Library to create "boletos de cobrança bancária" for several Brazilian banks',
+    description='Python Library to create "boletos de cobrança bancária" for \
+    several Brazilian banks',
     long_description=read('README.rst'),
     download_url='http://pypi.python.org/pypi/pyboleto',
     scripts=[
@@ -82,5 +66,16 @@ setup(
     ],
     platforms='any',
     test_suite='tests.alltests.suite',
-    **extra
+    install_requires=[
+        'distribute',
+        'reportlab'
+    ],
+    tests_require=[
+        'pylint',
+        'tox',
+        'coverage',
+        'pep8',
+        'sphinx-pypi-upload',
+        'sphinx'
+    ]
 )

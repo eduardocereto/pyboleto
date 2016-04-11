@@ -30,7 +30,7 @@ class Boleto(models.Model):
     cedente_cidade = models.CharField(u'Cidade do Cedente', max_length=255)
     cedente_uf = models.CharField(u'Estado do Cedente', max_length=2)
     cedente_endereco = models.CharField(u'Endereço do Cedente',
-                                          max_length=255)
+                                        max_length=255)
     cedente_bairro = models.CharField(u'Bairro do Cedente', max_length=255)
     cedente_cep = models.CharField(u'CEP do Cedente', max_length=9)
 
@@ -49,7 +49,8 @@ class Boleto(models.Model):
                                          max_length=255, blank=True)
     especie = models.CharField(u'Espécie', max_length=2, default="R$")
     moeda = models.CharField(max_length=2, default='9')
-    local_pagamento = models.CharField(u'Local de Pagamento', max_length=255,
+    local_pagamento = models.CharField(
+        u'Local de Pagamento', max_length=255,
         default=u'Pagável em qualquer banco até o vencimento')
     demonstrativo = models.TextField(blank=True)
     instrucoes = models.TextField(default=u"""1- Não receber após 30 dias.
@@ -60,7 +61,7 @@ class Boleto(models.Model):
         return self.numero_documento
 
     def print_pdf_pagina(self, pdf_file):
-        from .. import bank
+        from pyboleto import bank
 
         ClasseBanco = bank.get_class_for_codigo(self.codigo_banco)
 

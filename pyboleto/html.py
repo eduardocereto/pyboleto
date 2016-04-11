@@ -18,7 +18,7 @@ import base64
 from itertools import chain
 if sys.version_info < (3,):
     from itertools import izip_longest as zip_longest
-    zip_longest # chamando para evitar erro de nao uso do zip_longest
+    zip_longest  # chamando para evitar erro de nao uso do zip_longest
 else:
     from itertools import zip_longest
 

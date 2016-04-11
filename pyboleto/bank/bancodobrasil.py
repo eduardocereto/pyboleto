@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-from ..data import BoletoData, custom_property
+"""
+    Boleto for Banco do Brasil
+"""
+# -*- coding: utf-8 -*-
+from pyboleto.data import BoletoData, CustomProperty
 
 '''
 /*
@@ -24,8 +28,8 @@ class BoletoBB(BoletoData):
         Gera Dados necessários para criação de boleto para o Banco do Brasil
     '''
 
-    agencia_cedente = custom_property('agencia_cedente', 4)
-    conta_cedente = custom_property('conta_cedente', 8)
+    agencia_cedente = CustomProperty('agencia_cedente', 4)
+    conta_cedente = CustomProperty('conta_cedente', 8)
 
     def __init__(self, format_convenio, format_nnumero):
         '''
@@ -33,7 +37,8 @@ class BoletoBB(BoletoData):
 
             Args:
                 format_convenio Formato do convenio 4, 6, 7 ou 8
-                format_nnumero Formato nosso numero 1 ou 2 (apenas para convenio 6)
+                format_nnumero Formato nosso numero 1 ou 2
+                    (apenas para convenio 6)
         '''
         super(BoletoBB, self).__init__()
 
@@ -49,6 +54,9 @@ class BoletoBB(BoletoData):
         #  1: Nosso Numero with 5 positions
         #  2: Nosso Numero with 17 positions
         self.format_nnumero = format_nnumero
+
+        self._convenio = ""
+        self._nosso_numero = ""
 
     def format_nosso_numero(self):
         if self.format_convenio == 7:
@@ -122,25 +130,25 @@ class BoletoBB(BoletoData):
     @property
     def campo_livre(self):
         if self.format_convenio == 4:
-                content = "%s%s%s%s%s" % (self.convenio,
-                                           self.nosso_numero,
-                                           self.agencia_cedente,
-                                           self.conta_cedente,
-                                           self.carteira)
+            content = "%s%s%s%s%s" % (self.convenio,
+                                      self.nosso_numero,
+                                      self.agencia_cedente,
+                                      self.conta_cedente,
+                                      self.carteira)
         elif self.format_convenio in (7, 8):
             content = "000000%s%s%s" % (self.convenio,
-                                         self.nosso_numero,
-                                         self.carteira)
+                                        self.nosso_numero,
+                                        self.carteira)
         elif self.format_convenio == 6:
             if self.format_nnumero == 1:
                 content = "%s%s%s%s%s" % (self.convenio,
-                                           self.nosso_numero,
-                                           self.agencia_cedente,
-                                           self.conta_cedente,
-                                           self.carteira)
+                                          self.nosso_numero,
+                                          self.agencia_cedente,
+                                          self.conta_cedente,
+                                          self.carteira)
             if self.format_nnumero == 2:
                 content = "%s%s%s" % (self.convenio,
-                                        self.nosso_numero,
-                                        '21'  # numero do serviço
-                                        )
+                                      self.nosso_numero,
+                                      '21')  # numero do serviço
+
         return content
