@@ -21,7 +21,7 @@ def print_boletos(modeladmin, request, queryset):
 
     pdf_file = buffer.getvalue()
 
-    response = HttpResponse(mimetype='application/pdf')
+    response = HttpResponse()
     response['Content-Disposition'] = 'attachment; filename=%s' % (
         u'boletos_%s.pdf' % (
             date.today().strftime('%Y%m%d'),
