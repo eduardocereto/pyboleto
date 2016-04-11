@@ -21,12 +21,21 @@ class BoletoBradesco(BoletoData):
     agencia_cedente = CustomProperty('agencia_cedente', 4)
     conta_cedente = CustomProperty('conta_cedente', 7)
 
-    def __init__(self):
+    def __init__(self, carteira='06', **kwargs):
+        """
+            :param carteira: Supports (06 - not registered) and
+        (09 - registered).
+        """
         super(BoletoBradesco, self).__init__()
 
         self.codigo_banco = "237"
         self.logo_image = "logo_bancobradesco.jpg"
-        self.carteira = '06'
+        self.carteira = carteira
+
+        self.local_pagamento = kwargs.pop(
+            'local_pagamento',
+            "Pagável Preferencialmente na rede Bradesco ou no Bradesco expresso"
+            )
 
     def format_nosso_numero(self):
         return "%s/%s-%s" % (
