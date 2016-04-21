@@ -1,9 +1,14 @@
 ========
 pyboleto
 ========
+|travis| |pypi|
 
-.. image:: https://secure.travis-ci.org/eduardocereto/pyboleto.png?branch=master
+.. |travis| image:: https://secure.travis-ci.org/eduardocereto/pyboleto.png?branch=master
    :target: http://travis-ci.org/#!/eduardocereto/pyboleto
+   
+.. |pypi| image:: https://img.shields.io/pypi/v/pyboleto.svg
+    :target: https://pypi.python.org/pypi/pyboleto/
+ 
 
 .. _pyboleto-synopsis:
 
