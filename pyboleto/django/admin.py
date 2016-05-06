@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 from datetime import date
 
 from django.http import HttpResponse
